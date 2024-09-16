@@ -24,6 +24,10 @@ chrome-user-data
 *.swp
 *.swo
 
+/application/backend/venv
+/venv
+/backend/venv
+
 packages/react-devtools-core/dist
 packages/react-devtools-extensions/chrome/build
 packages/react-devtools-extensions/chrome/*.crx
