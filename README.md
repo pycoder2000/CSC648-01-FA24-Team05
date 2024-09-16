@@ -7,7 +7,7 @@
 |   Student Name   |     Student Email     | GitHub Username |  Student's Role  |
 | :--------------: | :-------------------: | :-------------: | :--------------: |
 |   Parth Desai    |   pdesai@sfsu.edu     |   pycoder2000   |   Team Lead / PM |
-|   Pedro Grande   | pgrande@mail.sfsu.edu |                 |   Front-end Developer |
+|   Pedro Grande   | pgrande@mail.sfsu.edu |   PFGrande      |   Front-end Developer |
 |  Charvi Sharma   |   csharma@sfsu.edu    |                 |   Scrum Master   |
 | Josue Hernandez  | jhernandez53@mail.sfsu.edu |            |   Git Master     |
 |  Andre Velarde   |  nvelarde@sfsu.edu    |                 |   Back-end Lead  |
