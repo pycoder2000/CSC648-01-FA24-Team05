@@ -12,4 +12,4 @@
 | Josue Hernandez  | jhernandez53@mail.sfsu.edu |            |   Git Master     |
 |  Andre Velarde   |  nvelarde@sfsu.edu    |                 |   Back-end Lead  |
 |  Preet Vithani   |  pvithani@sfsu.edu    |                 |   Front-end Lead |
-|  Hsin-Ying Tsai  |   htsai1@sfsu.edu     |                 |   Back-end Developer |
+|  Hsin-Ying Tsai  |   htsai1@sfsu.edu     |   Golden1018    |   Back-end Developer |
