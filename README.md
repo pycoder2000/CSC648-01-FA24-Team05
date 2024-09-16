@@ -13,3 +13,7 @@
 |  Andre Velarde   |  nvelarde@sfsu.edu    |                 |   Back-end Lead  |
 |  Preet Vithani   |  pvithani@sfsu.edu    |                 |   Front-end Lead |
 |  Hsin-Ying Tsai  |   htsai1@sfsu.edu     |   Golden1018    |   Back-end Developer |
+
+## Resources
+
+[How to setup Github SSH](https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/GitHub-SSH-Key-Setup-Config-Ubuntu-Linux)
