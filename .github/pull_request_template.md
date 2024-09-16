@@ -12,7 +12,6 @@ Provide a brief description of the changes your pull request makes. Explain the 
 Describe how you have tested these changes. Include details of your testing environment, tests ran to see how your change affects other areas of the code, etc.
 
 ## Checklist:
-- [ ] I have read the [CONTRIBUTING](LINK_TO_CONTRIBUTING.MD) document.
 - [ ] I have checked that my changes do not introduce any breaking changes.
 - [ ] I have updated the documentation accordingly (if necessary).
 - [ ] I have commented my code, particularly in hard-to-understand areas.
