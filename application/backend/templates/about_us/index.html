@@ -1,0 +1,23 @@
+<!-- templates/about_us/index.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Us{% endblock %}
+
+{% block content %}
+<h1 class="text-center mb-4">About Us</h1>
+<div class="row">
+    {% for member in members %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="{% static 'about_us/images/'|add:member.image %}" class="card-img-top" alt="{{ member.name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ member.name }}</h5>
+                    <p class="card-text">{{ member.position }}</p>
+                    <a href="{% url 'member_detail' name=member.name %}" class="btn btn-primary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
