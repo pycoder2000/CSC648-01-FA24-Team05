@@ -12,10 +12,10 @@ members = [
         "bio": "Parth is focused on crafting beautiful and responsive user interfaces. His passion for design is complemented by his technical prowess, making him a key player in ensuring that our products are both functional and visually appealing. He has a deep knowledge of UI/UX principles and is always exploring new ways to enhance user experience.",
     },
     {
-        "name": "Parth Desai",
-        "image": "Parth2.jpg",
+        "name": "Hsin Ying Tsai",
+        "image": "Hsin.jpg",
         "position": "Back End Developer",
-        "bio": "With a focus on server-side logic and database management, Parth ensures that the backbone of our application runs smoothly. He’s skilled in Python, Django, and REST APIs, and is responsible for integrating third-party services and managing complex data flows.",
+        "bio": "With a focus on server-side logic and database management, Hsin Ying ensures that the backbone of our application runs smoothly. He’s skilled in Python, Django, and REST APIs, and is responsible for integrating third-party services and managing complex data flows.",
     },
     {
         "name": "Pedro Grande",
