@@ -18,10 +18,10 @@ members = [
         "bio": "With a focus on server-side logic and database management, Parth ensures that the backbone of our application runs smoothly. He’s skilled in Python, Django, and REST APIs, and is responsible for integrating third-party services and managing complex data flows.",
     },
     {
-        "name": "Parth Desai",
-        "image": "Parth3.jpg",
-        "position": "Full Stack Developer",
-        "bio": "Parth’s versatility as a full-stack developer enables him to contribute across the entire stack. Whether it’s building a responsive front end or an efficient back end, Parth works on bridging the gap between client and server.",
+        "name": "Pedro Grande",
+        "image": "Pedro.jpg",
+        "position": "Front End Developer",
+        "bio": "Pedro is a computer science student aiming to become a software engineer. He has recently taken interest in understanding how to optimize interfaces for a better user experience. He helps in implementing and creating the website's ui elements. He is actively experimenting and learning about how to optimize his use of REACT.",
     },
     {
         "name": "Parth Desai",
