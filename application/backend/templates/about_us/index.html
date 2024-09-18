@@ -14,6 +14,7 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ member.name }}</h5>
                     <p class="card-text">{{ member.position }}</p>
+                    <p class="card-text">{{ member.bio|truncatewords:20 }}</p>
                     <a href="{% url 'member_detail' name=member.name %}" class="btn btn-primary">Learn More</a>
                 </div>
             </div>
