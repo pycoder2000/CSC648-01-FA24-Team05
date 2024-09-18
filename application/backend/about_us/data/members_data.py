@@ -15,7 +15,7 @@ members = [
         "name": "Josue Hernandez",
         "image": "Josue.jpg",
         "position": "Git Master",
-        "bio": "Josue manages version control and ensures smooth collaboration within the team."
+        "bio": "Josue manages version control and ensures smooth collaboration within the team.",
     },
     {
         "name": "Hsin Ying Tsai",
@@ -37,14 +37,8 @@ members = [
     },
     {
         "name": "Parth Desai",
-        "image": "Parth5.jpg",
-        "position": "DevOps Engineer",
-        "bio": "Parth is responsible for maintaining a smooth deployment process and ensuring our infrastructure is stable. He manages the CI/CD pipeline and optimizes cloud resources for cost efficiency and scalability.",
-    },
-    {
-        "name": "Parth Desai",
-        "image": "Parth6.jpg",
-        "position": "QA Engineer",
+        "image": "Parth.jpg",
+        "position": "Front-end Lead",
         "bio": "Parth takes care of quality assurance, ensuring that every product released meets the highest standards. He is meticulous and passionate about delivering bug-free, high-performance applications.",
     },
 ]

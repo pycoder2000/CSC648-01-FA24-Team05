@@ -7,9 +7,11 @@ from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', views.home, name='home'),
-    path('about-us/', include('about_us.urls')),  # This should not have 'about-us/' repeated in the included urls
+    path("admin/", admin.site.urls),
+    path("", views.home, name="home"),
+    path(
+        "about-us/", include("about_us.urls")
+    ),  # This should not have 'about-us/' repeated in the included urls
 ]
 
 if settings.DEBUG:
