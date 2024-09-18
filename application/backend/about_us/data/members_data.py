@@ -6,10 +6,10 @@ members = [
         "bio": "Parth is a passionate Data Engineer. He loves architecting innovative solutions in the big data realm across AWS, GCP, and Kubernetes. He's quite proficient in writing SQL queries & utilizing Scala, Spark, and Python for optimal big data processing. He's currently pursuing a masters in Data Science and AI at San Francisco State University.",
     },
     {
-        "name": "Parth Desai",
-        "image": "Parth1.jpg",
-        "position": "Front End Lead",
-        "bio": "Parth is focused on crafting beautiful and responsive user interfaces. His passion for design is complemented by his technical prowess, making him a key player in ensuring that our products are both functional and visually appealing. He has a deep knowledge of UI/UX principles and is always exploring new ways to enhance user experience.",
+        "name": "Nath Andre Velarde",
+        "image": "Andre.jpg",
+        "position": "Backend Lead",
+        "bio": "Andre is a computer science student at SFSU aspiring to be a software developer. As a backend lead, he will be responsible for managing the software development, creating an efficent/high quality system. He is skilled in C++ and python and enjoy's solving complex problems that lead to an impactful result.",
     },
     {
         "name": "Hsin Ying Tsai",
