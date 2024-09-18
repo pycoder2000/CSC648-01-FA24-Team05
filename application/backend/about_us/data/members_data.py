@@ -12,6 +12,12 @@ members = [
         "bio": "Andre is a computer science student at SFSU aspiring to be a software developer. As a backend lead, he will be responsible for managing the software development, creating an efficent/high quality system. He is skilled in C++ and python and enjoy's solving complex problems that lead to an impactful result.",
     },
     {
+        "name": "Josue Hernandez",
+        "image": "Josue.jpg",
+        "position": "Git Master",
+        "bio": "Josue manages version control and ensures smooth collaboration within the team."
+    },
+    {
         "name": "Hsin Ying Tsai",
         "image": "Hsin.jpg",
         "position": "Back End Developer",

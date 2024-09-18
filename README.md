@@ -9,7 +9,7 @@
 |   Parth Desai    |   pdesai@sfsu.edu     |   pycoder2000 / Parth Desai   |   Team Lead / PM |
 |   Pedro Grande   | pgrande@mail.sfsu.edu |   PFGrande      |   Front-end Developer |
 |  Charvi Sharma   |   csharma@sfsu.edu    | charvisharma6732 |   Scrum Master   |
-| Josue Hernandez  | jhernandez53@mail.sfsu.edu |            |   Git Master     |
+| Josue Hernandez  | jhernandez53@mail.sfsu.edu |      johernandez26      |   Git Master     |
 |  Andre Velarde   |  nvelarde@sfsu.edu    |    NathVelarde  |   Back-end Lead  |
 |  Preet Vithani   |  pvithani@sfsu.edu    |                 |   Front-end Lead |
 |  Hsin-Ying Tsai  |   htsai1@sfsu.edu     |   Golden1018    |   Back-end Developer |
