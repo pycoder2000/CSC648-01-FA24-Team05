@@ -24,10 +24,10 @@ members = [
         "bio": "Pedro is a computer science student aiming to become a software engineer. He has recently taken interest in understanding how to optimize interfaces for a better user experience. He helps in implementing and creating the website's ui elements. He is actively experimenting and learning about how to optimize his use of REACT.",
     },
     {
-        "name": "Parth Desai",
-        "image": "Parth4.jpg",
-        "position": "Data Scientist",
-        "bio": "Parth specializes in transforming raw data into actionable insights. His expertise in machine learning and data visualization helps the team make data-driven decisions that improve our products and services.",
+        "name": "Charvi Sharma",
+        "image": "Charvi.jpg",
+        "position": "Scrum Master",
+        "bio": "Charvi is an undergraduate computer science student who enjoys exploring the business aspects of technology. She is particularly passionate about communicating with others and staying informed about emerging tech trends. While she's still a novice in many areas, her ability to learn quickly and grasp new tools at a high level allows her to effectively contribute to projects. She will ensure that everybody is aware, prepared, and excited for weekly group meetings and for the overall term project! ",
     },
     {
         "name": "Parth Desai",
