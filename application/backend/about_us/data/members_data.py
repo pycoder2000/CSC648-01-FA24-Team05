@@ -36,9 +36,9 @@ members = [
         "bio": "Charvi is an undergraduate computer science student who enjoys exploring the business aspects of technology. She is particularly passionate about communicating with others and staying informed about emerging tech trends. While she's still a novice in many areas, her ability to learn quickly and grasp new tools at a high level allows her to effectively contribute to projects. She will ensure that everybody is aware, prepared, and excited for weekly group meetings and for the overall term project! ",
     },
     {
-        "name": "Parth Desai",
-        "image": "Parth.jpg",
+        "name": "Preet Vithani",
+        "image": "Preet.jpg",
         "position": "Front-end Lead",
-        "bio": "Parth takes care of quality assurance, ensuring that every product released meets the highest standards. He is meticulous and passionate about delivering bug-free, high-performance applications.",
+        "bio": "I am Preet Vithani from Mumbai and majoring in computer science. My interest is in Artificial Intelligence and App development so I would love to purse it for my future. My hobbies are reading book, traveling, hanging out with my friends and gaming.",
     },
 ]
