@@ -1,6 +1,6 @@
 # CSC648-S01-FA24-Team05
 
-**Application URL: <https://example.com>**
+**Application URL: <http://54.151.20.138:8000>**
 
 ## Team
 
