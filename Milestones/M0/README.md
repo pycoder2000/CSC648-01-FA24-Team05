@@ -1,39 +1,64 @@
 # M0 Submission Form
 
+## Team
+
+|  Student Name   |   Student's Role    |
+| :-------------: | :-----------------: |
+|   Parth Desai   |   Team Lead / PM    |
+|  Pedro Grande   | Front-end Developer |
+|  Charvi Sharma  |    Scrum Master     |
+| Josue Hernandez |     Git Master      |
+|  Andre Velarde  |    Back-end Lead    |
+|  Preet Vithani  |   Front-end Lead    |
+| Hsin-Ying Tsai  | Back-end Developer  |
+
+## Tech Stack
+
+|    Tech Stack     | Service |
+| :---------------: | :-----: |
+|      Server       |   AWS   |
+|     Back-End      | Python  |
+|     Database      |  MySQL  |
+| Web App Framework | Django  |
+|     Front-end     |  HTML   |
+|    Web server     |  nginx  |
+|   Compiler/IDE    | VS Code |
+
 ## Cloud VM Instance
-| Item              | Credentials                                      |
-| ----------------- | ------------------------------------------------ |
-| Website URL       | http://54.151.20.138:8000                        |
-| Cloud VM instance | AWS EC2 Instance                                 |
-| Instance ID       | i-0875ad3875847ee02                              |
-| Public IP Address | 54.151.20.138                                    |
-| SSH Command       | `ssh -i <pem_key_location> ubuntu@54.151.20.138` |
+
+|       Item        |                  Credentials                   |
+| :---------------: | :--------------------------------------------: |
+|    Website URL    |       [52.53.125.5](http://52.53.125.5/)       |
+| Cloud VM instance |                AWS EC2 Instance                |
+|    Instance ID    |              i-09b69c857e26f57ec               |
+| Public IP Address |                  52.53.125.5                   |
+|    SSH Command    | `ssh -i <pem_key_location> ubuntu@52.53.125.5` |
 
 **:memo: Note:** Please reach out to me if you need the PEM Key
 
 ## Database Instance Details
 
-| Item              | Credentials                                                 |
-| ----------------- | ----------------------------------------------------------- |
-| Database instance | Amazon RDS MySQL DB Instance                                |
-| Endpoint          | csc648-db-instance.cte6ak6ygcx6.us-west-1.rds.amazonaws.com |
-| Port              | 3306                                                        |
-| User              | admin                                                       |
-| Password          | ParthDesai2000                                              |
+|       Item        |                         Credentials                         |
+| :---------------: | :---------------------------------------------------------: |
+| Database instance |                Amazon RDS MySQL DB Instance                 |
+|     Endpoint      | csc648-db-instance.cte6ak6ygcx6.us-west-1.rds.amazonaws.com |
+|       Port        |                            3306                             |
+|       User        |                            admin                            |
+|     Password      |                       ParthDesai2000                        |
 
 ## Tech Stack Familiarity
 
 Below is a familiarity table indicating our competencies in the various technologies we'll be using as a part of tech stack (scaled out of 5):
 
-| Name            | React | Python | MySQL | AWS |
-| --------------- | ----- | ------ | ----- | --- |
-| Parth Desai     | 2     | 4.5    | 3.5   | 4   |
-| Pedro Grande    | 2     | 3      | 2     | 1   |
-| Charvi Sharma   | 1     | 2      | 3     | 1   |
-| Josue Hernandez | 3     | 3      | 2     | 1   |
-| Andre Velarde   | 2     | 3      | 1     | 1   |
-| Preet Vithani   | 3     | 2      | 2     | 1   |
-| Hsin-Ying Tsai  | 2     | 4      | 2     | 2   |
+|      Name       | React | Python | MySQL |  AWS  |
+| :-------------: | :---: | :----: | :---: | :---: |
+|   Parth Desai   |   2   |  4.5   |  3.5  |   4   |
+|  Pedro Grande   |   2   |   3    |   2   |   1   |
+|  Charvi Sharma  |   1   |   2    |   3   |   1   |
+| Josue Hernandez |   3   |   3    |   2   |   1   |
+|  Andre Velarde  |   2   |   3    |   1   |   1   |
+|  Preet Vithani  |   3   |   2    |   2   |   1   |
+| Hsin-Ying Tsai  |   2   |   4    |   2   |   2   |
 
 ## Study Plan for Team
 
