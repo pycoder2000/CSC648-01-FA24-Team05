@@ -1,18 +1,18 @@
 # CSC648-S01-FA24-Team05
 
-**Application URL: <http://54.151.20.138:8000>**
+**Application URL: [52.53.125.5](http://52.53.125.5/)**
 
 ## Team
 
-|   Student Name   |     Student Email     | GitHub Username |  Student's Role  |
-| :--------------: | :-------------------: | :-------------: | :--------------: |
-|   Parth Desai    |   pdesai@sfsu.edu     |   pycoder2000 / Parth Desai   |   Team Lead / PM |
-|   Pedro Grande   | pgrande@mail.sfsu.edu |   PFGrande      |   Front-end Developer |
-|  Charvi Sharma   |   csharma@sfsu.edu    | charvisharma6732 |   Scrum Master   |
-| Josue Hernandez  | jhernandez53@mail.sfsu.edu |      johernandez26      |   Git Master     |
-|  Andre Velarde   |  nvelarde@sfsu.edu    |    NathVelarde  |   Back-end Lead  |
-|  Preet Vithani   |  pvithani@sfsu.edu    |       preet56   |   Front-end Lead |
-|  Hsin-Ying Tsai  |   htsai1@sfsu.edu     |   Golden1018    |   Back-end Developer |
+|  Student Name   |       Student Email        |      GitHub Username      |   Student's Role    |
+| :-------------: | :------------------------: | :-----------------------: | :-----------------: |
+|   Parth Desai   |      pdesai@sfsu.edu       | pycoder2000 / Parth Desai |   Team Lead / PM    |
+|  Pedro Grande   |   pgrande@mail.sfsu.edu    |         PFGrande          | Front-end Developer |
+|  Charvi Sharma  |      csharma@sfsu.edu      |     charvisharma6732      |    Scrum Master     |
+| Josue Hernandez | jhernandez53@mail.sfsu.edu |       johernandez26       |     Git Master      |
+|  Andre Velarde  |     nvelarde@sfsu.edu      |        NathVelarde        |    Back-end Lead    |
+|  Preet Vithani  |     pvithani@sfsu.edu      |          preet56          |   Front-end Lead    |
+| Hsin-Ying Tsai  |      htsai1@sfsu.edu       |        Golden1018         | Back-end Developer  |
 
 ## Setup ##
 
