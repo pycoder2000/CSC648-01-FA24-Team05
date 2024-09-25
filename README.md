@@ -14,7 +14,7 @@
 |  Preet Vithani  |     pvithani@sfsu.edu      |          preet56          |   Front-end Lead    |
 | Hsin-Ying Tsai  |      htsai1@sfsu.edu       |        Golden1018         | Back-end Developer  |
 
-## Setup ##
+## Setup
 
 1. Clone the project repository
 ```bash
@@ -27,10 +27,15 @@ cd application/backend
 ```
 
 3. Create and activate a virtual environment.
-> (for mac)
+> (for Mac)
 ```bash
 virtualenv venv
 source venv/bin/activate
+```
+> (for Windows)
+```bash
+virtualenv venv
+.\venv\activate
 ```
 
 To deactivate the environment
@@ -52,6 +57,19 @@ python manage.py migrate
 7. Run development server
 ```bash
 python manage.py runserver
+```
+
+### Optional
+
+8. Remove Remote deleted branches from Local
+```
+git fetch --prune
+git remote prune origin
+```
+
+9. :warning: Run this command in your branch before creating a PR
+```
+git pull origin master
 ```
 
 ## Resources
