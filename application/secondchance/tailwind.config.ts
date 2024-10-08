@@ -9,8 +9,8 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        'secondchance': '#ff385c',
+        'secondchance-dark': '#d50027',
       },
     },
   },
