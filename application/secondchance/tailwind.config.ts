@@ -14,6 +14,8 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/aspect-ratio'), // aspect ratio plug-in used to display home-page items
+  ],
 };
 export default config;
