@@ -1,4 +1,4 @@
-import ProductListItem from "./PropertyListItem"
+import ProductListItem from "./ProductListItem"
 
 const ProductList = () => { 
     return (
