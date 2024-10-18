@@ -1,9 +1,16 @@
 import Image from "next/image";
+import PropertyList from "./components/properties/PropertyList";
 
 export default function Home() {
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
+       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start"> 
+         
+        {/* list of items, formatted for both mobile and desktop devices */}
+        <div className="mt-4 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+          <PropertyList />
+        </div>
+        
         <Image
           className="dark:invert"
           src="https://nextjs.org/icons/next.svg"
