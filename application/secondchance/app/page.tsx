@@ -3,7 +3,7 @@ import ProductList from "./components/properties/ProductList";
 
 export default function Home() {
   return (
-    <main>
+    <main className="bg-black">
       <p>
         Server Sucessfully running
       </p>
