@@ -19,8 +19,8 @@ const Navbar = async () => {
                         <Image
                             src="/logo.png"
                             alt="SecondChance logo"
-                            width={165}
-                            height={105}
+                            width={130}
+                            height={70}
                         />
                     </Link>
 
