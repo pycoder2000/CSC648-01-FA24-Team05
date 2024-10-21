@@ -1,11 +1,13 @@
 import { create } from "zustand";
 
 export type SearchQuery = {
-    location: string | undefined;  // Updated for location-based search
-    category: string | undefined;  // Category of items
-    priceMin: number | undefined;  // Minimum price filter
-    priceMax: number | undefined;  // Maximum price filter
-    condition: string | undefined; // Item condition (e.g., new, used)
+    country: string | undefined;
+    checkIn: Date | undefined;
+    checkOut: Date | undefined;
+    category: string | undefined;
+    priceMin: number | undefined;
+    priceMax: number | undefined;
+    condition: string | undefined;
 }
 
 interface SearchModalStore {
@@ -24,9 +26,11 @@ const useSearchModal = create<SearchModalStore>((set) => ({
     close: () => set({ isOpen: false }),
     setQuery: (query: SearchQuery) => set({ query: query }),
     query: {
-        location: '',
+        country: '',
+        checkIn: undefined,
+        checkOut: undefined,
         category: '',
-        priceMin: 0,
+        priceMin: undefined,
         priceMax: undefined,
         condition: ''
     }

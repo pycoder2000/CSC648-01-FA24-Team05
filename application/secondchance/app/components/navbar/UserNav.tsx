@@ -52,7 +52,7 @@ const UserNav: React.FC<UserNavProps> = ({
                                 label='My listings'
                                 onClick={() => {
                                     setIsOpen(false);
-                                    router.push('/mylistings'); // Updated to reflect user item listings
+                                    router.push('/mylistings');
                                 }}
                             />
 
@@ -68,7 +68,7 @@ const UserNav: React.FC<UserNavProps> = ({
                                 label='My rentals'
                                 onClick={() => {
                                     setIsOpen(false);
-                                    router.push('/myrentals'); // Updated to reflect user's rentals
+                                    router.push('/myrentals');
                                 }}
                             />
 

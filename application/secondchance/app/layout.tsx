@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import AddItemModal from "./components/modals/AddItemModal";
+import LoginModal from "./components/modals/LoginModal";
+import SearchModal from "./components/modals/SearchModal";
+import SignupModal from "./components/modals/SignupModal";
 import Navbar from "./components/navbar/Navbar";
 import "./globals.css";
-// import LoginModal from "./components/modals/LoginModal";
-// import SearchModal from "./components/modals/SearchModal";
-// import SignupModal from "./components/modals/SignupModal";
-// import AddItemModal from "./components/modals/AddItemModal"; // Updated modal for adding items
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,10 +28,10 @@ export default function RootLayout({
           {children}
         </div>
 
-        {/* <LoginModal />
+        <LoginModal />
         <SearchModal />
         <SignupModal />
-        <AddItemModal /> */}
+        <AddItemModal />
       </body>
     </html>
   );
