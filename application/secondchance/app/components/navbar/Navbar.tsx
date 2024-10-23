@@ -1,6 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import SearchFilters from "./SearchFilters";
+import UserNav from "./UserNav";
+import AddPropertyButton from "./AddPropertyButton";
 
 let placeHolder = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Second_Chance_Logo.png/800px-Second_Chance_Logo.png?20190622052123"
 
@@ -24,7 +26,9 @@ const Navbar = () => {
                     </div>
 
                     <div className="flex items-center space-x-6">
-                    <p className="text-black">Add property - User Nav</p>
+                        <AddPropertyButton/>
+
+                        <UserNav />
                     </div>
 
                 </div>
