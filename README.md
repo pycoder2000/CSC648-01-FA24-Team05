@@ -53,7 +53,7 @@ The key technological stack will include Django, Django Rest Framework, and Next
 - **Item Listing:** A page to add new second-hand items for rent, showcasing details, conditions, and rental rates.
 - **Detail Page:** In-depth view of each item’s features, rental price, availability, and reviews from other users.
 - **My Rentals:** Manage the user’s current and previous rental engagements.
-- **My Listings:** A page for landlords/users to manage the items they have listed for rent.
+- **My Listings:** A page for sellers/users to manage the items they have listed for rent.
 - **Favorites:** A section for users to save and manage their favorite items to rent.
 - **Chat Page:** Real-time chat for communication between renters and owners to discuss rental terms, conditions, and other inquiries.
 - **Search & Filters:** A sophisticated search mechanism allowing users to filter second-hand items based on price, category, location, and condition.
