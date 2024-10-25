@@ -28,6 +28,11 @@ const SearchFilters = () => {
           </div>
 
           <div className="cursor-pointer h-[48px] lg:h-[64px] px-8 flex flex-col justify-center rounded-full hover:bg-gray-100">
+            <p className="text-xs font-semibold">Condition</p>
+            <p className="text-sm">Select condition</p>
+          </div>
+
+          <div className="cursor-pointer h-[48px] lg:h-[64px] px-8 flex flex-col justify-center rounded-full hover:bg-gray-100">
             <p className="text-xs font-semibold">Price Range</p>
             <p className="text-sm">Select range</p>
           </div>
