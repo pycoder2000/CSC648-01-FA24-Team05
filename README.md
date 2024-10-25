@@ -1,6 +1,6 @@
 # SecondChance: The Eco-Friendly Rental Platform!
 
-**SecondChance App: [52.53.125.5](http://52.53.125.5/)**
+<!-- **SecondChance App: [52.53.125.5](http://52.53.125.5/)** -->
 
 1. [Introduction](#Introduction)
 2. [Key Features](#KeyFeatures)
@@ -40,7 +40,7 @@ The key technological stack will include Django, Django Rest Framework, and Next
 |         **Backend**         |            Python             |
 |        **Database**         |          PostgreSQL           |
 |     **Authentication**      |        Django Allauth         |
-|   **Search and Filters**    |         Elasticsearc          |
+|   **Search and Filters**    |         Elasticsearch         |
 |       **Web server**        |             nginx             |
 |       **Deployment**        |        Docker, AWS EC2        |
 |     **Version Control**     |            GitHub             |
