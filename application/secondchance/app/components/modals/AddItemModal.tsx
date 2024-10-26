@@ -1,12 +1,12 @@
 "use client";
 
+import CustomButton from "@/app/components/buttons/CustomButton";
 import useAddItemModal from "@/app/hooks/useAddItemModal";
 import apiService from "@/app/services/apiService";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 import Categories from "../additem/Categories";
-import CustomButton from "@/app/components/buttons/CustomButton";
 import SelectCountry, { SelectCountryValue } from "../forms/SelectCountry";
 import Modal from "./Modal";
 
@@ -60,174 +60,188 @@ const AddItemModal = () => {
 
       if (response.success) {
         console.log("SUCCESS :-D");
-
         router.push("/?added=true");
-
         addItemModal.close();
       } else {
         console.log("Error");
-
         const tmpErrors: string[] = Object.values(response).map(
           (error: any) => error
         );
-
         setErrors(tmpErrors);
       }
     }
   };
 
-  const content = (
-    <>
-      {currentStep == 1 ? (
-        <>
-          <h2 className="mb-6 text-2xl">Choose category</h2>
-
-          <Categories
-            dataCategory={dataCategory}
-            setCategory={(category: string) => setCategory(category)}
-          />
-
-          <CustomButton label="Next" onClick={() => setCurrentStep(2)} />
-        </>
-      ) : currentStep == 2 ? (
-        <>
-          <h2 className="mb-6 text-2xl">Describe your item</h2>
-
-          <div className="pt-3 pb-6 space-y-4">
-            <div className="flex flex-col space-y-2">
-              <label>Title</label>
-              <input
-                type="text"
-                value={dataTitle}
-                onChange={(e) => setDataTitle(e.target.value)}
-                className="w-full p-4 border border-gray-600 rounded-xl"
-              />
+  const renderContent = () => {
+    switch (currentStep) {
+      case 1:
+        return (
+          <>
+            <h2 className="mb-6 text-2xl">Choose Category</h2>
+            <Categories dataCategory={dataCategory} setCategory={setCategory} />
+            <div className="mt-6 flex flex-row gap-4">
+              <CustomButton label="Next ->" onClick={() => setCurrentStep(2)} />
             </div>
+          </>
+        );
 
-            <div className="flex flex-col space-y-2">
-              <label>Description</label>
-              <textarea
-                value={dataDescription}
-                onChange={(e) => setDataDescription(e.target.value)}
-                className="w-full h-[200px] p-4 border border-gray-600 rounded-xl"
-              ></textarea>
-            </div>
-          </div>
-
-          <CustomButton
-            label="Previous"
-            className="mb-2 bg-black hover:bg-gray-800"
-            onClick={() => setCurrentStep(1)}
-          />
-
-          <CustomButton label="Next" onClick={() => setCurrentStep(3)} />
-        </>
-      ) : currentStep == 3 ? (
-        <>
-          <h2 className="mb-6 text-2xl">Details</h2>
-
-          <div className="pt-3 pb-6 space-y-4">
-            <div className="flex flex-col space-y-2">
-              <label>Price per day</label>
-              <input
-                type="number"
-                value={dataPrice}
-                onChange={(e) => setDataPrice(e.target.value)}
-                className="w-full p-4 border border-gray-600 rounded-xl"
-              />
-            </div>
-
-            <div className="flex flex-col space-y-2">
-              <label>Condition</label>
-              <input
-                type="text"
-                value={dataCondition}
-                onChange={(e) => setDataCondition(e.target.value)}
-                className="w-full p-4 border border-gray-600 rounded-xl"
-              />
-            </div>
-          </div>
-
-          <CustomButton
-            label="Previous"
-            className="mb-2 bg-black hover:bg-gray-800"
-            onClick={() => setCurrentStep(2)}
-          />
-
-          <CustomButton label="Next" onClick={() => setCurrentStep(4)} />
-        </>
-      ) : currentStep == 4 ? (
-        <>
-          <h2 className="mb-6 text-2xl">Location</h2>
-
-          <div className="pt-3 pb-6 space-y-4">
-            <SelectCountry
-              value={dataCountry}
-              onChange={(value) => setDataCountry(value as SelectCountryValue)}
-            />
-          </div>
-
-          <CustomButton
-            label="Previous"
-            className="mb-2 bg-black hover:bg-gray-800"
-            onClick={() => setCurrentStep(3)}
-          />
-
-          <CustomButton label="Next" onClick={() => setCurrentStep(5)} />
-        </>
-      ) : (
-        <>
-          <h2 className="mb-6 text-2xl">Image</h2>
-
-          <div className="pt-3 pb-6 space-y-4">
-            <div className="py-4 px-6 bg-gray-600 text-white rounded-xl">
-              <input type="file" accept="image/*" onChange={setImage} />
-            </div>
-
-            {dataImage && (
-              <div className="w-[200px] h-[150px] relative">
-                <Image
-                  fill
-                  alt="Uploaded image"
-                  src={URL.createObjectURL(dataImage)}
-                  className="w-full h-full object-cover rounded-xl"
+      case 2:
+        return (
+          <>
+            <h2 className="mb-6 text-2xl">Describe Your Item</h2>
+            <div className="pt-3 pb-6 space-y-4">
+              <div className="flex flex-col space-y-2">
+                <label>Title</label>
+                <input
+                  type="text"
+                  value={dataTitle}
+                  onChange={(e) => setDataTitle(e.target.value)}
+                  className="w-full p-4 border border-gray-600 rounded-xl"
                 />
               </div>
-            )}
-          </div>
 
-          {errors.map((error, index) => {
-            return (
+              <div className="flex flex-col space-y-2">
+                <label>Description</label>
+                <textarea
+                  value={dataDescription}
+                  onChange={(e) => setDataDescription(e.target.value)}
+                  className="w-full h-[200px] p-4 border border-gray-600 rounded-xl"
+                ></textarea>
+              </div>
+            </div>
+            <div className="mt-6 flex flex-row gap-4">
+              <CustomButton
+                label="<- Previous"
+                className="bg-black hover:bg-gray-800"
+                onClick={() => setCurrentStep(1)}
+              />
+              <CustomButton label="Next ->" onClick={() => setCurrentStep(3)} />
+            </div>
+          </>
+        );
+
+      case 3:
+        return (
+          <>
+            <h2 className="mb-6 text-2xl">Details</h2>
+            <div className="pt-3 pb-6 space-y-4">
+              <div className="flex flex-col space-y-2">
+                <label>Price per day</label>
+                <input
+                  type="number"
+                  value={dataPrice}
+                  onChange={(e) => setDataPrice(e.target.value)}
+                  className="w-full p-4 border border-gray-600 rounded-xl"
+                />
+              </div>
+
+              <div className="flex flex-col space-y-2">
+                <label>Condition</label>
+                <select
+                  value={dataCondition}
+                  onChange={(e) => setDataCondition(e.target.value)}
+                  className="w-full p-4 border border-gray-600 rounded-xl"
+                >
+                  <option value="">Select condition</option>
+                  <option value="new">New</option>
+                  <option value="like new">Like New</option>
+                  <option value="good">Good</option>
+                  <option value="fair">Fair</option>
+                  <option value="poor">Poor</option>
+                </select>
+              </div>
+            </div>
+            <div className="mt-6 flex flex-row gap-4">
+              <CustomButton
+                label="<- Previous"
+                className="bg-black hover:bg-gray-800"
+                onClick={() => setCurrentStep(2)}
+              />
+              <CustomButton label="Next ->" onClick={() => setCurrentStep(4)} />
+            </div>
+          </>
+        );
+
+      case 4:
+        return (
+          <>
+            <h2 className="mb-6 text-2xl">Location</h2>
+            <div className="pt-3 pb-6 space-y-4">
+              <SelectCountry
+                value={dataCountry}
+                onChange={(value) =>
+                  setDataCountry(value as SelectCountryValue)
+                }
+              />
+            </div>
+            <div className="mt-6 flex flex-row gap-4">
+              <CustomButton
+                label="<- Previous"
+                className="bg-black hover:bg-gray-800"
+                onClick={() => setCurrentStep(3)}
+              />
+              <CustomButton label="Next ->" onClick={() => setCurrentStep(5)} />
+            </div>
+          </>
+        );
+
+      case 5:
+        return (
+          <>
+            <h2 className="mb-6 text-2xl">Image</h2>
+            <div className="pt-3 pb-6 space-y-4">
+              <div className="py-4 px-6 bg-gray-600 text-white rounded-xl">
+                <input type="file" accept="image/*" onChange={setImage} />
+              </div>
+
+              {dataImage && (
+                <div className="w-[200px] h-[150px] relative">
+                  <Image
+                    fill
+                    alt="Uploaded image"
+                    src={URL.createObjectURL(dataImage)}
+                    className="w-full h-full object-cover rounded-xl"
+                  />
+                </div>
+              )}
+            </div>
+
+            {errors.map((error, index) => (
               <div
                 key={index}
                 className="p-5 mb-4 bg-secondchance text-white rounded-xl opacity-80"
               >
                 {error}
               </div>
-            );
-          })}
+            ))}
 
-          <CustomButton
-            label="Previous"
-            className="mb-2 bg-black hover:bg-gray-800"
-            onClick={() => setCurrentStep(4)}
-          />
+            <div className="mt-6 flex flex-row gap-4">
+              <CustomButton
+                label="<- Previous"
+                className="bg-black hover:bg-gray-800"
+                onClick={() => setCurrentStep(4)}
+              />
+              <CustomButton label="Submit" onClick={submitForm} />
+            </div>
+          </>
+        );
 
-          <CustomButton label="Submit" onClick={submitForm} />
-        </>
-      )}
-    </>
-  );
+      default:
+        return (
+          <div className="p-4">
+            <p>Step not recognized. Please go back and try again.</p>
+          </div>
+        );
+    }
+  };
 
   return (
-    <>
-      <Modal
-        isOpen={addItemModal.isOpen}
-        close={addItemModal.close}
-        label="Add Item"
-        content={content}
-      />
-    </>
+    <Modal
+      isOpen={addItemModal.isOpen}
+      close={addItemModal.close}
+      label="Add Item"
+      content={renderContent()}
+    />
   );
 };
 

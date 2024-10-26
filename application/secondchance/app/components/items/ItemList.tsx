@@ -1,11 +1,11 @@
 "use client";
 
+import ItemCard from "@/app/components/items/ItemCard";
+import useSearchModal from "@/app/hooks/useSearchModal";
+import apiService from "@/app/services/apiService";
 import { format } from "date-fns";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import ItemCard from "@/app/components/items/ItemCard";
-import apiService from '@/app/services/apiService';
-import useSearchModal from "@/app/hooks/useSearchModal";
 
 export type ItemType = {
   id: string;
@@ -35,21 +35,13 @@ const ItemList: React.FC<ItemListProps> = ({ seller_id, favorites }) => {
   console.log("searchQuery: ", searchModal.query);
 
   const markFavorite = (id: string, is_favorite: boolean) => {
-    const tmpItems = items.map((item: ItemType) => {
-      if (item.id == id) {
+    const updatedItems = items.map((item) => {
+      if (item.id === id) {
         item.is_favorite = is_favorite;
-
-        if (is_favorite) {
-          console.log("added to list of favorited items");
-        } else {
-          console.log("removed from list");
-        }
       }
-
       return item;
     });
-
-    setItems(tmpItems);
+    setItems(updatedItems);
   };
 
   const getItems = async () => {
@@ -60,54 +52,61 @@ const ItemList: React.FC<ItemListProps> = ({ seller_id, favorites }) => {
     } else if (favorites) {
       url += "?is_favorites=true";
     } else {
-      let urlQuery = "";
+      const queryParams = new URLSearchParams();
 
       if (location) {
-        urlQuery += "&location=" + location;
+        queryParams.append("location", location);
       }
 
       if (pickUpDate) {
-        urlQuery += "&startDate=" + format(pickUpDate, "yyyy-MM-dd");
+        queryParams.append(
+          "startDate",
+          format(new Date(pickUpDate), "yyyy-MM-dd")
+        );
       }
 
       if (returnDate) {
-        urlQuery += "&endDate=" + format(returnDate, "yyyy-MM-dd");
+        queryParams.append(
+          "endDate",
+          format(new Date(returnDate), "yyyy-MM-dd")
+        );
       }
 
       if (condition) {
-        urlQuery += "&condition=" + condition;
+        queryParams.append("condition", condition);
       }
 
       if (priceMin !== undefined) {
-        urlQuery += `&priceMin=${priceMin}`;
+        queryParams.append("priceMin", String(priceMin));
       }
 
       if (priceMax !== undefined) {
-        urlQuery += `&priceMax=${priceMax}`;
+        queryParams.append("priceMax", String(priceMax));
       }
 
       if (category) {
-        urlQuery += "&category=" + category;
+        queryParams.append("category", category);
       }
 
-      if (urlQuery.length) {
-        console.log("Query:", urlQuery);
-
-        urlQuery = "?" + urlQuery.substring(1);
-        url += urlQuery;
+      if (queryParams.toString()) {
+        url += `?${queryParams.toString()}`;
       }
     }
 
-    const tmpItems = await apiService.get(url)
+    try {
+      const response = await apiService.get(url);
+      const tmpItems = response.data || [];
+      const favoritesList = response.favorites || [];
 
-    setItems(tmpItems.data.map((item: ItemType) => {
-      if (tmpItems.favorites.includes(item.id)) {
-        item.is_favorite = true;
-      } else {
-        item.is_favorite = false;
-      }
-      return item;
-    }));
+      const updatedItems = tmpItems.map((item: ItemType) => ({
+        ...item,
+        is_favorite: favoritesList.includes(item.id),
+      }));
+
+      setItems(updatedItems);
+    } catch (error) {
+      console.error("Error fetching items:", error);
+    }
   };
 
   useEffect(() => {
@@ -116,17 +115,13 @@ const ItemList: React.FC<ItemListProps> = ({ seller_id, favorites }) => {
 
   return (
     <>
-      {items.map((item) => {
-        return (
-          <ItemCard
-            key={item.id}
-            item={item}
-            markFavorite={(is_favorite: any) =>
-              markFavorite(item.id, is_favorite)
-            }
-          />
-        );
-      })}
+      {items.map((item) => (
+        <ItemCard
+          key={item.id}
+          item={item}
+          markFavorite={(is_favorite) => markFavorite(item.id, is_favorite)}
+        />
+      ))}
     </>
   );
 };

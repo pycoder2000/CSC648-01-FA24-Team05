@@ -6,7 +6,7 @@ import { useState } from "react";
 
 const Categories = () => {
   const searchModal = useSearchModal();
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState<string>("");
 
   const _setCategory = (_category: string) => {
     setCategory(_category);

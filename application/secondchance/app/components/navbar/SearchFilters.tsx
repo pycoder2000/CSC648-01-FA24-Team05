@@ -6,33 +6,45 @@ const SearchFilters = () => {
   const searchModal = useSearchModal();
 
   return (
-    <div
-      onClick={() => searchModal.open("location")}
-      className="h-[48px] lg:h-[64px] flex flex-row items-center justify-between border rounded-full"
-    >
+    <div className="h-[48px] lg:h-[64px] flex flex-row items-center justify-between border rounded-full">
       <div className="hidden lg:block">
         <div className="flex flex-row items-center justify-between">
-          <div className="cursor-pointer h-[48px] lg:h-[64px] px-8 flex flex-col justify-center rounded-full hover:bg-gray-100">
+          <div
+            className="cursor-pointer h-[48px] lg:h-[64px] px-8 flex flex-col justify-center rounded-full hover:bg-gray-100"
+            onClick={() => searchModal.open("location")}
+          >
             <p className="text-xs font-semibold">Where</p>
             <p className="text-sm">Wanted location</p>
           </div>
 
-          <div className="cursor-pointer h-[48px] lg:h-[64px] px-8 flex flex-col justify-center rounded-full hover:bg-gray-100">
+          <div
+            className="cursor-pointer h-[48px] lg:h-[64px] px-8 flex flex-col justify-center rounded-full hover:bg-gray-100"
+            onClick={() => searchModal.open("checkin")}
+          >
             <p className="text-xs font-semibold">Pick-up Date</p>
             <p className="text-sm">Add dates</p>
           </div>
 
-          <div className="cursor-pointer h-[48px] lg:h-[64px] px-8 flex flex-col justify-center rounded-full hover:bg-gray-100">
+          <div
+            className="cursor-pointer h-[48px] lg:h-[64px] px-8 flex flex-col justify-center rounded-full hover:bg-gray-100"
+            onClick={() => searchModal.open("checkout")}
+          >
             <p className="text-xs font-semibold">Return Date</p>
             <p className="text-sm">Add dates</p>
           </div>
 
-          <div className="cursor-pointer h-[48px] lg:h-[64px] px-8 flex flex-col justify-center rounded-full hover:bg-gray-100">
+          <div
+            className="cursor-pointer h-[48px] lg:h-[64px] px-8 flex flex-col justify-center rounded-full hover:bg-gray-100"
+            onClick={() => searchModal.open("condition")}
+          >
             <p className="text-xs font-semibold">Condition</p>
             <p className="text-sm">Select condition</p>
           </div>
 
-          <div className="cursor-pointer h-[48px] lg:h-[64px] px-8 flex flex-col justify-center rounded-full hover:bg-gray-100">
+          <div
+            className="cursor-pointer h-[48px] lg:h-[64px] px-8 flex flex-col justify-center rounded-full hover:bg-gray-100"
+            onClick={() => searchModal.open("price")}
+          >
             <p className="text-xs font-semibold">Price Range</p>
             <p className="text-sm">Select range</p>
           </div>
