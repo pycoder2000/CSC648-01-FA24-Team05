@@ -11,7 +11,7 @@ export type ItemType = {
   id: string;
   title: string;
   image_url: string;
-  price: number;
+  price_per_day: number;
   is_favorite: boolean;
 };
 

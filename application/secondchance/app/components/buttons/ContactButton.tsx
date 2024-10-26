@@ -1,8 +1,8 @@
 'use client';
 
-import useLoginModal from "../hooks/useLoginModal";
+import useLoginModal from "@/app/hooks/useLoginModal";
 import { useRouter } from "next/navigation";
-import apiService from "../services/apiService";
+import apiService from "@/app/services/apiService";
 
 interface ContactButtonProps {
     userId: string | null;
