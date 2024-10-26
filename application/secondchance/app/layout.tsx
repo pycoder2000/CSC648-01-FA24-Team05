@@ -1,4 +1,4 @@
-import AddPropertyModal from "@/app/components/modals/AddItemModal";
+import AddItemModal from "@/app/components/modals/AddItemModal";
 import LoginModal from "@/app/components/modals/LoginModal";
 import SearchModal from "@/app/components/modals/SearchModal";
 import SignupModal from "@/app/components/modals/SignupModal";
@@ -30,7 +30,7 @@ export default function RootLayout({
         <LoginModal />
         <SearchModal />
         <SignupModal />
-        <AddPropertyModal />
+        <AddItemModal />
       </body>
     </html>
   );
