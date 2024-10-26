@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { getUserId } from "@/app/lib/actions";
 import AddItemButton from "@/app/components/navbar/AddItemButton";
 import SearchFilters from "@/app/components/navbar/SearchFilters";
 import UserNav from "@/app/components/navbar/UserNav";
+import { getUserId } from "@/app/lib/actions";
 
 const Navbar = async () => {
   const userId = await getUserId();
@@ -31,7 +31,6 @@ const Navbar = async () => {
           <div className="flex items-center space-x-6">
             <AddItemButton userId={userId} />
 
-            <UserNav />
             <UserNav userId={userId} />
           </div>
         </div>
