@@ -92,6 +92,7 @@ develop-eggs/
 dist/
 downloads/
 eggs/
+lib/
 lib64/
 parts/
 sdist/
@@ -139,8 +140,5 @@ local_settings.py
 .env
 db.sqlite3
 CSC648-EC2-Instance-Key-Pair.pem
-Info.md
-application/secondchance/package-lock.json
-application/backend/docker-compose.prod.yml
-application/backend/docker-compose.yml
-application/backend/.env.dev
+
+second_backend/venv
