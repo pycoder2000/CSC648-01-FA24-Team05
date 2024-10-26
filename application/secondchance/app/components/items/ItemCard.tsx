@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { ItemType } from "./ItemList";
-// import FavoriteButton from "../FavoriteButton";
+import { ItemType } from "@/app/components/items/ItemList";
+// import FavoriteButton from "@/app/components/buttons/FavoriteButton";
 
 interface ItemProps {
   item: ItemType;
