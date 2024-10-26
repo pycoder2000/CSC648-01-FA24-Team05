@@ -140,3 +140,4 @@ local_settings.py
 db.sqlite3
 CSC648-EC2-Instance-Key-Pair.pem
 Info.md
+application/secondchance/package-lock.json
