@@ -1,12 +1,12 @@
+import apiService from "@/app/services/apiService";
 import Image from "next/image";
 import Link from "next/link";
-import apiService from "@/app/services/apiService";
 
 const MyRentalsPage = async () => {
   const rentals = await apiService.get("/api/auth/myrentals/");
 
   return (
-    <main className="max-w-[1500px] mx-auto px-6 pb-6">
+    <main className="w-full mx-auto px-6 pb-6">
       <h1 className="my-6 text-2xl">My Rentals</h1>
 
       <div className="space-y-4">
