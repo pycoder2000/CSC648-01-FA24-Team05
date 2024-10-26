@@ -1,13 +1,12 @@
 import RentalSidebar from "@/app/components/items/RentalSidebar";
+import { getUserId } from "@/app/lib/actions";
+import apiService from "@/app/services/apiService";
 import Image from "next/image";
 import Link from "next/link";
 
-// import apiService from "@/app/services/apiService";
-// import { getUserId } from "@/app/lib/actions";
-
 const ItemDetailPage = async ({ params }: { params: { id: string } }) => {
   const item = await apiService.get(`/api/items/${params.id}`);
-  // const userId = await getUserId();
+  const userId = await getUserId();
 
   console.log("userId", userId);
 

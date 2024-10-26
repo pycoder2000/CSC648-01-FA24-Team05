@@ -4,7 +4,7 @@ import { format } from "date-fns";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import ItemCard from "@/app/components/items/ItemCard";
-// import apiService from '@/app/services/apiService';
+import apiService from '@/app/services/apiService';
 import useSearchModal from "@/app/hooks/useSearchModal";
 
 export type ItemType = {
@@ -98,16 +98,16 @@ const ItemList: React.FC<ItemListProps> = ({ seller_id, favorites }) => {
       }
     }
 
-    // const tmpItems = await apiService.get(url)
+    const tmpItems = await apiService.get(url)
 
-    // setItems(tmpItems.data.map((item: ItemType) => {
-    //   if (tmpItems.favorites.includes(item.id)) {
-    //     item.is_favorite = true;
-    //   } else {
-    //     item.is_favorite = false;
-    //   }
-    //   return item;
-    // }));
+    setItems(tmpItems.data.map((item: ItemType) => {
+      if (tmpItems.favorites.includes(item.id)) {
+        item.is_favorite = true;
+      } else {
+        item.is_favorite = false;
+      }
+      return item;
+    }));
   };
 
   useEffect(() => {
