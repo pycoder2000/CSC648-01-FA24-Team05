@@ -4,7 +4,7 @@ import { MessageType } from "@/app/inbox/[id]/page";
 import { ConversationType, UserType } from "@/app/inbox/page";
 import { useEffect, useRef, useState } from "react";
 import useWebSocket from "react-use-websocket";
-import CustomButton from "../forms/CustomButton";
+import CustomButton from "../buttons/CustomButton";
 
 interface ConversationDetailProps {
   token: string;

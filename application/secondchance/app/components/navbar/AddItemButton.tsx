@@ -1,21 +1,21 @@
 "use client";
 
-// import useLoginModal from "@/app/hooks/useLoginModal";
-// import useAddItemModal from "@/app/hooks/useAddItemModal";
+import useLoginModal from "@/app/hooks/useLoginModal";
+import useAddItemModal from "@/app/hooks/useAddItemModal";
 
 interface AddItemButtonProps {
   userId?: string | null;
 }
 
 const AddItemButton: React.FC<AddItemButtonProps> = ({ userId }) => {
-  // const loginModal = useLoginModal();
-  // const addItemModal = useAddItemModal();
+  const loginModal = useLoginModal();
+  const addItemModal = useAddItemModal();
 
   const addRentalItem = () => {
     if (userId) {
-      // addItemModal.open()
+      addItemModal.open()
     } else {
-      // loginModal.open();
+      loginModal.open();
     }
   };
 

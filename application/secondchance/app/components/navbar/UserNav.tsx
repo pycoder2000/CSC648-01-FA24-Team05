@@ -3,11 +3,10 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-// import LogoutButton from "@/app/components/buttons/LogoutButton";
 import MenuLink from "@/app/components/navbar/MenuLink";
-
-// import useLoginModal from "@/app/hooks/useLoginModal";
-// import useSignupModal from "@/app/hooks/useSignupModal";
+import LogoutButton from "@/app/components/buttons/LogoutButton";
+import useLoginModal from "@/app/hooks/useLoginModal";
+import useSignupModal from "@/app/hooks/useSignupModal";
 
 interface UserNavProps {
   userId?: string | null;
@@ -15,8 +14,8 @@ interface UserNavProps {
 
 const UserNav: React.FC<UserNavProps> = ({ userId }) => {
   const router = useRouter();
-  //   const loginModal = useLoginModal();
-  //   const signupModal = useSignupModal();
+  const loginModal = useLoginModal();
+  const signupModal = useSignupModal();
   const [isOpen, setIsOpen] = useState(false);
 
   console.log("User ID:", userId);
@@ -88,7 +87,7 @@ const UserNav: React.FC<UserNavProps> = ({ userId }) => {
                 }}
               />
 
-              {/* <LogoutButton /> */}
+              <LogoutButton />
             </>
           ) : (
             <>
@@ -96,7 +95,7 @@ const UserNav: React.FC<UserNavProps> = ({ userId }) => {
                 label="Log in"
                 onClick={() => {
                   setIsOpen(false);
-                  //   loginModal.open();
+                    loginModal.open();
                 }}
               />
 
@@ -104,7 +103,7 @@ const UserNav: React.FC<UserNavProps> = ({ userId }) => {
                 label="Sign up"
                 onClick={() => {
                   setIsOpen(false);
-                  //   signupModal.open();
+                    signupModal.open();
                 }}
               />
             </>

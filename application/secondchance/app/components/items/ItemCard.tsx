@@ -1,7 +1,7 @@
+import FavoriteButton from "@/app/components/buttons/FavoriteButton";
+import { ItemType } from "@/app/components/items/ItemList";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { ItemType } from "@/app/components/items/ItemList";
-// import FavoriteButton from "@/app/components/buttons/FavoriteButton";
 
 interface ItemProps {
   item: ItemType;
@@ -25,13 +25,13 @@ const ItemCard: React.FC<ItemProps> = ({ item, markFavorite }) => {
           alt="Item image"
         />
 
-        {/* {markFavorite && (
+        {markFavorite && (
           <FavoriteButton
             id={item.id}
             is_favorite={item.is_favorite}
             markFavorite={(is_favorite) => markFavorite(is_favorite)}
           />
-        )} */}
+        )}
       </div>
 
       <div className="mt-2">
