@@ -1,27 +1,27 @@
 "use client";
 
+import useSearchModal, { SearchQuery } from "@/app/hooks/useSearchModal";
 import Image from "next/image";
 import { useState } from "react";
-// import useSearchModal, { SearchQuery } from '../hooks/useSearchModal';
 
 const Categories = () => {
-  // const searchModal = useSearchModal();
+  const searchModal = useSearchModal();
   const [category, setCategory] = useState("");
 
   const _setCategory = (_category: string) => {
     setCategory(_category);
 
-    // const query: SearchQuery = {
-    //     country: searchModal.query.country,
-    //     checkIn: searchModal.query.checkIn,
-    //     checkOut: searchModal.query.checkOut,
-    //     guests: searchModal.query.guests,
-    //     bedrooms: searchModal.query.bedrooms,
-    //     bathrooms: searchModal.query.bathrooms,
-    //     category: _category
-    // }
+    const query: SearchQuery = {
+      location: searchModal.query.location,
+      startDate: searchModal.query.startDate,
+      endDate: searchModal.query.endDate,
+      condition: searchModal.query.condition,
+      priceMin: searchModal.query.priceMin,
+      priceMax: searchModal.query.priceMax,
+      category: _category,
+    };
 
-    // searchModal.setQuery(query);
+    searchModal.setQuery(query);
   };
 
   const categories = [

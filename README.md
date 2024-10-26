@@ -19,17 +19,17 @@ The key technological stack will include Django, Django Rest Framework, and Next
 
 ##  2. <a name='KeyFeatures'></a>Key Features
 
-| **Feature**                     | **Description**                                                                                        |
-| ------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| **Eco-Conscious Rentals**       | Focus on renting second-hand items, reducing waste and promoting sustainability.                       |
-| **User-Friendly Listings**      | Users can easily add, browse, and manage listings of second-hand items.                                |
-| **Real-Time Communication**     | Integrated real-time chat feature allows renters and owners to discuss terms and conditions.           |
-| **Search and Filters**          | Advanced search and filter options to find items based on location, category, price, and condition.    |
-| **Favorites List**              | Users can save favorite items to rent in the future.                                                   |
-| **Secure Transactions**         | Payment gateways to ensure safe and secure rental transactions.                                        |
-| **Sustainability Tips**         | A dedicated page offering eco-friendly tips on how to reuse, recycle, and maintain items.              |
-| **Personalized User Dashboard** | Renters and owners have personalized dashboards to manage their rentals, listings, and communications. |
-| **Responsive Design**           | The platform is fully responsive and works seamlessly on all devices.                                  |
+| **Feature**                     | **Description**                                                                                         |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| **Eco-Conscious Rentals**       | Focus on renting second-hand items, reducing waste and promoting sustainability.                        |
+| **User-Friendly Listings**      | Users can easily add, browse, and manage listings of second-hand items.                                 |
+| **Real-Time Communication**     | Integrated real-time chat feature allows renters and sellers to discuss terms and conditions.           |
+| **Search and Filters**          | Advanced search and filter options to find items based on location, category, price, and condition.     |
+| **Favorites List**              | Users can save favorite items to rent in the future.                                                    |
+| **Secure Transactions**         | Payment gateways to ensure safe and secure rental transactions.                                         |
+| **Sustainability Tips**         | A dedicated page offering eco-friendly tips on how to reuse, recycle, and maintain items.               |
+| **Personalized User Dashboard** | Renters and sellers have personalized dashboards to manage their rentals, listings, and communications. |
+| **Responsive Design**           | The platform is fully responsive and works seamlessly on all devices.                                   |
 
 ##  3. <a name='TechnologiesUsed'></a>Technologies Used
 
@@ -55,7 +55,7 @@ The key technological stack will include Django, Django Rest Framework, and Next
 - **My Rentals:** Manage the user’s current and previous rental engagements.
 - **My Listings:** A page for sellers/users to manage the items they have listed for rent.
 - **Favorites:** A section for users to save and manage their favorite items to rent.
-- **Chat Page:** Real-time chat for communication between renters and owners to discuss rental terms, conditions, and other inquiries.
+- **Chat Page:** Real-time chat for communication between renters and sellers to discuss rental terms, conditions, and other inquiries.
 - **Search & Filters:** A sophisticated search mechanism allowing users to filter second-hand items based on price, category, location, and condition.
 - **Sustainability Tips Page:** A dedicated page offering users ecological tips on reusing and maintaining items to further reduce environmental waste.
 
