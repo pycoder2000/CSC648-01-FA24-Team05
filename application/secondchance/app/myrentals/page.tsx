@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import apiService from "../services/apiService";
+import apiService from "@/app/services/apiService";
 
 const MyRentalsPage = async () => {
   const rentals = await apiService.get("/api/auth/myrentals/");

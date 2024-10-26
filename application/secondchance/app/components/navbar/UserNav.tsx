@@ -3,8 +3,8 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-// import LogoutButton from "../LogoutButton";
-import MenuLink from "./MenuLink";
+// import LogoutButton from "@/app/components/buttons/LogoutButton";
+import MenuLink from "@/app/components/navbar/MenuLink";
 
 // import useLoginModal from "@/app/hooks/useLoginModal";
 // import useSignupModal from "@/app/hooks/useSignupModal";

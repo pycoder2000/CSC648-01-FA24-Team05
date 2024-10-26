@@ -2,9 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { getUserId } from "@/app/lib/actions";
-import AddItemButton from "./AddItemButton";
-import SearchFilters from "./SearchFilters";
-import UserNav from "./UserNav";
+import AddItemButton from "@/app/components/navbar/AddItemButton";
+import SearchFilters from "@/app/components/navbar/SearchFilters";
+import UserNav from "@/app/components/navbar/UserNav";
 
 const Navbar = async () => {
   const userId = await getUserId();

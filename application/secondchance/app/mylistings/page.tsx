@@ -1,5 +1,5 @@
 import ItemList from "@/app/components/items/ItemList";
-import { getUserId } from "../lib/actions";
+import { getUserId } from "@/app/lib/actions";
 
 const MyListingsPage = async () => {
   const userId = await getUserId();

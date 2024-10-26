@@ -3,7 +3,7 @@
 import { format } from "date-fns";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import ItemCard from "./ItemCard";
+import ItemCard from "@/app/components/items/ItemCard";
 // import apiService from '@/app/services/apiService';
 import useSearchModal from "@/app/hooks/useSearchModal";
 
