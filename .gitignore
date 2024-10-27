@@ -1,4 +1,7 @@
 .DS_Store
+*.env.dev
+*.env
+*.env.prod
 node_modules
 scripts/flow/*/.flowconfig
 .flowconfig
@@ -135,12 +138,3 @@ target/
 *.pyc
 __pycache__/
 local_settings.py
-
-.env
-db.sqlite3
-CSC648-EC2-Instance-Key-Pair.pem
-Info.md
-application/secondchance/package-lock.json
-application/backend/docker-compose.prod.yml
-application/backend/docker-compose.yml
-application/backend/.env.dev

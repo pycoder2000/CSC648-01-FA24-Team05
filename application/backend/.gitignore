@@ -94,6 +94,7 @@ downloads/
 eggs/
 lib/
 lib64/
+migrations/
 parts/
 sdist/
 var/
