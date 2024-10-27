@@ -12,10 +12,16 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 
 DEBUG = bool(os.environ.get("DEBUG", default=0))
 
+AUTH_USER_MODEL = "useraccount.User"
+
+SITE_ID = 1
+
 if DEBUG:
     ALLOWED_HOSTS = ["localhost", "127.0.0.1", "0.0.0.0"]
 else:
     ALLOWED_HOSTS = []
+
+WEBSITE_URL = "http://0.0.0.0:8000"
 
 # Application definition
 INSTALLED_APPS = [
@@ -25,6 +31,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "useraccount",
 ]
 
 MIDDLEWARE = [
@@ -61,8 +68,12 @@ WSGI_APPLICATION = "secondchance_backend.wsgi.application"
 # Database
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": os.environ.get("SQL_ENGINE"),
+        "NAME": os.environ.get("SQL_DATABASE"),
+        "USER": os.environ.get("SQL_USER"),
+        "PASSWORD": os.environ.get("SQL_PASSWORD"),
+        "HOST": os.environ.get("SQL_HOST"),
+        "PORT": os.environ.get("SQL_PORT"),
     }
 }
 
@@ -96,6 +107,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = "static/"
+MEDIA_URL = "media/"
+MEDIA_ROOT = BASE_DIR / "media"
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
