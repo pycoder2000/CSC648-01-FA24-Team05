@@ -5,7 +5,7 @@ import useAddItemModal from "@/app/hooks/useAddItemModal";
 import apiService from "@/app/services/apiService";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import Categories from "../additem/Categories";
 import SelectCountry, { SelectCountryValue } from "../forms/SelectCountry";
 import Modal from "./Modal";
@@ -23,6 +23,24 @@ const AddItemModal = () => {
 
   const addItemModal = useAddItemModal();
   const router = useRouter();
+
+  const resetForm = () => {
+    setCurrentStep(1);
+    setDataCategory("");
+    setDataTitle("");
+    setDataDescription("");
+    setDataPrice("");
+    setDataCondition("");
+    setDataCountry(undefined);
+    setDataImage(null);
+    setErrors([]);
+  };
+
+  useEffect(() => {
+    if (!addItemModal.isOpen) {
+      resetForm();
+    }
+  }, [addItemModal.isOpen]);
 
   const setCategory = (category: string) => {
     setDataCategory(category);
@@ -61,6 +79,7 @@ const AddItemModal = () => {
         console.log("SUCCESS :-D");
         router.push("/?added=true");
         addItemModal.close();
+        resetForm();
       } else {
         console.log("Error");
         const tmpErrors: string[] = Object.values(response).map(

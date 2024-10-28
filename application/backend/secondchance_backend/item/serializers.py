@@ -27,6 +27,8 @@ class ItemDetailSerializer(serializers.ModelSerializer):
             "image_url",
             "condition",
             "seller",
+            "category",
+            "country",
         )
 
 
