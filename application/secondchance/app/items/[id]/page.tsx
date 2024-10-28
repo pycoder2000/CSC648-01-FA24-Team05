@@ -25,7 +25,7 @@ const ItemDetailPage = async ({ params }: { params: { id: string } }) => {
 
       <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
         <div className="col-span-3 mt-6">
-          <div className="shadow-lg border border-gray-300 rounded-xl bg-white p-8 shadow-xl">
+          <div className="border border-gray-300 rounded-xl bg-white p-8 shadow-xl">
             <h1 className="mb-4 text-4xl font-bold text-gray-800">
               {item.title}
             </h1>
@@ -34,7 +34,7 @@ const ItemDetailPage = async ({ params }: { params: { id: string } }) => {
               <div className="flex items-center mb-2">
                 <FaMapMarkerAlt className="text-blue-600 mr-2" />
                 <p className="text-lg text-gray-700">
-                  <strong>Location:</strong> {item.location}
+                  <strong>Location:</strong> {item.country}
                 </p>
               </div>
 
