@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
 export type SearchQuery = {
-  location: string | undefined;
+  country: string | undefined;
   startDate: Date | undefined;
   endDate: Date | undefined;
   condition: string | undefined;
@@ -26,7 +26,7 @@ const useSearchModal = create<SearchModalStore>((set) => ({
   close: () => set({ isOpen: false }),
   setQuery: (query: SearchQuery) => set({ query: query }),
   query: {
-    location: undefined,
+    country: '',
     startDate: undefined,
     endDate: undefined,
     condition: '',

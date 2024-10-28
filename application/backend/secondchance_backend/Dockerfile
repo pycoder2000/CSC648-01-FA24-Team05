@@ -2,8 +2,8 @@ FROM python:3.12.2-slim-bullseye
 
 WORKDIR /usr/src/secondchance_backend
 
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
 RUN apt-get update && apt-get install -y netcat
 

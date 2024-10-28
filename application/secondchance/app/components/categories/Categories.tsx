@@ -12,7 +12,7 @@ const Categories = () => {
     setCategory(_category);
 
     const query: SearchQuery = {
-      location: searchModal.query.location,
+      country: searchModal.query.country,
       startDate: searchModal.query.startDate,
       endDate: searchModal.query.endDate,
       condition: searchModal.query.condition,

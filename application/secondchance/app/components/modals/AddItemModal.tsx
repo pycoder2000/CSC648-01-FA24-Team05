@@ -53,7 +53,6 @@ const AddItemModal = () => {
       formData.append("price_per_day", dataPrice);
       formData.append("condition", dataCondition);
       formData.append("country", dataCountry.label);
-      formData.append("country_code", dataCountry.value);
       formData.append("image", dataImage);
 
       const response = await apiService.post("/api/items/create/", formData);

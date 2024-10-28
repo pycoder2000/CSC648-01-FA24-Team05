@@ -9,7 +9,7 @@ from rest_framework.decorators import (
 from .models import User
 from .serializers import UserDetailSerializer
 
-from item.serializers import RentalsListSerializer
+from item.serializers import RentalListSerializer
 
 
 @api_view(["GET"])

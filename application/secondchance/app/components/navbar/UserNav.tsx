@@ -3,8 +3,8 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-import MenuLink from "@/app/components/navbar/MenuLink";
 import LogoutButton from "@/app/components/buttons/LogoutButton";
+import MenuLink from "@/app/components/navbar/MenuLink";
 import useLoginModal from "@/app/hooks/useLoginModal";
 import useSignupModal from "@/app/hooks/useSignupModal";
 
@@ -21,7 +21,7 @@ const UserNav: React.FC<UserNavProps> = ({ userId }) => {
   console.log("User ID:", userId);
 
   return (
-    <div className="p-3 h-[48px] lg:h-[64px] relative inline-block border flex flex-col justify-center rounded-full">
+    <div className="p-3 h-[48px] lg:h-[64px] relative border flex flex-col justify-center rounded-full">
       <button onClick={() => setIsOpen(!isOpen)} className="flex items-center">
         <svg
           fill="none"
@@ -95,7 +95,7 @@ const UserNav: React.FC<UserNavProps> = ({ userId }) => {
                 label="Log in"
                 onClick={() => {
                   setIsOpen(false);
-                    loginModal.open();
+                  loginModal.open();
                 }}
               />
 
@@ -103,7 +103,7 @@ const UserNav: React.FC<UserNavProps> = ({ userId }) => {
                 label="Sign up"
                 onClick={() => {
                   setIsOpen(false);
-                    signupModal.open();
+                  signupModal.open();
                 }}
               />
             </>

@@ -23,7 +23,7 @@ interface ItemListProps {
 const ItemList: React.FC<ItemListProps> = ({ seller_id, favorites }) => {
   const params = useSearchParams();
   const searchModal = useSearchModal();
-  const location = searchModal.query.location;
+  const country = searchModal.query.country;
   const pickUpDate = searchModal.query.startDate;
   const returnDate = searchModal.query.endDate;
   const condition = searchModal.query.condition;
@@ -54,8 +54,8 @@ const ItemList: React.FC<ItemListProps> = ({ seller_id, favorites }) => {
     } else {
       const queryParams = new URLSearchParams();
 
-      if (location) {
-        queryParams.append("location", location);
+      if (country) {
+        queryParams.append("country", country);
       }
 
       if (pickUpDate) {
