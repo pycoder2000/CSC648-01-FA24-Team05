@@ -24,16 +24,18 @@ const SearchModal = () => {
   const [condition, setCondition] = useState<string>("");
   const [priceMin, setPriceMin] = useState<string>("");
   const [priceMax, setPriceMax] = useState<string>("");
+  const [category, setCategory] = useState<string>("");
   const [dateRange, setDateRange] = useState<Range>(initialDateRange);
 
   const closeAndSearch = () => {
     const newSearchQuery: SearchQuery = {
-      location: country?.label,
+      country: country?.label || "",
       startDate: dateRange.startDate,
       endDate: dateRange.endDate,
       condition: condition,
       priceMin: parseInt(priceMin) || undefined,
       priceMax: parseInt(priceMax) || undefined,
+      category: category || "",
     };
 
     searchModal.setQuery(newSearchQuery);

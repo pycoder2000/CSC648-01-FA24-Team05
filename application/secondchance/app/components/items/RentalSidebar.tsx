@@ -1,8 +1,8 @@
 "use client";
 
+import DatePicker from "@/app/components/forms/Calendar";
 import useLoginModal from "@/app/hooks/useLoginModal";
 import apiService from "@/app/services/apiService";
-import DatePicker from "@/app/components/forms/Calendar";
 import { differenceInDays, eachDayOfInterval, format } from "date-fns";
 import { useEffect, useState } from "react";
 import { Range } from "react-date-range";
@@ -37,8 +37,6 @@ const RentalSidebar: React.FC<RentalSidebarProps> = ({ item, userId }) => {
   const [reservedDates, setReservedDates] = useState<Date[]>([]);
 
   const processRental = async () => {
-    console.log("processRental", userId);
-
     if (userId) {
       if (dateRange.startDate && dateRange.endDate) {
         const formData = new FormData();
@@ -59,7 +57,7 @@ const RentalSidebar: React.FC<RentalSidebarProps> = ({ item, userId }) => {
         );
 
         if (response.success) {
-          console.log("Rental successful");
+          console.log("Booking successful");
         } else {
           console.log("Something went wrong...");
         }
@@ -124,41 +122,44 @@ const RentalSidebar: React.FC<RentalSidebarProps> = ({ item, userId }) => {
   }, [dateRange]);
 
   return (
-    <aside className="mt-6 p-6 col-span-2 rounded-xl border border-gray-300 shadow-xl">
-      <h2 className="mb-5 text-2xl">${item.price_per_day} per day</h2>
+    <aside className="mt-6 p-6 col-span-2 rounded-xl border border-gray-200 shadow-xl bg-white">
+      <h2 className="mb-2 text-2xl font-semibold text-gray-800">
+        Booking Summary
+      </h2>
+      <p className="text-lg text-gray-600 mb-5">${item.price_per_day} / day</p>
 
-      <DatePicker
-        value={dateRange}
-        reservedDates={reservedDates}
-        onChange={(value) => _setDateRange(value.selection)}
-      />
+      <div className="mb-5">
+        <h3 className="mb-3 text-lg font-medium text-gray-700">Select Dates</h3>
+        <DatePicker
+          value={dateRange}
+          reservedDates={reservedDates}
+          onChange={(value) => _setDateRange(value.selection)}
+        />
+      </div>
 
       <div
         onClick={processRental}
-        className="w-full mb-6 py-6 text-center text-white bg-secondchance hover:bg-secondchance-dark rounded-xl"
+        className="w-full mb-6 py-3 text-center text-white bg-secondchance hover:bg-secondchance-dark transition rounded-lg cursor-pointer"
       >
-        Rent
+        Book Now
       </div>
 
-      <div className="mb-4 flex justify-between align-center">
-        <p>
-          ${item.price_per_day} * {days} days
+      <div className="mb-4 flex justify-between items-center text-gray-700">
+        <p className="text-md">
+          ${item.price_per_day} x {days} {days === 1 ? "day" : "days"}
         </p>
-
-        <p>${item.price_per_day * days}</p>
+        <p className="text-md">${item.price_per_day * days}</p>
       </div>
 
-      <div className="mb-4 flex justify-between align-center">
-        <p>Platform fee</p>
-
-        <p>${fee}</p>
+      <div className="mb-4 flex justify-between items-center text-gray-700">
+        <p className="text-md">Service Fee</p>
+        <p className="text-md">${fee}</p>
       </div>
 
-      <hr />
+      <hr className="my-4" />
 
-      <div className="mt-4 flex justify-between align-center font-bold">
-        <p>Total</p>
-
+      <div className="mt-4 flex justify-between items-center font-bold text-lg text-gray-900">
+        <p>Total Amount</p>
         <p>${totalPrice}</p>
       </div>
     </aside>

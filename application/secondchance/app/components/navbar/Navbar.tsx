@@ -12,7 +12,7 @@ const Navbar = async () => {
   console.log("userId: ", userId);
 
   return (
-    <nav className="w-full fixed top-0 left-0 py-6 border-b bg-white z-10">
+    <nav className="w-full fixed top-0 left-0 py-6 border-b border-white bg-white shadow-md flex justify-between items-center z-10">
       <div className="w-full mx-auto px-6">
         <div className="flex justify-between items-center">
           <Link href="/">
