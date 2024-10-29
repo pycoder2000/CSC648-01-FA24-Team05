@@ -30,5 +30,5 @@ def rentals_list(request):
     print("user", request.user)
     print(rentals)
 
-    serializer = RentalsListSerializer(rentals, many=True)
+    serializer = RentalListSerializer(rentals, many=True)
     return JsonResponse(serializer.data, safe=False)
