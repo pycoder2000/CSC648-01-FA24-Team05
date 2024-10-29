@@ -2,6 +2,7 @@ import AddItemModal from "@/app/components/modals/AddItemModal";
 import LoginModal from "@/app/components/modals/LoginModal";
 import SearchModal from "@/app/components/modals/SearchModal";
 import SignupModal from "@/app/components/modals/SignupModal";
+import SuccessModal from "@/app/components/modals/SuccessModal";
 import Navbar from "@/app/components/navbar/Navbar";
 import "@/app/globals.css";
 import type { Metadata } from "next";
@@ -40,6 +41,7 @@ export default function RootLayout({
         <SearchModal />
         <SignupModal />
         <AddItemModal />
+        <SuccessModal />
       </body>
     </html>
   );
