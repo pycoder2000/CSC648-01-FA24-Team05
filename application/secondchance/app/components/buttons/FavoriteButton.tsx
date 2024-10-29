@@ -28,12 +28,12 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({
     <div
       onClick={toggleFavorite}
       className={`absolute top-2 right-2 ${
-        is_favorite ? "text-secondchance" : "text-white"
-      } hover:text-secondchance`}
+        is_favorite ? "text-rose-500" : "text-gray-400"
+      } hover:text-rose-500`}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        fill="none"
+        fill={is_favorite ? "#F43F5E" : "none"}
         viewBox="0 0 24 24"
         strokeWidth={1.5}
         stroke="currentColor"
