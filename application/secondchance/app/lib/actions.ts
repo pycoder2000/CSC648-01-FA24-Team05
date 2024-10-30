@@ -3,8 +3,6 @@
 import { cookies } from 'next/headers';
 
 export async function handleRefresh() {
-    console.log('handleRefresh');
-
     const cookieHandler = await cookies();
     const refreshToken = await getRefreshToken();
 

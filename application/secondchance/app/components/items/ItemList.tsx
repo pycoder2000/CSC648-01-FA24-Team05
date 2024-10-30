@@ -32,8 +32,6 @@ const ItemList: React.FC<ItemListProps> = ({ seller_id, favorites }) => {
   const category = searchModal.query.category;
   const [items, setItems] = useState<ItemType[]>([]);
 
-  console.log("searchQuery: ", searchModal.query);
-
   const markFavorite = (id: string, is_favorite: boolean) => {
     const updatedItems = items.map((item) => {
       if (item.id === id) {

@@ -62,8 +62,6 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
   }, [lastJsonMessage]);
 
   const sendMessage = async () => {
-    console.log("sendMessage");
-
     sendJsonMessage({
       event: "chat_message",
       data: {
@@ -103,9 +101,7 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
           >
             <p className="font-bold text-gray-500">{message.created_by.name}</p>
             <p>{message.body}</p>
-            {message.read && (
-              <p className="text-xs text-gray-400">✔️ Read</p>
-            )}
+            {message.read && <p className="text-xs text-gray-400">✔️ Read</p>}
           </div>
         ))}
 
@@ -120,9 +116,7 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
           >
             <p className="font-bold text-gray-500">{message.name}</p>
             <p>{message.body}</p>
-            {message.read && (
-              <p className="text-xs text-gray-400">✔️ Read</p>
-            )}
+            {message.read && <p className="text-xs text-gray-400">✔️ Read</p>}
           </div>
         ))}
       </div>
