@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
-import DatePicker from "@/app/components/forms/Calendar";
-import useLoginModal from "@/app/hooks/useLoginModal";
-import useSuccessModal from "@/app/hooks/useSuccessModal";
-import apiService from "@/app/services/apiService";
-import { differenceInDays, eachDayOfInterval, format } from "date-fns";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { Range } from "react-date-range";
+import DatePicker from '@/app/components/forms/Calendar';
+import useLoginModal from '@/app/hooks/useLoginModal';
+import useSuccessModal from '@/app/hooks/useSuccessModal';
+import apiService from '@/app/services/apiService';
+import { differenceInDays, eachDayOfInterval, format } from 'date-fns';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { Range } from 'react-date-range';
 
 const initialDateRange = {
   startDate: new Date(),
   endDate: new Date(),
-  key: "selection",
+  key: 'selection',
 };
 
 export type Item = {
@@ -44,30 +44,24 @@ const RentalSidebar: React.FC<RentalSidebarProps> = ({ item, userId }) => {
     if (userId) {
       if (dateRange.startDate && dateRange.endDate) {
         const formData = new FormData();
-        formData.append("location", item.location);
-        formData.append("condition", item.condition);
-        formData.append("category", item.category);
-        formData.append(
-          "start_date",
-          format(dateRange.startDate, "yyyy-MM-dd")
-        );
-        formData.append("end_date", format(dateRange.endDate, "yyyy-MM-dd"));
-        formData.append("number_of_days", days.toString());
-        formData.append("total_price", totalPrice.toString());
+        formData.append('location', item.location);
+        formData.append('condition', item.condition);
+        formData.append('category', item.category);
+        formData.append('start_date', format(dateRange.startDate, 'yyyy-MM-dd'));
+        formData.append('end_date', format(dateRange.endDate, 'yyyy-MM-dd'));
+        formData.append('number_of_days', days.toString());
+        formData.append('total_price', totalPrice.toString());
 
-        const response = await apiService.post(
-          `/api/items/${item.id}/rent/`,
-          formData
-        );
+        const response = await apiService.post(`/api/items/${item.id}/rent/`, formData);
 
         if (response.success) {
           successModal.open();
           setTimeout(() => {
             successModal.close();
-            router.push("/myrentals");
+            router.push('/myrentals');
           }, 15000);
         } else {
-          console.log("Something went wrong...");
+          console.log('Something went wrong...');
         }
       }
     } else {
@@ -130,11 +124,9 @@ const RentalSidebar: React.FC<RentalSidebarProps> = ({ item, userId }) => {
   }, [dateRange]);
 
   return (
-    <aside className="mt-6 p-6 col-span-2 rounded-xl border border-gray-200 shadow-xl bg-white">
-      <h2 className="mb-2 text-2xl font-semibold text-gray-800">
-        Booking Summary
-      </h2>
-      <p className="text-lg text-gray-600 mb-5">${item.price_per_day} / day</p>
+    <aside className="col-span-2 mt-6 rounded-xl border border-gray-200 bg-white p-6 shadow-xl">
+      <h2 className="mb-2 text-2xl font-semibold text-gray-800">Booking Summary</h2>
+      <p className="mb-5 text-lg text-gray-600">${item.price_per_day} / day</p>
 
       <div className="mb-5">
         <h3 className="mb-3 text-lg font-medium text-gray-700">Select Dates</h3>
@@ -147,26 +139,26 @@ const RentalSidebar: React.FC<RentalSidebarProps> = ({ item, userId }) => {
 
       <div
         onClick={processRental}
-        className="w-full mb-6 py-3 text-center text-white bg-secondchance hover:bg-secondchance-dark transition rounded-lg cursor-pointer"
+        className="mb-6 w-full cursor-pointer rounded-lg bg-secondchance py-3 text-center text-white transition hover:bg-secondchance-dark"
       >
         Book Now
       </div>
 
-      <div className="mb-4 flex justify-between items-center text-gray-700">
+      <div className="mb-4 flex items-center justify-between text-gray-700">
         <p className="text-md">
-          ${item.price_per_day} x {days} {days === 1 ? "day" : "days"}
+          ${item.price_per_day} x {days} {days === 1 ? 'day' : 'days'}
         </p>
         <p className="text-md">${item.price_per_day * days}</p>
       </div>
 
-      <div className="mb-4 flex justify-between items-center text-gray-700">
+      <div className="mb-4 flex items-center justify-between text-gray-700">
         <p className="text-md">Service Fee</p>
         <p className="text-md">${fee}</p>
       </div>
 
       <hr className="my-4" />
 
-      <div className="mt-4 flex justify-between items-center font-bold text-lg text-gray-900">
+      <div className="mt-4 flex items-center justify-between text-lg font-bold text-gray-900">
         <p>Total Amount</p>
         <p>${totalPrice}</p>
       </div>

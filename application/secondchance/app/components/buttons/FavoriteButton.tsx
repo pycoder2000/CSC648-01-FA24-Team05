@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import apiService from "@/app/services/apiService";
+import apiService from '@/app/services/apiService';
 
 interface FavoriteButtonProps {
   id: string;
@@ -8,18 +8,11 @@ interface FavoriteButtonProps {
   markFavorite: (is_favorite: boolean) => void;
 }
 
-const FavoriteButton: React.FC<FavoriteButtonProps> = ({
-  id,
-  is_favorite,
-  markFavorite,
-}) => {
+const FavoriteButton: React.FC<FavoriteButtonProps> = ({ id, is_favorite, markFavorite }) => {
   const toggleFavorite = async (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
 
-    const response = await apiService.post(
-      `/api/items/${id}/toggle_favorite/`,
-      {}
-    );
+    const response = await apiService.post(`/api/items/${id}/toggle_favorite/`, {});
 
     markFavorite(response.is_favorite);
   };
@@ -27,17 +20,17 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({
   return (
     <div
       onClick={toggleFavorite}
-      className={`absolute top-2 right-2 ${
-        is_favorite ? "text-rose-500" : "text-gray-400"
+      className={`absolute right-2 top-2 ${
+        is_favorite ? 'text-rose-500' : 'text-gray-400'
       } hover:text-rose-500`}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        fill={is_favorite ? "#F43F5E" : "none"}
+        fill={is_favorite ? '#F43F5E' : 'none'}
         viewBox="0 0 24 24"
         strokeWidth={1.5}
         stroke="currentColor"
-        className="w-6 h-6"
+        className="h-6 w-6"
       >
         <path
           strokeLinecap="round"

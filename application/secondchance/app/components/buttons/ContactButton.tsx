@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import useLoginModal from "@/app/hooks/useLoginModal";
-import { useRouter } from "next/navigation";
-import apiService from "@/app/services/apiService";
+import useLoginModal from '@/app/hooks/useLoginModal';
+import apiService from '@/app/services/apiService';
+import { useRouter } from 'next/navigation';
 
 interface ContactButtonProps {
   userId: string | null;
@@ -26,17 +26,17 @@ const ContactButton: React.FC<ContactButtonProps> = ({ userId, sellerId }) => {
   };
 
   return (
-    <div className="mt-4 flex gap-4 justify-center w-full">
+    <div className="mt-4 flex w-full justify-center gap-4">
       <button
-        className="bg-green-500 text-white font-medium py-2 px-8 rounded-full hover:bg-green-700 transition"
-        onClick={() => alert("Follow feature is not implemented yet!")}
+        className="rounded-full bg-green-500 px-8 py-2 font-medium text-white transition hover:bg-green-700"
+        onClick={() => alert('Follow feature is not implemented yet!')}
       >
         Follow
       </button>
 
       <button
         onClick={startConversation}
-        className="border border-gray-400 text-gray-600 font-medium py-2 px-8 rounded-full hover:bg-blue-600 hover:text-white transition"
+        className="rounded-full border border-gray-400 px-8 py-2 font-medium text-gray-600 transition hover:bg-blue-600 hover:text-white"
       >
         Contact
       </button>

@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { MessageType } from "@/app/inbox/[id]/page";
-import { ConversationType, UserType } from "@/app/inbox/page";
-import { useEffect, useRef, useState } from "react";
-import useWebSocket from "react-use-websocket";
-import CustomButton from "../buttons/CustomButton";
+import { MessageType } from '@/app/inbox/[id]/page';
+import { ConversationType, UserType } from '@/app/inbox/page';
+import { useEffect, useRef, useState } from 'react';
+import useWebSocket from 'react-use-websocket';
+import CustomButton from '../buttons/CustomButton';
 
 interface ConversationDetailProps {
   token: string;
@@ -20,7 +20,7 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
   conversation,
 }) => {
   const messagesDiv = useRef<HTMLDivElement | null>(null);
-  const [newMessage, setNewMessage] = useState("");
+  const [newMessage, setNewMessage] = useState('');
   const myUser = conversation.users?.find((user) => user.id === userId);
   const otherUser = conversation.users?.find((user) => user.id !== userId);
   const [realtimeMessages, setRealtimeMessages] = useState<MessageType[]>([]);
@@ -30,22 +30,22 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
     {
       share: false,
       shouldReconnect: () => true,
-    }
+    },
   );
 
   useEffect(() => {
-    console.log("Connection state changed", readyState);
+    console.log('Connection state changed', readyState);
   }, [readyState]);
 
   useEffect(() => {
     if (
       lastJsonMessage &&
-      typeof lastJsonMessage === "object" &&
-      "name" in lastJsonMessage &&
-      "body" in lastJsonMessage
+      typeof lastJsonMessage === 'object' &&
+      'name' in lastJsonMessage &&
+      'body' in lastJsonMessage
     ) {
       const message: MessageType = {
-        id: "",
+        id: '',
         name: lastJsonMessage.name as string,
         body: lastJsonMessage.body as string,
         sent_to: otherUser as UserType,
@@ -63,7 +63,7 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
 
   const sendMessage = async () => {
     sendJsonMessage({
-      event: "chat_message",
+      event: 'chat_message',
       data: {
         body: newMessage,
         name: myUser?.name,
@@ -72,7 +72,7 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
       },
     });
 
-    setNewMessage("");
+    setNewMessage('');
     setTimeout(() => {
       scrollToBottom();
     }, 50);
@@ -86,17 +86,12 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
 
   return (
     <>
-      <div
-        ref={messagesDiv}
-        className="max-h-[400px] overflow-auto flex flex-col space-y-4"
-      >
+      <div ref={messagesDiv} className="flex max-h-[400px] flex-col space-y-4 overflow-auto">
         {messages.map((message, index) => (
           <div
             key={index}
-            className={`w-[80%] py-4 px-6 rounded-xl ${
-              message.created_by.name === myUser?.name
-                ? "ml-[20%] bg-blue-200"
-                : "bg-gray-200"
+            className={`w-[80%] rounded-xl px-6 py-4 ${
+              message.created_by.name === myUser?.name ? 'ml-[20%] bg-blue-200' : 'bg-gray-200'
             }`}
           >
             <p className="font-bold text-gray-500">{message.created_by.name}</p>
@@ -108,10 +103,8 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
         {realtimeMessages.map((message, index) => (
           <div
             key={index}
-            className={`w-[80%] py-4 px-6 rounded-xl ${
-              message.name === myUser?.name
-                ? "ml-[20%] bg-blue-200"
-                : "bg-gray-200"
+            className={`w-[80%] rounded-xl px-6 py-4 ${
+              message.name === myUser?.name ? 'ml-[20%] bg-blue-200' : 'bg-gray-200'
             }`}
           >
             <p className="font-bold text-gray-500">{message.name}</p>
@@ -121,20 +114,16 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
         ))}
       </div>
 
-      <div className="mt-4 py-4 px-6 flex border border-gray-300 space-x-4 rounded-xl">
+      <div className="mt-4 flex space-x-4 rounded-xl border border-gray-300 px-6 py-4">
         <input
           type="text"
           placeholder="Type your message..."
-          className="w-full p-2 bg-gray-200 rounded-xl"
+          className="w-full rounded-xl bg-gray-200 p-2"
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
         />
 
-        <CustomButton
-          label="Send"
-          onClick={sendMessage}
-          className="w-[100px]"
-        />
+        <CustomButton label="Send" onClick={sendMessage} className="w-[100px]" />
       </div>
     </>
   );

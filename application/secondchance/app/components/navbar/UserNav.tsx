@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import LogoutButton from "@/app/components/buttons/LogoutButton";
-import MenuLink from "@/app/components/navbar/MenuLink";
-import useLoginModal from "@/app/hooks/useLoginModal";
-import useSignupModal from "@/app/hooks/useSignupModal";
-import apiService from "@/app/services/apiService";
-import { AnimatePresence, motion } from "framer-motion";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import LogoutButton from '@/app/components/buttons/LogoutButton';
+import MenuLink from '@/app/components/navbar/MenuLink';
+import useLoginModal from '@/app/hooks/useLoginModal';
+import useSignupModal from '@/app/hooks/useSignupModal';
+import apiService from '@/app/services/apiService';
+import { AnimatePresence, motion } from 'framer-motion';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { useEffect, useRef, useState } from 'react';
 
 interface UserNavProps {
   userId?: string | null;
@@ -31,7 +31,7 @@ const UserNav: React.FC<UserNavProps> = ({ userId }) => {
         setUserName(userData.name);
         setUserImage(userData.avatar_url);
       } catch (error) {
-        console.error("Error fetching user information:", error);
+        console.error('Error fetching user information:', error);
       }
     };
     fetchUserInfo();
@@ -49,9 +49,9 @@ const UserNav: React.FC<UserNavProps> = ({ userId }) => {
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
 
@@ -60,29 +60,25 @@ const UserNav: React.FC<UserNavProps> = ({ userId }) => {
   };
 
   return (
-    <div className="relative cursor-pointer h-[48px] lg:h-[64px] flex items-center rounded-full hover:bg-gray-100 border transition duration-300 px-4">
-      <button
-        ref={buttonRef}
-        onClick={toggleMenu}
-        className="flex items-center space-x-2"
-      >
+    <div className="relative flex h-[48px] cursor-pointer items-center rounded-full border px-4 transition duration-300 hover:bg-gray-100 lg:h-[64px]">
+      <button ref={buttonRef} onClick={toggleMenu} className="flex items-center space-x-2">
         {userId && userImage ? (
           <div className="relative">
             <Image
-              className="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500"
+              className="h-10 w-10 rounded-full p-1 ring-2 ring-gray-300 dark:ring-gray-500"
               src={userImage}
               alt="User Avatar"
               width={40}
               height={40}
             />
-            <span className="absolute top-0 left-7 w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+            <span className="absolute left-7 top-0 h-3.5 w-3.5 rounded-full border-2 border-white bg-green-400 dark:border-gray-800"></span>
           </div>
         ) : (
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             fill="currentColor"
-            className="w-8 h-8"
+            className="h-8 w-8"
           >
             <path
               fillRule="evenodd"
@@ -97,11 +93,11 @@ const UserNav: React.FC<UserNavProps> = ({ userId }) => {
         {isOpen && (
           <motion.div
             ref={menuRef}
-            className="w-[220px] absolute top-[60px] right-0 bg-white border rounded-xl shadow-md flex flex-col cursor-pointer"
+            className="absolute right-0 top-[60px] flex w-[220px] cursor-pointer flex-col rounded-xl border bg-white shadow-md"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10, transition: { duration: 0.2 } }}
-            transition={{ duration: 0.2, ease: "easeInOut" }}
+            transition={{ duration: 0.2, ease: 'easeInOut' }}
           >
             {userId ? (
               <>
@@ -111,7 +107,7 @@ const UserNav: React.FC<UserNavProps> = ({ userId }) => {
                       setIsOpen(false);
                       router.push(`/sellers/${userId}`);
                     }}
-                    className="p-4 border-b border-gray-200 hover:bg-gray-100 transition rounded-lg text-gray-900 cursor-pointer"
+                    className="cursor-pointer rounded-lg border-b border-gray-200 p-4 text-gray-900 transition hover:bg-gray-100"
                   >
                     <p className="text-lg font-semibold">{userName}</p>
                   </div>
@@ -121,7 +117,7 @@ const UserNav: React.FC<UserNavProps> = ({ userId }) => {
                   label="Inbox"
                   onClick={() => {
                     setIsOpen(false);
-                    router.push("/inbox");
+                    router.push('/inbox');
                   }}
                 />
 
@@ -129,7 +125,7 @@ const UserNav: React.FC<UserNavProps> = ({ userId }) => {
                   label="My Listings"
                   onClick={() => {
                     setIsOpen(false);
-                    router.push("/mylistings");
+                    router.push('/mylistings');
                   }}
                 />
 
@@ -137,7 +133,7 @@ const UserNav: React.FC<UserNavProps> = ({ userId }) => {
                   label="My Favorites"
                   onClick={() => {
                     setIsOpen(false);
-                    router.push("/myfavorites");
+                    router.push('/myfavorites');
                   }}
                 />
 
@@ -145,7 +141,7 @@ const UserNav: React.FC<UserNavProps> = ({ userId }) => {
                   label="My Rentals"
                   onClick={() => {
                     setIsOpen(false);
-                    router.push("/myrentals");
+                    router.push('/myrentals');
                   }}
                 />
 

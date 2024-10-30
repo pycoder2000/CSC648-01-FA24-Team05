@@ -1,23 +1,23 @@
-"use client";
+'use client';
 
-import CustomButton from "@/app/components/buttons/CustomButton";
-import useAddItemModal from "@/app/hooks/useAddItemModal";
-import apiService from "@/app/services/apiService";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { ChangeEvent, useEffect, useState } from "react";
-import Categories from "../additem/Categories";
-import SelectCountry, { SelectCountryValue } from "../forms/SelectCountry";
-import Modal from "./Modal";
+import CustomButton from '@/app/components/buttons/CustomButton';
+import useAddItemModal from '@/app/hooks/useAddItemModal';
+import apiService from '@/app/services/apiService';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { ChangeEvent, useEffect, useState } from 'react';
+import Categories from '../additem/Categories';
+import SelectCountry, { SelectCountryValue } from '../forms/SelectCountry';
+import Modal from './Modal';
 
 const AddItemModal = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [errors, setErrors] = useState<string[]>([]);
-  const [dataCategory, setDataCategory] = useState("");
-  const [dataTitle, setDataTitle] = useState("");
-  const [dataDescription, setDataDescription] = useState("");
-  const [dataPrice, setDataPrice] = useState("");
-  const [dataCondition, setDataCondition] = useState("");
+  const [dataCategory, setDataCategory] = useState('');
+  const [dataTitle, setDataTitle] = useState('');
+  const [dataDescription, setDataDescription] = useState('');
+  const [dataPrice, setDataPrice] = useState('');
+  const [dataCondition, setDataCondition] = useState('');
   const [dataCountry, setDataCountry] = useState<SelectCountryValue>();
   const [dataImage, setDataImage] = useState<File | null>(null);
 
@@ -26,11 +26,11 @@ const AddItemModal = () => {
 
   const resetForm = () => {
     setCurrentStep(1);
-    setDataCategory("");
-    setDataTitle("");
-    setDataDescription("");
-    setDataPrice("");
-    setDataCondition("");
+    setDataCategory('');
+    setDataTitle('');
+    setDataDescription('');
+    setDataPrice('');
+    setDataCondition('');
     setDataCountry(undefined);
     setDataImage(null);
     setErrors([]);
@@ -54,33 +54,24 @@ const AddItemModal = () => {
   };
 
   const submitForm = async () => {
-    if (
-      dataCategory &&
-      dataTitle &&
-      dataDescription &&
-      dataPrice &&
-      dataCountry &&
-      dataImage
-    ) {
+    if (dataCategory && dataTitle && dataDescription && dataPrice && dataCountry && dataImage) {
       const formData = new FormData();
-      formData.append("category", dataCategory);
-      formData.append("title", dataTitle);
-      formData.append("description", dataDescription);
-      formData.append("price_per_day", dataPrice);
-      formData.append("condition", dataCondition);
-      formData.append("country", dataCountry.label);
-      formData.append("image", dataImage);
+      formData.append('category', dataCategory);
+      formData.append('title', dataTitle);
+      formData.append('description', dataDescription);
+      formData.append('price_per_day', dataPrice);
+      formData.append('condition', dataCondition);
+      formData.append('country', dataCountry.label);
+      formData.append('image', dataImage);
 
-      const response = await apiService.post("/api/items/create/", formData);
+      const response = await apiService.post('/api/items/create/', formData);
 
       if (response.success) {
-        router.push("/?added=true");
+        router.push('/?added=true');
         addItemModal.close();
         resetForm();
       } else {
-        const tmpErrors: string[] = Object.values(response).map(
-          (error: any) => error
-        );
+        const tmpErrors: string[] = Object.values(response).map((error: any) => error);
         setErrors(tmpErrors);
       }
     }
@@ -103,14 +94,14 @@ const AddItemModal = () => {
         return (
           <>
             <h2 className="mb-6 text-2xl">Describe Your Item</h2>
-            <div className="pt-3 pb-6 space-y-4">
+            <div className="space-y-4 pb-6 pt-3">
               <div className="flex flex-col space-y-2">
                 <label>Title</label>
                 <input
                   type="text"
                   value={dataTitle}
                   onChange={(e) => setDataTitle(e.target.value)}
-                  className="w-full p-4 border border-gray-600 rounded-xl"
+                  className="w-full rounded-xl border border-gray-600 p-4"
                 />
               </div>
 
@@ -119,7 +110,7 @@ const AddItemModal = () => {
                 <textarea
                   value={dataDescription}
                   onChange={(e) => setDataDescription(e.target.value)}
-                  className="w-full h-[200px] p-4 border border-gray-600 rounded-xl"
+                  className="h-[200px] w-full rounded-xl border border-gray-600 p-4"
                 ></textarea>
               </div>
             </div>
@@ -138,14 +129,14 @@ const AddItemModal = () => {
         return (
           <>
             <h2 className="mb-6 text-2xl">Details</h2>
-            <div className="pt-3 pb-6 space-y-4">
+            <div className="space-y-4 pb-6 pt-3">
               <div className="flex flex-col space-y-2">
                 <label>Price per day</label>
                 <input
                   type="number"
                   value={dataPrice}
                   onChange={(e) => setDataPrice(e.target.value)}
-                  className="w-full p-4 border border-gray-600 rounded-xl"
+                  className="w-full rounded-xl border border-gray-600 p-4"
                 />
               </div>
 
@@ -154,7 +145,7 @@ const AddItemModal = () => {
                 <select
                   value={dataCondition}
                   onChange={(e) => setDataCondition(e.target.value)}
-                  className="w-full p-4 border border-gray-600 rounded-xl"
+                  className="w-full rounded-xl border border-gray-600 p-4"
                 >
                   <option value="">Select condition</option>
                   <option value="new">New</option>
@@ -180,12 +171,10 @@ const AddItemModal = () => {
         return (
           <>
             <h2 className="mb-6 text-2xl">Location</h2>
-            <div className="pt-3 pb-6 space-y-4">
+            <div className="space-y-4 pb-6 pt-3">
               <SelectCountry
                 value={dataCountry}
-                onChange={(value) =>
-                  setDataCountry(value as SelectCountryValue)
-                }
+                onChange={(value) => setDataCountry(value as SelectCountryValue)}
               />
             </div>
             <div className="mt-6 flex flex-row gap-4">
@@ -203,18 +192,18 @@ const AddItemModal = () => {
         return (
           <>
             <h2 className="mb-6 text-2xl">Image</h2>
-            <div className="pt-3 pb-6 space-y-4">
-              <div className="py-4 px-6 bg-gray-600 text-white rounded-xl">
+            <div className="space-y-4 pb-6 pt-3">
+              <div className="rounded-xl bg-gray-600 px-6 py-4 text-white">
                 <input type="file" accept="image/*" onChange={setImage} />
               </div>
 
               {dataImage && (
-                <div className="w-[200px] h-[150px] relative">
+                <div className="relative h-[150px] w-[200px]">
                   <Image
                     fill
                     alt="Uploaded image"
                     src={URL.createObjectURL(dataImage)}
-                    className="w-full h-full object-cover rounded-xl"
+                    className="h-full w-full rounded-xl object-cover"
                   />
                 </div>
               )}
@@ -223,7 +212,7 @@ const AddItemModal = () => {
             {errors.map((error, index) => (
               <div
                 key={index}
-                className="p-5 mb-4 bg-secondchance text-white rounded-xl opacity-80"
+                className="mb-4 rounded-xl bg-secondchance p-5 text-white opacity-80"
               >
                 {error}
               </div>
