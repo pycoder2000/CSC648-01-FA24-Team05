@@ -21,7 +21,7 @@ else:
     ALLOWED_HOSTS = []
 
 WEBSITE_URL = "http://0.0.0.0:8000"
-
+CHANNEL_LAYERS = {"default": {"BACKEND": "channels.layers.InMemoryChannelLayer"}}
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
@@ -84,6 +84,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "useraccount",
     "item",
+    "chat",
 ]
 
 MIDDLEWARE = [
