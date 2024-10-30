@@ -1,4 +1,4 @@
-import { create } from "zustand";
+import { create } from 'zustand';
 
 interface SuccessModalStore {
   isOpen: boolean;
@@ -9,7 +9,7 @@ interface SuccessModalStore {
 const useSuccessModal = create<SuccessModalStore>((set) => ({
   isOpen: false,
   open: () => set({ isOpen: true }),
-  close: () => set({ isOpen: false })
+  close: () => set({ isOpen: false }),
 }));
 
 export default useSuccessModal;

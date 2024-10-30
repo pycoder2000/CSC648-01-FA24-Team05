@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import ItemCard from "@/app/components/items/ItemCard";
-import useSearchModal from "@/app/hooks/useSearchModal";
-import apiService from "@/app/services/apiService";
-import { format } from "date-fns";
-import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import ItemCard from '@/app/components/items/ItemCard';
+import useSearchModal from '@/app/hooks/useSearchModal';
+import apiService from '@/app/services/apiService';
+import { format } from 'date-fns';
+import { useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 export type ItemType = {
   id: string;
@@ -43,47 +43,41 @@ const ItemList: React.FC<ItemListProps> = ({ seller_id, favorites }) => {
   };
 
   const getItems = async () => {
-    let url = "/api/items/";
+    let url = '/api/items/';
 
     if (seller_id) {
       url += `?seller_id=${seller_id}`;
     } else if (favorites) {
-      url += "?is_favorites=true";
+      url += '?is_favorites=true';
     } else {
       const queryParams = new URLSearchParams();
 
       if (country) {
-        queryParams.append("country", country);
+        queryParams.append('country', country);
       }
 
       if (pickUpDate) {
-        queryParams.append(
-          "startDate",
-          format(new Date(pickUpDate), "yyyy-MM-dd")
-        );
+        queryParams.append('startDate', format(new Date(pickUpDate), 'yyyy-MM-dd'));
       }
 
       if (returnDate) {
-        queryParams.append(
-          "endDate",
-          format(new Date(returnDate), "yyyy-MM-dd")
-        );
+        queryParams.append('endDate', format(new Date(returnDate), 'yyyy-MM-dd'));
       }
 
       if (condition) {
-        queryParams.append("condition", condition);
+        queryParams.append('condition', condition);
       }
 
       if (priceMin !== undefined) {
-        queryParams.append("priceMin", String(priceMin));
+        queryParams.append('priceMin', String(priceMin));
       }
 
       if (priceMax !== undefined) {
-        queryParams.append("priceMax", String(priceMax));
+        queryParams.append('priceMax', String(priceMax));
       }
 
       if (category) {
-        queryParams.append("category", category);
+        queryParams.append('category', category);
       }
 
       if (queryParams.toString()) {
@@ -103,7 +97,7 @@ const ItemList: React.FC<ItemListProps> = ({ seller_id, favorites }) => {
 
       setItems(updatedItems);
     } catch (error) {
-      console.error("Error fetching items:", error);
+      console.error('Error fetching items:', error);
     }
   };
 

@@ -1,20 +1,19 @@
-import AddItemModal from "@/app/components/modals/AddItemModal";
-import LoginModal from "@/app/components/modals/LoginModal";
-import SearchModal from "@/app/components/modals/SearchModal";
-import SignupModal from "@/app/components/modals/SignupModal";
-import SuccessModal from "@/app/components/modals/SuccessModal";
-import Navbar from "@/app/components/navbar/Navbar";
-import "@/app/globals.css";
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import Head from "next/head";
+import AddItemModal from '@/app/components/modals/AddItemModal';
+import LoginModal from '@/app/components/modals/LoginModal';
+import SearchModal from '@/app/components/modals/SearchModal';
+import SignupModal from '@/app/components/modals/SignupModal';
+import SuccessModal from '@/app/components/modals/SuccessModal';
+import Navbar from '@/app/components/navbar/Navbar';
+import '@/app/globals.css';
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import Head from 'next/head';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "SecondChance",
-  description:
-    "An eco-friendly platform for renting and listing second-hand items.",
+  title: 'SecondChance',
+  description: 'An eco-friendly platform for renting and listing second-hand items.',
 };
 
 export default function RootLayout({

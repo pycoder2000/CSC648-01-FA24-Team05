@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import useLoginModal from "@/app/hooks/useLoginModal";
-import useAddItemModal from "@/app/hooks/useAddItemModal";
+import useLoginModal from '@/app/hooks/useLoginModal';
+import useAddItemModal from '@/app/hooks/useAddItemModal';
 
 interface AddItemButtonProps {
   userId?: string | null;
@@ -13,7 +13,7 @@ const AddItemButton: React.FC<AddItemButtonProps> = ({ userId }) => {
 
   const addRentalItem = () => {
     if (userId) {
-      addItemModal.open()
+      addItemModal.open();
     } else {
       loginModal.open();
     }
@@ -22,7 +22,7 @@ const AddItemButton: React.FC<AddItemButtonProps> = ({ userId }) => {
   return (
     <div
       onClick={addRentalItem}
-      className="cursor-pointer h-[48px] lg:h-[64px] px-8 flex flex-col justify-center rounded-full hover:bg-gray-100 border"
+      className="flex h-[48px] cursor-pointer flex-col justify-center rounded-full border px-8 hover:bg-gray-100 lg:h-[64px]"
     >
       <p className="text-xs font-semibold">List Your Item</p>
       <p className="text-sm">Start selling now</p>

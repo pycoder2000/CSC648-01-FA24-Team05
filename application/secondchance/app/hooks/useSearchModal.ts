@@ -1,4 +1,4 @@
-import { create } from "zustand";
+import { create } from 'zustand';
 
 export type SearchQuery = {
   country: string | undefined;
@@ -21,7 +21,7 @@ interface SearchModalStore {
 
 const useSearchModal = create<SearchModalStore>((set) => ({
   isOpen: false,
-  step: "",
+  step: '',
   open: (step) => set({ isOpen: true, step: step }),
   close: () => set({ isOpen: false }),
   setQuery: (query: SearchQuery) => set({ query: query }),
@@ -32,7 +32,7 @@ const useSearchModal = create<SearchModalStore>((set) => ({
     condition: '',
     priceMin: undefined,
     priceMax: undefined,
-    category: "",
+    category: '',
   },
 }));
 

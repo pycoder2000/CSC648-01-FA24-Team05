@@ -67,6 +67,7 @@ def items_list(request):
     serializer = ItemListSerializer(items, many=True)
     return JsonResponse({"data": serializer.data, "favorites": favorites})
 
+
 @api_view(["GET"])
 @authentication_classes([])
 @permission_classes([])
@@ -101,6 +102,7 @@ def create_item(request):
     else:
         return JsonResponse({"errors": form.errors.as_json()}, status=400)
 
+
 @api_view(["POST"])
 def rent_item(request, pk):
     try:
@@ -123,6 +125,7 @@ def rent_item(request, pk):
         return JsonResponse({"success": True})
     except Exception as e:
         return JsonResponse({"success": False, "error": str(e)}, status=400)
+
 
 @api_view(["POST"])
 def toggle_favorite(request, pk):

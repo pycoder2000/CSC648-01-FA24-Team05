@@ -1,41 +1,37 @@
-"use client";
+'use client';
 
-import CustomButton from "@/app/components/buttons/CustomButton";
-import DatePicker from "@/app/components/forms/Calendar";
-import SelectCountry, {
-  SelectCountryValue,
-} from "@/app/components/forms/SelectCountry";
-import Modal from "@/app/components/modals/Modal";
-import useSearchModal, { SearchQuery } from "@/app/hooks/useSearchModal";
-import { useState } from "react";
-import { Range } from "react-date-range";
+import CustomButton from '@/app/components/buttons/CustomButton';
+import DatePicker from '@/app/components/forms/Calendar';
+import SelectCountry, { SelectCountryValue } from '@/app/components/forms/SelectCountry';
+import Modal from '@/app/components/modals/Modal';
+import useSearchModal, { SearchQuery } from '@/app/hooks/useSearchModal';
+import { useState } from 'react';
+import { Range } from 'react-date-range';
 
 const initialDateRange = {
   startDate: new Date(),
   endDate: new Date(),
-  key: "selection",
+  key: 'selection',
 };
 
 const SearchModal = () => {
   const searchModal = useSearchModal();
-  const [country, setCountry] = useState<SelectCountryValue | undefined>(
-    undefined
-  );
-  const [condition, setCondition] = useState<string>("");
-  const [priceMin, setPriceMin] = useState<string>("");
-  const [priceMax, setPriceMax] = useState<string>("");
-  const [category, setCategory] = useState<string>("");
+  const [country, setCountry] = useState<SelectCountryValue | undefined>(undefined);
+  const [condition, setCondition] = useState<string>('');
+  const [priceMin, setPriceMin] = useState<string>('');
+  const [priceMax, setPriceMax] = useState<string>('');
+  const [category, setCategory] = useState<string>('');
   const [dateRange, setDateRange] = useState<Range>(initialDateRange);
 
   const closeAndSearch = () => {
     const newSearchQuery: SearchQuery = {
-      country: country?.label || "",
+      country: country?.label || '',
       startDate: dateRange.startDate,
       endDate: dateRange.endDate,
       condition: condition,
       priceMin: parseInt(priceMin) || undefined,
       priceMax: parseInt(priceMax) || undefined,
-      category: category || "",
+      category: category || '',
     };
 
     searchModal.setQuery(newSearchQuery);
@@ -48,7 +44,7 @@ const SearchModal = () => {
 
   const renderContent = () => {
     switch (searchModal.step) {
-      case "location":
+      case 'location':
         return (
           <>
             <h2 className="mb-6 text-2xl">Where do you want to rent from?</h2>
@@ -57,64 +53,43 @@ const SearchModal = () => {
               onChange={(value) => setCountry(value as SelectCountryValue)}
             />
             <div className="mt-6 flex flex-row gap-4">
-              <CustomButton
-                label="Pick-up Date ->"
-                onClick={() => searchModal.open("checkin")}
-              />
+              <CustomButton label="Pick-up Date ->" onClick={() => searchModal.open('checkin')} />
             </div>
           </>
         );
 
-      case "checkin":
+      case 'checkin':
         return (
           <>
             <h2 className="mb-6 text-2xl">When do you want to pick up?</h2>
-            <DatePicker
-              value={dateRange}
-              onChange={(value) => _setDateRange(value.selection)}
-            />
+            <DatePicker value={dateRange} onChange={(value) => _setDateRange(value.selection)} />
             <div className="mt-6 flex flex-row gap-4">
-              <CustomButton
-                label="<- Location"
-                onClick={() => searchModal.open("location")}
-              />
-              <CustomButton
-                label="Return Date ->"
-                onClick={() => searchModal.open("checkout")}
-              />
+              <CustomButton label="<- Location" onClick={() => searchModal.open('location')} />
+              <CustomButton label="Return Date ->" onClick={() => searchModal.open('checkout')} />
             </div>
           </>
         );
 
-      case "checkout":
+      case 'checkout':
         return (
           <>
             <h2 className="mb-6 text-2xl">When do you want to return?</h2>
-            <DatePicker
-              value={dateRange}
-              onChange={(value) => _setDateRange(value.selection)}
-            />
+            <DatePicker value={dateRange} onChange={(value) => _setDateRange(value.selection)} />
             <div className="mt-6 flex flex-row gap-4">
-              <CustomButton
-                label="<- Pick-up Date"
-                onClick={() => searchModal.open("checkin")}
-              />
-              <CustomButton
-                label="Condition ->"
-                onClick={() => searchModal.open("condition")}
-              />
+              <CustomButton label="<- Pick-up Date" onClick={() => searchModal.open('checkin')} />
+              <CustomButton label="Condition ->" onClick={() => searchModal.open('condition')} />
             </div>
           </>
         );
 
-      case "condition":
+      case 'condition':
         return (
           <>
             <h2 className="mb-6 text-2xl">Condition</h2>
             <select
               value={condition}
               onChange={(e) => setCondition(e.target.value)}
-              className="w-full h-14 px-4 border border-gray-300 rounded-xl"
+              className="h-14 w-full rounded-xl border border-gray-300 px-4"
             >
               <option value="">Select condition</option>
               <option value="new">New</option>
@@ -124,19 +99,13 @@ const SearchModal = () => {
               <option value="poor">Poor</option>
             </select>
             <div className="mt-6 flex flex-row gap-4">
-              <CustomButton
-                label="<- Return Date"
-                onClick={() => searchModal.open("checkout")}
-              />
-              <CustomButton
-                label="Price Range ->"
-                onClick={() => searchModal.open("price")}
-              />
+              <CustomButton label="<- Return Date" onClick={() => searchModal.open('checkout')} />
+              <CustomButton label="Price Range ->" onClick={() => searchModal.open('price')} />
             </div>
           </>
         );
 
-      case "price":
+      case 'price':
         return (
           <>
             <h2 className="mb-6 text-2xl">Price Range</h2>
@@ -147,7 +116,7 @@ const SearchModal = () => {
                 value={priceMin}
                 placeholder="Min price"
                 onChange={(e) => setPriceMin(e.target.value)}
-                className="w-full h-14 px-4 border border-gray-300 rounded-xl"
+                className="h-14 w-full rounded-xl border border-gray-300 px-4"
               />
               <input
                 type="number"
@@ -155,14 +124,11 @@ const SearchModal = () => {
                 value={priceMax}
                 placeholder="Max price"
                 onChange={(e) => setPriceMax(e.target.value)}
-                className="w-full h-14 px-4 border border-gray-300 rounded-xl"
+                className="h-14 w-full rounded-xl border border-gray-300 px-4"
               />
             </div>
             <div className="mt-6 flex flex-row gap-4">
-              <CustomButton
-                label="<- Condition"
-                onClick={() => searchModal.open("condition")}
-              />
+              <CustomButton label="<- Condition" onClick={() => searchModal.open('condition')} />
               <CustomButton label="Search" onClick={closeAndSearch} />
             </div>
           </>

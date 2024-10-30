@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import ConversationDetail from "@/app/components/inbox/ConversationDetail";
-import { UserType } from "@/app/inbox/page";
-import { getAccessToken, getUserId } from "@/app/lib/actions";
-import apiService from "@/app/services/apiService";
-import { useEffect, useState } from "react";
+import ConversationDetail from '@/app/components/inbox/ConversationDetail';
+import { UserType } from '@/app/inbox/page';
+import { getAccessToken, getUserId } from '@/app/lib/actions';
+import apiService from '@/app/services/apiService';
+import { useEffect, useState } from 'react';
 
 export type MessageType = {
   id: string;
@@ -30,9 +30,7 @@ const ConversationPage = ({ params }: { params: { id: string } }) => {
       setToken(fetchedToken);
 
       if (fetchedUserId && fetchedToken) {
-        const conversationData = await apiService.get(
-          `/api/chat/${params.id}/`
-        );
+        const conversationData = await apiService.get(`/api/chat/${params.id}/`);
         setConversation(conversationData);
         await apiService.post(`/api/chat/${params.id}/mark_read/`, {});
       }
@@ -43,14 +41,14 @@ const ConversationPage = ({ params }: { params: { id: string } }) => {
 
   if (!userId || !token) {
     return (
-      <main className="w-full mx-auto px-6 py-12">
+      <main className="mx-auto w-full px-6 py-12">
         <p>You need to be authenticated...</p>
       </main>
     );
   }
 
   return (
-    <main className="w-full mx-auto px-6 pb-6">
+    <main className="mx-auto w-full px-6 pb-6">
       {conversation && (
         <ConversationDetail
           token={token}

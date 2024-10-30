@@ -1,52 +1,50 @@
-import RentalSidebar from "@/app/components/items/RentalSidebar";
-import { getUserId } from "@/app/lib/actions";
-import apiService from "@/app/services/apiService";
-import Image from "next/image";
-import Link from "next/link";
-import { FaClipboardCheck, FaMapMarkerAlt, FaTag } from "react-icons/fa";
+import RentalSidebar from '@/app/components/items/RentalSidebar';
+import { getUserId } from '@/app/lib/actions';
+import apiService from '@/app/services/apiService';
+import Image from 'next/image';
+import Link from 'next/link';
+import { FaClipboardCheck, FaMapMarkerAlt, FaTag } from 'react-icons/fa';
 
 const ItemDetailPage = async ({ params }: { params: { id: string } }) => {
   const item = await apiService.get(`/api/items/${params.id}`);
   const userId = await getUserId();
 
-  console.log("userId", userId);
+  console.log('userId', userId);
 
   return (
-    <main className="w-full max-w-7xl mx-auto px-6 pb-6">
-      <div className="w-full h-[60vh] mb-8 overflow-hidden rounded-lg relative border border-gray-300 shadow-lg">
+    <main className="mx-auto w-full max-w-7xl px-6 pb-6">
+      <div className="relative mb-8 h-[60vh] w-full overflow-hidden rounded-lg border border-gray-300 shadow-lg">
         <Image
           fill
           src={item.image_url}
-          className="object-cover w-full h-full"
+          className="h-full w-full object-cover"
           alt={item.title}
-          style={{ objectFit: "cover" }}
+          style={{ objectFit: 'cover' }}
         />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-5">
         <div className="col-span-3 mt-6">
-          <div className="border border-gray-300 rounded-xl bg-white p-8 shadow-xl">
-            <h1 className="mb-4 text-4xl font-bold text-gray-800">
-              {item.title}
-            </h1>
+          <div className="rounded-xl border border-gray-300 bg-white p-8 shadow-xl">
+            <h1 className="mb-4 text-4xl font-bold text-gray-800">{item.title}</h1>
 
-            <div className="mb-6 p-4 rounded-lg border border-gray-200 bg-gray-50">
-              <div className="flex items-center mb-2">
-                <FaMapMarkerAlt className="text-blue-600 mr-2" />
+            <div className="mb-6 rounded-lg border border-gray-200 bg-gray-50 p-4">
+              <div className="mb-2 flex items-center">
+                <FaMapMarkerAlt className="mr-2 text-blue-600" />
                 <p className="text-lg text-gray-700">
                   <strong>Location:</strong> {item.country}
                 </p>
               </div>
 
-              <div className="flex items-center mb-2">
-                <FaClipboardCheck className="text-green-600 mr-2" />
+              <div className="mb-2 flex items-center">
+                <FaClipboardCheck className="mr-2 text-green-600" />
                 <p className="text-lg text-gray-700">
                   <strong>Condition:</strong> {item.condition}
                 </p>
               </div>
 
               <div className="flex items-center">
-                <FaTag className="text-yellow-600 mr-2" />
+                <FaTag className="mr-2 text-yellow-600" />
                 <p className="text-lg text-gray-700">
                   <strong>Category:</strong> {item.category}
                 </p>
@@ -57,15 +55,15 @@ const ItemDetailPage = async ({ params }: { params: { id: string } }) => {
 
             <Link
               href={`/sellers/${item.seller.id}`}
-              className="flex items-center space-x-4 hover:bg-gray-100 p-4 rounded-lg transition"
+              className="flex items-center space-x-4 rounded-lg p-4 transition hover:bg-gray-100"
             >
               {item.seller.avatar_url && (
-                <div className="w-[60px] h-[60px] border border-gray-300 rounded-full overflow-hidden">
+                <div className="h-[60px] w-[60px] overflow-hidden rounded-full border border-gray-300">
                   <Image
                     src={item.seller.avatar_url}
                     width={60}
                     height={60}
-                    className="object-cover w-full h-full"
+                    className="h-full w-full object-cover"
                     alt="Seller Avatar"
                   />
                 </div>
@@ -78,9 +76,7 @@ const ItemDetailPage = async ({ params }: { params: { id: string } }) => {
 
             <hr className="my-6" />
 
-            <p className="mt-6 text-lg text-gray-700 leading-relaxed">
-              {item.description}
-            </p>
+            <p className="mt-6 text-lg leading-relaxed text-gray-700">{item.description}</p>
           </div>
         </div>
 
