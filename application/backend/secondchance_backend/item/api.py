@@ -9,6 +9,7 @@ from rest_framework_simplejwt.tokens import AccessToken
 from .forms import ItemForm
 from .models import Item, Rental
 from .serializers import ItemListSerializer, ItemDetailSerializer, RentalListSerializer
+from django.shortcuts import get_object_or_404
 from useraccount.models import User
 
 
@@ -29,28 +30,19 @@ def items_list(request):
 
     is_favorites = request.GET.get("is_favorites", "")
     seller_id = request.GET.get("seller_id", "")
-
     country = request.GET.get("country", "")
     category = request.GET.get("category", "")
     condition = request.GET.get("condition", "")
     pick_up_date = request.GET.get("checkIn", "")
     return_date = request.GET.get("checkOut", "")
 
-    print("country", country)
-
+    # Date-based filtering
     if pick_up_date and return_date:
-        exact_matches = Rental.objects.filter(
-            start_date=pick_up_date
-        ) | Rental.objects.filter(end_date=return_date)
-        overlap_matches = Rental.objects.filter(
-            start_date__lte=return_date, end_date__gte=pick_up_date
-        )
-        all_matches = []
-
-        for rental in exact_matches | overlap_matches:
-            all_matches.append(rental.item_id)
-
-        items = items.exclude(id__in=all_matches)
+        rented_items = Rental.objects.filter(
+            start_date__lte=return_date,
+            end_date__gte=pick_up_date,
+        ).values_list("item_id", flat=True)
+        items = items.exclude(id__in=rented_items)
 
     if seller_id:
         items = items.filter(seller_id=seller_id)
@@ -61,6 +53,9 @@ def items_list(request):
     if country:
         items = items.filter(country=country)
 
+    if category:
+        items = items.filter(category=category)
+
     if condition and condition != "undefined":
         items = items.filter(condition=condition)
 
@@ -70,9 +65,7 @@ def items_list(request):
                 favorites.append(item.id)
 
     serializer = ItemListSerializer(items, many=True)
-
     return JsonResponse({"data": serializer.data, "favorites": favorites})
-
 
 @api_view(["GET"])
 @authentication_classes([])
@@ -100,17 +93,13 @@ def item_rentals(request, pk):
 @api_view(["POST", "FILES"])
 def create_item(request):
     form = ItemForm(request.POST, request.FILES)
-
     if form.is_valid():
         item = form.save(commit=False)
         item.seller = request.user
         item.save()
-
         return JsonResponse({"success": True})
     else:
-        print("error", form.errors, form.non_field_errors)
         return JsonResponse({"errors": form.errors.as_json()}, status=400)
-
 
 @api_view(["POST"])
 def rent_item(request, pk):
@@ -133,10 +122,7 @@ def rent_item(request, pk):
 
         return JsonResponse({"success": True})
     except Exception as e:
-        print("Error", e)
-
-        return JsonResponse({"success": False})
-
+        return JsonResponse({"success": False, "error": str(e)}, status=400)
 
 @api_view(["POST"])
 def toggle_favorite(request, pk):

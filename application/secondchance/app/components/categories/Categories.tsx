@@ -3,12 +3,15 @@
 import useSearchModal, { SearchQuery } from "@/app/hooks/useSearchModal";
 import Image from "next/image";
 import { useState } from "react";
+import apiService from "@/app/services/apiService";
+import ItemList from "@/app/components/items/ItemList";
 
 const Categories = () => {
   const searchModal = useSearchModal();
   const [category, setCategory] = useState<string>("");
+  const [items, setItems] = useState([]);
 
-  const _setCategory = (_category: string) => {
+  const _setCategory = async (_category: string) => {
     setCategory(_category);
 
     const query: SearchQuery = {
@@ -22,6 +25,11 @@ const Categories = () => {
     };
 
     searchModal.setQuery(query);
+
+    const response = await apiService.get(`/api/items/?category=${_category}`);
+    if (response.success) {
+      setItems(response.items);
+    }
   };
 
   const categories = [
