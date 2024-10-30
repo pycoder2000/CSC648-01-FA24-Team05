@@ -24,7 +24,7 @@ const LoginModal = () => {
 
     const response = await apiService.postWithoutToken(
       "/api/auth/login/",
-      JSON.stringify(formData)
+      formData
     );
 
     if (response.access) {

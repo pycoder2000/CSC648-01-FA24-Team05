@@ -54,8 +54,6 @@ const AddItemModal = () => {
   };
 
   const submitForm = async () => {
-    console.log("submitForm");
-
     if (
       dataCategory &&
       dataTitle &&
@@ -76,12 +74,10 @@ const AddItemModal = () => {
       const response = await apiService.post("/api/items/create/", formData);
 
       if (response.success) {
-        console.log("SUCCESS :-D");
         router.push("/?added=true");
         addItemModal.close();
         resetForm();
       } else {
-        console.log("Error");
         const tmpErrors: string[] = Object.values(response).map(
           (error: any) => error
         );

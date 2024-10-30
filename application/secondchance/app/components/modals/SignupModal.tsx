@@ -50,22 +50,24 @@ const SignupModal = () => {
   };
 
   const submitSignup = async () => {
-    const formData = {
-      name: name,
-      email: email,
-      password1: password1,
-      password2: password2,
-      phone: phone,
-      birthday: birthday,
-      country: country,
-      state: state,
-      city: city,
-      profile_picture: profilePicture ? profilePicture : null,
-    };
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("password1", password1);
+    formData.append("password2", password2);
+    formData.append("phone", phone);
+    formData.append("birthday", birthday);
+    formData.append("country", country);
+    formData.append("state", state);
+    formData.append("city", city);
+
+    if (profilePicture) {
+      formData.append("profile_picture", profilePicture);
+    }
 
     const response = await apiService.postWithoutToken(
       "/api/auth/register/",
-      JSON.stringify(formData)
+      formData
     );
 
     if (response.access) {

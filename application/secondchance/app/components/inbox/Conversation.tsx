@@ -14,7 +14,6 @@ const Conversation: React.FC<ConversationProps> = ({
   userId,
 }) => {
   const router = useRouter();
-  console.log("Conversation Data", conversation);
   const otherUser = conversation.users.find((user) => user.id !== userId);
   const handleGoToConversation = async () => {
     try {

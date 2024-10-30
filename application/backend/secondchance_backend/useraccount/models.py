@@ -34,7 +34,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     name = models.CharField(
         max_length=255, blank=False, null=False, default="Anonymous User"
     )
-    avatar = models.ImageField(upload_to="uploads/avatars")
+    avatar = models.ImageField(upload_to="uploads/avatars", blank=True, null=True)
     phone = models.CharField(max_length=20, blank=True, null=True)
     birthday = models.DateField(blank=True, null=True)
     city = models.CharField(max_length=100, blank=True, null=True)
