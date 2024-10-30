@@ -19,7 +19,7 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
   messages,
   conversation,
 }) => {
-  const messagesDiv = useRef<HTMLDivElement>(null);
+  const messagesDiv = useRef<HTMLDivElement | null>(null);
   const [newMessage, setNewMessage] = useState("");
   const myUser = conversation.users?.find((user) => user.id === userId);
   const otherUser = conversation.users?.find((user) => user.id !== userId);
@@ -51,6 +51,8 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
         sent_to: otherUser as UserType,
         created_by: myUser as UserType,
         conversationId: conversation.id,
+        read: false,
+        read_at: null,
       };
 
       setRealtimeMessages((realtimeMessages) => [...realtimeMessages, message]);
@@ -73,7 +75,6 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
     });
 
     setNewMessage("");
-
     setTimeout(() => {
       scrollToBottom();
     }, 50);
@@ -102,6 +103,9 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
           >
             <p className="font-bold text-gray-500">{message.created_by.name}</p>
             <p>{message.body}</p>
+            {message.read && (
+              <p className="text-xs text-gray-400">✔️ Read</p>
+            )}
           </div>
         ))}
 
@@ -116,6 +120,9 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
           >
             <p className="font-bold text-gray-500">{message.name}</p>
             <p>{message.body}</p>
+            {message.read && (
+              <p className="text-xs text-gray-400">✔️ Read</p>
+            )}
           </div>
         ))}
       </div>
