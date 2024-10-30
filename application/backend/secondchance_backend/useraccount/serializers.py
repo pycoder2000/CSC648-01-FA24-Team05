@@ -16,4 +16,5 @@ class UserDetailSerializer(serializers.ModelSerializer):
             "birthday",
             "city",
             "state",
+            "country",
         )

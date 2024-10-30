@@ -35,7 +35,7 @@ const SellerDetailPage = async ({ params }: { params: { id: string } }) => {
             <div className="inline-flex items-center mt-1 text-gray-500">
               <FaMapMarkerAlt className="mr-1" />
               <span>
-                {seller.city}, {seller.state}
+                {seller.city}, {seller.state}, {seller.country}
               </span>
             </div>
 
