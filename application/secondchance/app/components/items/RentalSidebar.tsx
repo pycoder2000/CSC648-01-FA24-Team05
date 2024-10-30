@@ -2,8 +2,10 @@
 
 import DatePicker from "@/app/components/forms/Calendar";
 import useLoginModal from "@/app/hooks/useLoginModal";
+import useSuccessModal from "@/app/hooks/useSuccessModal";
 import apiService from "@/app/services/apiService";
 import { differenceInDays, eachDayOfInterval, format } from "date-fns";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Range } from "react-date-range";
 
@@ -28,6 +30,8 @@ interface RentalSidebarProps {
 
 const RentalSidebar: React.FC<RentalSidebarProps> = ({ item, userId }) => {
   const loginModal = useLoginModal();
+  const successModal = useSuccessModal();
+  const router = useRouter();
 
   const [fee, setFee] = useState<number>(0);
   const [days, setDays] = useState<number>(1);
@@ -57,7 +61,11 @@ const RentalSidebar: React.FC<RentalSidebarProps> = ({ item, userId }) => {
         );
 
         if (response.success) {
-          console.log("Booking successful");
+          successModal.open();
+          setTimeout(() => {
+            successModal.close();
+            router.push("/myrentals");
+          }, 15000);
         } else {
           console.log("Something went wrong...");
         }

@@ -103,25 +103,27 @@ const Categories = () => {
   ];
 
   return (
-    <div className="pt-3 cursor-pointer pb-6 flex items-center space-x-12">
-      {categories.map((cat) => (
-        <div
-          key={cat.id}
-          onClick={() => _setCategory(cat.id)}
-          className={`pb-4 flex flex-col items-center space-y-2 border-b-2 ${
-            category === cat.id ? "border-black" : "border-white"
-          } opacity-60 hover:border-gray-200 hover:opacity-100`}
-        >
-          <Image
-            src={cat.icon}
-            alt={`Category - ${cat.label}`}
-            width={30}
-            height={30}
-          />
+    <div className="pt-3 cursor-pointer pb-6 overflow-x-auto">
+      <div className="flex items-center space-x-8 w-full">
+        {categories.map((cat) => (
+          <div
+            key={cat.id}
+            onClick={() => _setCategory(cat.id)}
+            className={`pb-4 flex flex-col items-center space-y-2 border-b-2 ${
+              category === cat.id ? "border-black" : "border-transparent"
+            } opacity-60 hover:border-gray-300 hover:opacity-100 transition`}
+          >
+            <Image
+              src={cat.icon}
+              alt={`Category - ${cat.label}`}
+              width={30}
+              height={30}
+            />
 
-          <span className="text-xs">{cat.label}</span>
-        </div>
-      ))}
+            <span className="text-xs whitespace-nowrap">{cat.label}</span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

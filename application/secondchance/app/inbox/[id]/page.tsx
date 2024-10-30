@@ -1,7 +1,10 @@
+"use client";
+
 import ConversationDetail from "@/app/components/inbox/ConversationDetail";
 import { UserType } from "@/app/inbox/page";
 import { getAccessToken, getUserId } from "@/app/lib/actions";
 import apiService from "@/app/services/apiService";
+import { useEffect, useState } from "react";
 
 export type MessageType = {
   id: string;
@@ -10,11 +13,33 @@ export type MessageType = {
   conversationId: string;
   sent_to: UserType;
   created_by: UserType;
+  read?: boolean;
+  read_at?: string | null;
 };
 
-const ConversationPage = async ({ params }: { params: { id: string } }) => {
-  const userId = await getUserId();
-  const token = await getAccessToken();
+const ConversationPage = ({ params }: { params: { id: string } }) => {
+  const [userId, setUserId] = useState<string | null>(null);
+  const [token, setToken] = useState<string | null>(null);
+  const [conversation, setConversation] = useState<any>(null);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const fetchedUserId = (await getUserId()) ?? null;
+      const fetchedToken = (await getAccessToken()) ?? null;
+      setUserId(fetchedUserId);
+      setToken(fetchedToken);
+
+      if (fetchedUserId && fetchedToken) {
+        const conversationData = await apiService.get(
+          `/api/chat/${params.id}/`
+        );
+        setConversation(conversationData);
+        await apiService.post(`/api/chat/${params.id}/mark_read/`, {});
+      }
+    };
+
+    fetchUserData();
+  }, [params.id]);
 
   if (!userId || !token) {
     return (
@@ -24,16 +49,16 @@ const ConversationPage = async ({ params }: { params: { id: string } }) => {
     );
   }
 
-  const conversation = await apiService.get(`/api/chat/${params.id}/`);
-
   return (
     <main className="w-full mx-auto px-6 pb-6">
-      <ConversationDetail
-        token={token}
-        userId={userId}
-        messages={conversation.messages}
-        conversation={conversation.conversation}
-      />
+      {conversation && (
+        <ConversationDetail
+          token={token}
+          userId={userId}
+          messages={conversation.messages}
+          conversation={conversation.conversation}
+        />
+      )}
     </main>
   );
 };

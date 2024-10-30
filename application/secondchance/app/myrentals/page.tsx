@@ -6,20 +6,30 @@ const MyRentalsPage = async () => {
   const rentals = await apiService.get("/api/auth/myrentals/");
 
   return (
-    <main className="w-full mx-auto px-6 pb-6">
-      <h1 className="my-6 text-2xl">My Rentals</h1>
+    <main className="w-full max-w-7xl mx-auto px-6 pb-12">
+      <div className="flex justify-between items-center my-8">
+        <h1 className="text-3xl font-bold text-gray-800">My Rentals</h1>
+      </div>
 
-      <div className="space-y-4">
+      <div className="space-y-6">
         {rentals.map((rental: any) => {
           return (
-            <div className="p-5 grid grid-cols-1 md:grid-cols-4 gap-4 shadow-md border border-gray-300 rounded-xl">
+            <div
+              key={rental.id}
+              className="p-5 grid grid-cols-1 md:grid-cols-4 gap-6 shadow-lg border border-gray-200 rounded-lg bg-white hover:shadow-xl transition"
+            >
               <div className="col-span-1">
-                <div className="relative overflow-hidden aspect-square rounded-xl">
+                <div
+                  className="relative overflow-hidden rounded-lg"
+                  style={{ aspectRatio: "1 / 1" }}
+                >
                   <Image
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     src={rental.item.image_url}
-                    className="hover:scale-110 object-cover transition h-full w-full"
+                    className="hover:scale-105 object-cover transition duration-300 ease-in-out w-full h-full"
                     alt={rental.item.title}
+                    style={{ objectFit: "cover" }}
                   />
                 </div>
               </div>
@@ -27,18 +37,21 @@ const MyRentalsPage = async () => {
               <div className="col-span-1 md:col-span-3">
                 <h2 className="mb-4 text-xl">{rental.item.title}</h2>
 
-                <p className="mb-2">
-                  <strong>Pick-up Date:</strong> {rental.start_date}
+                <p className="mb-2 text-gray-600">
+                  <strong className="font-medium">Pick-up Date:</strong>{" "}
+                  {rental.start_date}
                 </p>
-                <p className="mb-2">
-                  <strong>Return Date:</strong> {rental.end_date}
+                <p className="mb-2 text-gray-600">
+                  <strong className="font-medium">Return Date:</strong>{" "}
+                  {rental.end_date}
                 </p>
-
-                <p className="mb-2">
-                  <strong>Number of days:</strong> {rental.number_of_days}
+                <p className="mb-2 text-gray-600">
+                  <strong className="font-medium">Number of Days:</strong>{" "}
+                  {rental.number_of_days}
                 </p>
-                <p className="mb-2">
-                  <strong>Total price:</strong> ${rental.total_price}
+                <p className="mb-2 text-gray-600">
+                  <strong className="font-medium">Total Price:</strong> $
+                  {rental.total_price}
                 </p>
 
                 <Link

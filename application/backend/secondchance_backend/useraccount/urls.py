@@ -14,4 +14,5 @@ urlpatterns = [
     path("token/refresh/", get_refresh_view().as_view(), name="token_refresh"),
     path("myrentals/", api.rentals_list, name="api_rentals_list"),
     path("<uuid:pk>/", api.seller_detail, name="api_seller_detail"),
+    path("users/<uuid:pk>/", api.get_user_detail, name="api_user_detail"),
 ]
