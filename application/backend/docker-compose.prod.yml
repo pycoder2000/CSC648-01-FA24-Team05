@@ -18,7 +18,7 @@ services:
     expose:
       - 8000
     env_file:
-      - ./.env.dev
+      - ./.env.prod
     depends_on:
       - db
       - daphne
@@ -32,7 +32,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
-      - ./.env.dev
+      - ./.env.prod
 
 volumes:
   postgres_data:
