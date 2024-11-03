@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  nginx:
+    build: ./nginx
+    ports:
+      - 1337:80
+    depends_on:
+      - web
+    volumes:
+      - media_volume:/usr/src/secondchance_backend/media
+  web:
+    build: ./secondchance_backend
+    command: gunicorn secondchance_backend.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - ./secondchance_backend/:/usr/src/secondchance_backend/
+      - media_volume:/usr/src/secondchance_backend/media
+    expose:
+      - 8000
+    env_file:
+      - ./.env.dev
+    depends_on:
+      - db
+      - daphne
+  daphne:
+    build: ./secondchance_backend
+    command: daphne --bind 0.0.0.0 -p 8002 secondchance_backend.asgi:application
+    ports:
+      - 8002:8002
+  db:
+    image: postgres:15
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - ./.env.dev
+
+volumes:
+  postgres_data:
+  media_volume:
