@@ -6,10 +6,10 @@ import Image from "next/image"
 const MyListingsPage = () => {
     return (
         <main className="max-w-[1500px] mx-auto px-6 pd-6">
-            <h1 className="my-6 text-2xl"></h1>
+            <h1 className="my-6 text-2xl">My Listings</h1>
 
-            {/* list uses same formatting as landing page */}
-            <div className="mt-4 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+            {/* Different formatting from landing page to differentiate both interfaces */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <ProductList/>
             </div>
 
