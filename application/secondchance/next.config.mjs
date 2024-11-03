@@ -14,6 +14,12 @@ export const nextConfig = {
         port: '8000',
         pathname: '/**',
       },
+      {
+        protocol: 'http',
+        hostname: '64.23.143.71',
+        port: '1337',
+        pathname: '/**',
+      },
     ],
   },
 };
