@@ -56,10 +56,6 @@ const RentalSidebar: React.FC<RentalSidebarProps> = ({ item, userId }) => {
 
         if (response.success) {
           successModal.open();
-          setTimeout(() => {
-            successModal.close();
-            router.push('/myrentals');
-          }, 15000);
         } else {
           console.log('Something went wrong...');
         }
