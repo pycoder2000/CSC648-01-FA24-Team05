@@ -6,7 +6,7 @@ export async function handleRefresh() {
   const cookieHandler = await cookies();
   const refreshToken = await getRefreshToken();
 
-  const token = await fetch('http://0.0.0.0:8000/api/auth/token/refresh/', {
+  const token = await fetch('http://localhost:8000/api/auth/token/refresh/', {
     method: 'POST',
     body: JSON.stringify({
       refresh: refreshToken,

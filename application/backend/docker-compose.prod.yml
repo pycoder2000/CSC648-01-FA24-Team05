@@ -11,7 +11,7 @@ services:
       - media_volume:/usr/src/secondchance_backend/media
   web:
     build: ./secondchance_backend
-    command: gunicorn secondchance_backend.wsgi:application --bind 0.0.0.0:8000
+    command: gunicorn secondchance_backend.wsgi:application --bind 127.0.0.1:8000
     volumes:
       - ./secondchance_backend/:/usr/src/secondchance_backend/
       - media_volume:/usr/src/secondchance_backend/media
@@ -25,7 +25,7 @@ services:
       - daphne
   daphne:
     build: ./secondchance_backend
-    command: daphne --bind 0.0.0.0 -p 8002 secondchance_backend.asgi:application
+    command: daphne --bind 127.0.0.1 -p 8002 secondchance_backend.asgi:application
     ports:
       - 8002:8002
   db:
