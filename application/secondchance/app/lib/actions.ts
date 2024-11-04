@@ -6,6 +6,12 @@ export async function handleRefresh() {
   const cookieHandler = await cookies();
   const refreshToken = await getRefreshToken();
 
+  if (!refreshToken) {
+    console.log('No refresh token found. Resetting cookies.');
+    resetAuthCookies();
+    return null;
+  }
+
   const token = await fetch('http://localhost:8000/api/auth/token/refresh/', {
     method: 'POST',
     body: JSON.stringify({
@@ -93,5 +99,7 @@ export async function getAccessToken() {
 
 export async function getRefreshToken() {
   const cookieHandler = await cookies();
-  return cookieHandler.get('session_refresh_token')?.value;
+  const refreshToken = cookieHandler.get('session_refresh_token')?.value;
+  console.log('Refresh Token:', refreshToken);
+  return refreshToken;
 }
