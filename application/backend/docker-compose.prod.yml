@@ -9,6 +9,10 @@ services:
       - web
     volumes:
       - media_volume:/usr/src/secondchance_backend/media
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - secondchance_network
+
   web:
     build: ./secondchance_backend
     command: gunicorn secondchance_backend.wsgi:application --bind 0.0.0.0:8000
@@ -23,11 +27,17 @@ services:
     depends_on:
       - db
       - daphne
+    networks:
+      - secondchance_network
+
   daphne:
     build: ./secondchance_backend
     command: daphne --bind 0.0.0.0 -p 8002 secondchance_backend.asgi:application
     ports:
       - 8002:8002
+    networks:
+      - secondchance_network
+
   db:
     image: postgres:15
     volumes:
@@ -39,3 +49,7 @@ services:
 volumes:
   postgres_data:
   media_volume:
+
+networks:
+  secondchance_network:
+    driver: bridge
