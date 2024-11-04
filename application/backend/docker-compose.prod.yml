@@ -31,8 +31,9 @@ services:
     image: postgres:15
     volumes:
       - postgres_data:/var/lib/postgresql/data/
-    environment:
+    env_file:
       - ./.env.prod
+
 
 volumes:
   postgres_data:
