@@ -15,6 +15,7 @@ services:
     volumes:
       - ./secondchance_backend/:/usr/src/secondchance_backend/
       - media_volume:/usr/src/secondchance_backend/media
+      - ./secondchance_backend/static:/usr/src/secondchance_backend/static
     expose:
       - 8000
     env_file:
