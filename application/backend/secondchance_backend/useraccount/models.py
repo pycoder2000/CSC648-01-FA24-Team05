@@ -75,10 +75,15 @@ class User(AbstractBaseUser, PermissionsMixin):
         self.save(update_fields=["items_rented"])
 
     def calculate_sustainability_score(self):
+        if self.date_joined:
+            days_on_platform = (timezone.now() - self.date_joined).days
+        else:
+            days_on_platform = 0
+
         score = (
             (self.items_rented_out * 0.4)
             + (self.items_rented * 0.4)
-            + ((timezone.now() - self.date_joined).days * 0.2)
+            + (days_on_platform * 0.2)
         )
 
         max_score = 100
