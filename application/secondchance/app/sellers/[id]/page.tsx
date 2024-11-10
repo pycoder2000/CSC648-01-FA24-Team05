@@ -1,3 +1,5 @@
+import Gauge from '@/app/components/animations/Gauge';
+import GaugeAvatar from '@/app/components/animations/GaugeAvatar';
 import ContactButton from '@/app/components/buttons/ContactButton';
 import ItemList from '@/app/components/items/ItemList';
 import { getUserId } from '@/app/lib/actions';
@@ -18,7 +20,12 @@ const SellerDetailPage = async ({ params }: { params: { id: string } }) => {
       <div className="grid grid-cols-1 gap-4 md:grid-cols-5">
         <aside className="col-span-2 mb-4">
           <div className="flex flex-col items-center rounded-xl border border-gray-300 bg-white p-6 shadow-xl">
-            <div className="relative h-40 w-40 overflow-hidden">
+            <div className="relative h-40 w-40">
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="absolute h-42 w-42">
+                  <GaugeAvatar score={seller.sustainability_score || 0} />
+                </div>
+              </div>
               <Image
                 src={seller.avatar_url}
                 width={200}
@@ -58,7 +65,12 @@ const SellerDetailPage = async ({ params }: { params: { id: string } }) => {
                   ['Joined', `${daysSinceJoined} ago`],
                   ['Birthday', seller.birthday || 'N/A'],
                   ['Location', `${seller.city}, ${seller.state}` || 'N/A'],
-                  ['Sustainability Score', seller.sustainability_score || 'N/A'],
+                  [
+                    'Sustainability Score',
+                    <div className="h-20 w-20">
+                      <Gauge score={seller.sustainability_score || 0} />
+                    </div>,
+                  ],
                 ].map(([label, value], index) => (
                   <div key={index} className="grid grid-cols-3 items-center gap-4 p-6 py-3">
                     <div className="pl-2 text-sm text-[#78829D]">{label}</div>

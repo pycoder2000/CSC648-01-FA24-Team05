@@ -68,11 +68,13 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def increment_items_rented_out(self):
         self.items_rented_out += 1
-        self.save(update_fields=["items_rented_out"])
+        self.calculate_sustainability_score()
+        self.save(update_fields=["items_rented_out", "sustainability_score"])
 
     def increment_items_rented(self):
         self.items_rented += 1
-        self.save(update_fields=["items_rented"])
+        self.calculate_sustainability_score()
+        self.save(update_fields=["items_rented", "sustainability_score"])
 
     def calculate_sustainability_score(self):
         if self.date_joined:
@@ -81,13 +83,13 @@ class User(AbstractBaseUser, PermissionsMixin):
             days_on_platform = 0
 
         score = (
-            (self.items_rented_out * 0.4)
-            + (self.items_rented * 0.4)
-            + (days_on_platform * 0.2)
+            (self.items_rented_out * 2.5)
+            + (self.items_rented * 1.5)
+            + (days_on_platform * 0.1)
         )
 
         max_score = 100
-        normalized_score = min(max(score, 1), max_score)
+        normalized_score = min(max(round(score), 1), max_score)
         self.sustainability_score = normalized_score
 
     def save(self, *args, **kwargs):
