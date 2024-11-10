@@ -3,6 +3,7 @@ import uuid
 from django.conf import settings
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager
 from django.db import models
+from django.utils import timezone
 
 
 class CustomUserManager(UserManager):
@@ -40,6 +41,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     city = models.CharField(max_length=100, blank=True, null=True)
     state = models.CharField(max_length=100, blank=True, null=True)
     country = models.CharField(max_length=100, blank=True, null=True)
+    items_rented_out = models.IntegerField(default=0)
+    items_rented = models.IntegerField(default=0)
+    sustainability_score = models.FloatField(default=0.0)
 
     is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
@@ -61,3 +65,33 @@ class User(AbstractBaseUser, PermissionsMixin):
             return f"{settings.WEBSITE_URL}{self.avatar.url}"
         else:
             return ""
+
+    def increment_items_rented_out(self):
+        self.items_rented_out += 1
+        self.calculate_sustainability_score()
+        self.save(update_fields=["items_rented_out", "sustainability_score"])
+
+    def increment_items_rented(self):
+        self.items_rented += 1
+        self.calculate_sustainability_score()
+        self.save(update_fields=["items_rented", "sustainability_score"])
+
+    def calculate_sustainability_score(self):
+        if self.date_joined:
+            days_on_platform = (timezone.now() - self.date_joined).days
+        else:
+            days_on_platform = 0
+
+        score = (
+            (self.items_rented_out * 2.5)
+            + (self.items_rented * 1.5)
+            + (days_on_platform * 0.1)
+        )
+
+        max_score = 100
+        normalized_score = min(max(round(score), 1), max_score)
+        self.sustainability_score = normalized_score
+
+    def save(self, *args, **kwargs):
+        self.calculate_sustainability_score()
+        super().save(*args, **kwargs)

@@ -9,7 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        secondchance: '#7dab03',
+        'secondchance': '#7dab03',
         'secondchance-dark': '#507b00',
       },
     },

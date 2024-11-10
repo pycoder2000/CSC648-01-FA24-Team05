@@ -129,6 +129,11 @@ git remote prune origin
 git pull origin master
 ```
 
+10. :warning: If your UI doesn't update, run this command
+```
+npm run build
+```
+
 ##  7. <a name='Resources'></a>Resources
 
 - [How to setup Github SSH](https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/GitHub-SSH-Key-Setup-Config-Ubuntu-Linux)

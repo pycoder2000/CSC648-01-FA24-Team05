@@ -98,6 +98,9 @@ def create_item(request):
         item = form.save(commit=False)
         item.seller = request.user
         item.save()
+
+        request.user.increment_items_rented_out()
+
         return JsonResponse({"success": True})
     else:
         return JsonResponse({"errors": form.errors.as_json()}, status=400)
@@ -121,6 +124,8 @@ def rent_item(request, pk):
             total_price=total_price,
             created_by=request.user,
         )
+
+        request.user.increment_items_rented()
 
         return JsonResponse({"success": True})
     except Exception as e:

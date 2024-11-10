@@ -6,10 +6,11 @@ from rest_framework.decorators import (
     permission_classes,
 )
 from rest_framework.permissions import IsAuthenticated
-from .models import User
-from .serializers import UserDetailSerializer
-
+from useraccount.models import User
+from item.models import Item, Rental
+from useraccount.serializers import UserDetailSerializer
 from item.serializers import RentalListSerializer
+from item.forms import ItemForm
 
 
 @api_view(["GET"])

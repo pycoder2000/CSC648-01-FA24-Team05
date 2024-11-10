@@ -6,18 +6,22 @@ from .models import User
 class UserDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = (
+        fields = [
             "id",
+            "email",
             "name",
             "avatar_url",
-            "email",
-            "date_joined",
             "phone",
             "birthday",
             "city",
             "state",
             "country",
-        )
+            "date_joined",
+            "last_login",
+            "items_rented_out",
+            "items_rented",
+            "sustainability_score",
+        ]
 
 
 class CustomRegisterSerializer(RegisterSerializer):
