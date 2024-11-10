@@ -10,7 +10,7 @@ class UserDetailSerializer(serializers.ModelSerializer):
             "id",
             "email",
             "name",
-            "avatar",
+            "avatar_url",
             "phone",
             "birthday",
             "city",
