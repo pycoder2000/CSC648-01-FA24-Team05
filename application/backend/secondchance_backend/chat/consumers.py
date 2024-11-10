@@ -9,12 +9,10 @@ class ChatConsumer(AsyncWebsocketConsumer):
         self.room_name = self.scope["url_route"]["kwargs"]["room_name"]
         self.room_group_name = f"chat_{self.room_name}"
 
-        # Join room group
         await self.channel_layer.group_add(self.room_group_name, self.channel_name)
         await self.accept()
 
     async def disconnect(self, close_code):
-        # Leave room group
         await self.channel_layer.group_discard(self.room_group_name, self.channel_name)
 
     async def receive(self, text_data):
@@ -29,6 +27,18 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 {
                     "type": "read_notification",
                     "conversation_id": conversation_id,
+                    "user_id": self.scope["user"].id,
+                },
+            )
+        elif event_type == "typing":
+            name = data["data"]["name"]
+            typing = data["data"]["typing"]
+            await self.channel_layer.group_send(
+                self.room_group_name,
+                {
+                    "type": "typing_notification",
+                    "name": name,
+                    "typing": typing,
                 },
             )
         else:
@@ -57,11 +67,24 @@ class ChatConsumer(AsyncWebsocketConsumer):
         )
 
     async def read_notification(self, event):
-        # Handle read notification events and send them to WebSocket
         conversation_id = event["conversation_id"]
+        user_id = event["user_id"]
 
         await self.send(
-            text_data=json.dumps({"type": "read", "conversation_id": conversation_id})
+            text_data=json.dumps({
+                "type": "read",
+                "conversation_id": conversation_id,
+                "user_id": user_id
+            })
+        )
+
+    async def typing_notification(self, event):
+        """Send typing status to the WebSocket."""
+        name = event["name"]
+        typing = event["typing"]
+
+        await self.send(
+            text_data=json.dumps({"type": "typing", "name": name, "typing": typing})
         )
 
     @sync_to_async
