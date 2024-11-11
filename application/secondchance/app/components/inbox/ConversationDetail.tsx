@@ -5,6 +5,7 @@ import { ConversationType, UserType } from '@/app/inbox/page';
 import { useEffect, useRef, useState } from 'react';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
 import CustomButton from '../buttons/CustomButton';
+import Image from 'next/image';
 
 interface ConversationDetailProps {
   token: string;
@@ -66,11 +67,10 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
       } else if (message.type === 'typing' && message.name === otherUser?.name) {
         setIsTyping(!!message.typing);
       } else if (message.type === 'read' && message.user_id === otherUser?.id) {
-        // Update read status for messages as soon as the read notification is received
         setRealtimeMessages((prevMessages) =>
           prevMessages.map((msg) =>
-            msg.sent_to.id === message.user_id ? { ...msg, read: true } : msg
-          )
+            msg.sent_to.id === message.user_id ? { ...msg, read: true } : msg,
+          ),
         );
       }
     }
@@ -78,7 +78,6 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
   }, [lastJsonMessage]);
 
   useEffect(() => {
-    // Send a "read" event to the WebSocket when the conversation is loaded or new messages arrive
     if (realtimeMessages.length > 0) {
       sendJsonMessage({
         type: 'read',
@@ -123,8 +122,8 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
   };
 
   return (
-    <>
-      <div ref={messagesDiv} className="flex max-h-[400px] flex-col space-y-4 overflow-auto">
+    <div className="flex min-h-screen flex-col">
+      <div ref={messagesDiv} className="flex flex-grow flex-col space-y-4 overflow-auto p-4">
         {messages.map((message, index) => (
           <div
             key={index}
@@ -156,7 +155,7 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
         )}
       </div>
 
-      <div className="mt-4 flex space-x-4 rounded-xl border border-gray-300 px-6 py-4">
+      <div className="mt-4 flex flex-none space-x-4 border-t border-gray-300 px-6 py-4">
         <input
           type="text"
           placeholder="Type your message..."
@@ -167,7 +166,7 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
 
         <CustomButton label="Send" onClick={sendMessage} className="w-[100px]" />
       </div>
-    </>
+    </div>
   );
 };
 

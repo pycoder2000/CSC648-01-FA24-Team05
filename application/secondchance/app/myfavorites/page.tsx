@@ -16,7 +16,7 @@ const MyFavoritesPage = async () => {
   }
 
   return (
-    <main className="mx-auto w-full px-6 pb-12">
+    <main className="max-w-7xl w-full mx-auto px-6 pb-12">
       <div className="my-8 flex items-center justify-between">
         <h1 className="text-3xl font-bold text-gray-800">My Favorite Items</h1>
       </div>

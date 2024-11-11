@@ -6,11 +6,11 @@ const SearchFilters = () => {
   const searchModal = useSearchModal();
 
   return (
-    <div className="flex h-[48px] flex-row items-center justify-between rounded-full border lg:h-[64px]">
+    <div className="flex h-[64px] flex-row items-center justify-between rounded-full border lg:h-[64px]">
       <div className="hidden lg:block">
         <div className="flex flex-row items-center justify-between">
           <div
-            className="flex h-[48px] cursor-pointer flex-col justify-center rounded-full px-8 hover:bg-gray-100 lg:h-[64px]"
+            className="flex h-[64px] cursor-pointer flex-col justify-center rounded-full px-8 hover:bg-gray-100 lg:h-[64px]"
             onClick={() => searchModal.open('location')}
           >
             <p className="text-xs font-semibold">Where</p>
@@ -18,7 +18,7 @@ const SearchFilters = () => {
           </div>
 
           <div
-            className="flex h-[48px] cursor-pointer flex-col justify-center rounded-full px-8 hover:bg-gray-100 lg:h-[64px]"
+            className="flex h-[64px] cursor-pointer flex-col justify-center rounded-full px-8 hover:bg-gray-100 lg:h-[64px]"
             onClick={() => searchModal.open('checkin')}
           >
             <p className="text-xs font-semibold">Pick-up Date</p>
@@ -26,7 +26,7 @@ const SearchFilters = () => {
           </div>
 
           <div
-            className="flex h-[48px] cursor-pointer flex-col justify-center rounded-full px-8 hover:bg-gray-100 lg:h-[64px]"
+            className="flex h-[64px] cursor-pointer flex-col justify-center rounded-full px-8 hover:bg-gray-100 lg:h-[64px]"
             onClick={() => searchModal.open('checkout')}
           >
             <p className="text-xs font-semibold">Return Date</p>
@@ -34,7 +34,7 @@ const SearchFilters = () => {
           </div>
 
           <div
-            className="flex h-[48px] cursor-pointer flex-col justify-center rounded-full px-8 hover:bg-gray-100 lg:h-[64px]"
+            className="flex h-[64px] cursor-pointer flex-col justify-center rounded-full px-8 hover:bg-gray-100 lg:h-[64px]"
             onClick={() => searchModal.open('condition')}
           >
             <p className="text-xs font-semibold">Condition</p>
@@ -42,7 +42,7 @@ const SearchFilters = () => {
           </div>
 
           <div
-            className="flex h-[48px] cursor-pointer flex-col justify-center rounded-full px-8 hover:bg-gray-100 lg:h-[64px]"
+            className="flex h-[64px] cursor-pointer flex-col justify-center rounded-full px-8 hover:bg-gray-100 lg:h-[64px]"
             onClick={() => searchModal.open('price')}
           >
             <p className="text-xs font-semibold">Price Range</p>

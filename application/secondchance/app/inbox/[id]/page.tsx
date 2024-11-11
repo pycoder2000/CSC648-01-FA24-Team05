@@ -41,8 +41,11 @@ const ConversationPage = ({ params }: { params: { id: string } }) => {
 
   if (!userId || !token) {
     return (
-      <main className="mx-auto w-full px-6 py-12">
-        <p>You need to be authenticated...</p>
+      <main className="mx-auto w-full px-6 py-12 text-center">
+        <h2 className="text-2xl font-semibold text-gray-800">Access Denied</h2>
+        <p className="mt-4 text-gray-600">
+          You need to be authenticated to view this conversation.
+        </p>
       </main>
     );
   }
