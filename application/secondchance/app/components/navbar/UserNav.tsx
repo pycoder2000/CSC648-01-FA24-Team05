@@ -60,7 +60,7 @@ const UserNav: React.FC<UserNavProps> = ({ userId }) => {
   };
 
   return (
-    <div className="relative flex h-[48px] cursor-pointer items-center rounded-full border px-4 transition duration-300 hover:bg-gray-100 lg:h-[64px]">
+    <div className="relative flex h-[64px] cursor-pointer items-center rounded-full border px-4 transition duration-300 hover:bg-gray-100 lg:h-[64px]">
       <button ref={buttonRef} onClick={toggleMenu} className="flex items-center space-x-2">
         {userId && userImage ? (
           <div className="relative">
