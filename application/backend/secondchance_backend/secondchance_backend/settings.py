@@ -13,9 +13,9 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = True
 
 if DEBUG:
-    ALLOWED_HOSTS = ["localhost", "127.0.0.1", "0.0.0.0", "64.23.143.71"]
+    ALLOWED_HOSTS = ["localhost", "127.0.0.1", "0.0.0.0", "137.184.177.241"]
 else:
-    ALLOWED_HOSTS = ["64.23.143.71"]
+    ALLOWED_HOSTS = ["137.184.177.241"]
 
 AUTH_USER_MODEL = "useraccount.User"
 
@@ -24,7 +24,7 @@ SITE_ID = 1
 if DEBUG:
     WEBSITE_URL = "http://localhost:8000"
 else:
-    WEBSITE_URL = "http://64.23.143.71:1337"
+    WEBSITE_URL = "http://137.184.177.241:1337"
 
 CHANNEL_LAYERS = {"default": {"BACKEND": "channels.layers.InMemoryChannelLayer"}}
 
@@ -52,30 +52,24 @@ REST_FRAMEWORK = {
 }
 
 CORS_ALLOWED_ORIGINS = [
-    "http://0.0.0.0:8000",
-    "http://0.0.0.0:3000",
     "http://127.0.0.1:8000",
     "http://127.0.0.1:3000",
-    "http://64.23.143.71",
-    "http://64.23.143.71:1337",
+    "http://137.184.177.241",
+    "http://137.184.177.241:1337",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "http://0.0.0.0:8000",
-    "http://0.0.0.0:3000",
     "http://127.0.0.1:8000",
     "http://127.0.0.1:3000",
-    "http://64.23.143.71",
-    "http://64.23.143.71:1337",
+    "http://137.184.177.241",
+    "http://137.184.177.241:1337",
 ]
 
 CORS_ORIGINS_WHITELIST = [
-    "http://0.0.0.0:8000",
-    "http://0.0.0.0:3000",
     "http://127.0.0.1:8000",
     "http://127.0.0.1:3000",
-    "http://64.23.143.71",
-    "http://64.23.143.71:1337",
+    "http://137.184.177.241",
+    "http://137.184.177.241:1337",
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
@@ -177,8 +171,8 @@ USE_I18N = True
 USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
-STATIC_URL = "/static/"
-STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "static"
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
