@@ -14,8 +14,9 @@ from useraccount.models import User
 
 @api_view(["GET"])
 def conversations_list(request):
-    serializer = ConversationListSerializer(request.user.conversations.all(), many=True)
-
+    serializer = ConversationListSerializer(
+        request.user.conversations.all(), many=True, context={"request": request}
+    )
     return JsonResponse(serializer.data, safe=False)
 
 
@@ -23,7 +24,9 @@ def conversations_list(request):
 def conversations_detail(request, pk):
     conversation = request.user.conversations.get(pk=pk)
 
-    conversation_serializer = ConversationDetailSerializer(conversation, many=False)
+    conversation_serializer = ConversationDetailSerializer(
+        conversation, many=False, context={"request": request}
+    )
     messages_serializer = ConversationMessageSerializer(
         conversation.messages.all(), many=True
     )
