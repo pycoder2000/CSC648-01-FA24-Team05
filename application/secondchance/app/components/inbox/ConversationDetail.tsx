@@ -5,7 +5,6 @@ import { ConversationType, UserType } from '@/app/inbox/page';
 import { useEffect, useRef, useState } from 'react';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
 import CustomButton from '../buttons/CustomButton';
-import Image from 'next/image';
 
 interface ConversationDetailProps {
   token: string;
@@ -45,13 +44,8 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
   );
 
   useEffect(() => {
-    console.log('Connection state changed', readyState);
-  }, [readyState]);
-
-  useEffect(() => {
     if (lastJsonMessage && typeof lastJsonMessage === 'object') {
       const message = lastJsonMessage as WebSocketMessage;
-
       if (message.type === 'message' && message.name && message.body) {
         const newMessage: MessageType = {
           id: '',
@@ -61,7 +55,7 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
           created_by: myUser as UserType,
           conversationId: conversation.id,
           read: false,
-          read_at: null,
+          read_at: new Date().toISOString(), // Use read_at for timestamp
         };
         setRealtimeMessages((prevMessages) => [...prevMessages, newMessage]);
       } else if (message.type === 'typing' && message.name === otherUser?.name) {
@@ -77,17 +71,6 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
     scrollToBottom();
   }, [lastJsonMessage]);
 
-  useEffect(() => {
-    if (realtimeMessages.length > 0) {
-      sendJsonMessage({
-        type: 'read',
-        data: {
-          conversation_id: conversation.id,
-        },
-      });
-    }
-  }, [realtimeMessages]);
-
   const handleTyping = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewMessage(e.target.value);
     sendJsonMessage({
@@ -99,7 +82,15 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
     });
   };
 
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      sendMessage();
+    }
+  };
+
   const sendMessage = async () => {
+    if (newMessage.trim() === '') return;
+
     sendJsonMessage({
       event: 'chat_message',
       data: {
@@ -121,18 +112,26 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
     }
   };
 
+  const formatTimestamp = (timestamp: string) => {
+    return new Date(timestamp).toLocaleTimeString([], {
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+  };
+
   return (
-    <div className="flex min-h-screen flex-col">
-      <div ref={messagesDiv} className="flex flex-grow flex-col space-y-4 overflow-auto p-4">
+    <div className="flex h-screen flex-col">
+      <div ref={messagesDiv} className="flex-1 space-y-4 overflow-auto px-4 py-6">
         {messages.map((message, index) => (
           <div
             key={index}
-            className={`w-[80%] rounded-xl px-6 py-4 ${
-              message.created_by.name === myUser?.name ? 'ml-[20%] bg-blue-200' : 'bg-gray-200'
+            className={`w-[80%] rounded-xl px-6 py-4 shadow ${
+              message.created_by.name === myUser?.name ? 'ml-[20%] bg-blue-100' : 'bg-gray-100'
             }`}
           >
-            <p className="font-bold text-gray-500">{message.created_by.name}</p>
+            <p className="font-bold text-gray-600">{message.created_by.name}</p>
             <p>{message.body}</p>
+            <p className="text-xs text-gray-400">{formatTimestamp(message.read_at || '')}</p>
             {message.read && <p className="text-xs text-gray-400">✔️ Read</p>}
           </div>
         ))}
@@ -140,12 +139,13 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
         {realtimeMessages.map((message, index) => (
           <div
             key={index}
-            className={`w-[80%] rounded-xl px-6 py-4 ${
-              message.name === myUser?.name ? 'ml-[20%] bg-blue-200' : 'bg-gray-200'
+            className={`w-[80%] rounded-xl px-6 py-4 shadow ${
+              message.name === myUser?.name ? 'ml-[20%] bg-blue-100' : 'bg-gray-100'
             }`}
           >
-            <p className="font-bold text-gray-500">{message.name}</p>
+            <p className="font-bold text-gray-600">{message.name}</p>
             <p>{message.body}</p>
+            <p className="text-xs text-gray-400">{formatTimestamp(message.read_at || '')}</p>
             {message.read && <p className="text-xs text-gray-400">✔️ Read</p>}
           </div>
         ))}
@@ -155,16 +155,34 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
         )}
       </div>
 
-      <div className="mt-4 flex flex-none space-x-4 border-t border-gray-300 px-6 py-4">
+      <div className="flex items-center space-x-4 bg-gray-50 px-4 py-2 shadow-lg">
         <input
           type="text"
           placeholder="Type your message..."
-          className="w-full rounded-xl bg-gray-200 p-2"
+          className="w-full rounded-2xl bg-gray-100 p-3 shadow-inner focus:outline-none"
           value={newMessage}
           onChange={handleTyping}
+          onKeyPress={handleKeyPress}
         />
-
-        <CustomButton label="Send" onClick={sendMessage} className="w-[100px]" />
+        <button
+          onClick={sendMessage}
+          className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-500 text-white shadow-lg hover:bg-blue-600"
+        >
+          <svg
+            className="h-5 w-5 rotate-90 transform"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+            />
+          </svg>
+        </button>
       </div>
     </div>
   );
