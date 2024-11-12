@@ -10,12 +10,6 @@ export const nextConfig = {
       },
       {
         protocol: 'http',
-        hostname: '0.0.0.0',
-        port: '8000',
-        pathname: '/**',
-      },
-      {
-        protocol: 'http',
         hostname: '137.184.177.241',
         port: '1337',
         pathname: '/**',
