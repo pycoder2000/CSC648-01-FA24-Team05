@@ -1,36 +1,69 @@
-.DS_Store
-*.env.dev
+# Environment Files
 *.env
+*.env.dev
 *.env.prod
-node_modules
-scripts/flow/*/.flowconfig
-.flowconfig
+*.pem
+
+# OS-Specific Files
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+.apdisk
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+
+# Logs
+*.log
+npm-debug.log*
+
+# Temporary and Backup Files
 *~
-*.pyc
-.grunt
-_SpecRunner.html
-__benchmarks__
-build/
-remote-repo/
-coverage/
-.module-cache
-fixtures/dom/public/react-dom.js
-fixtures/dom/public/react.js
-test/the-files-to-test.generated.js
-*.log*
-chrome-user-data
-*.sublime-project
-*.sublime-workspace
-.idea
-*.iml
-.vscode
 *.swp
 *.swo
 
-/application/backend/venv
-/venv
-/backend/venv
+# IDE and Editor Files
+*.sublime-project
+*.sublime-workspace
+.idea/
+*.iml
+.vscode/
 
+# Node Modules
+node_modules/
+
+# Python
+__pycache__/
+*.py[cod]
+*.so
+env/
+venv/
+build/
+dist/
+*.egg-info/
+.installed.cfg
+pip-log.txt
+pip-delete-this-directory.txt
+target/
+
+# Django
+db.sqlite3
+local_settings.py
+
+# Coverage and Testing
+coverage/
+.coverage
+coverage.xml
+nosetests.xml
+
+# Static Files
+static/
+
+# React DevTools
 packages/react-devtools-core/dist
 packages/react-devtools-extensions/chrome/build
 packages/react-devtools-extensions/chrome/*.crx
@@ -45,96 +78,15 @@ packages/react-devtools-inline/dist
 packages/react-devtools-shell/dist
 packages/react-devtools-timeline/dist
 
-/coverage
+# Specific Project Directories
+remote-repo/
+fixtures/dom/public/react-dom.js
+fixtures/dom/public/react.js
+chrome-user-data
+_SpecRunner.html
+__benchmarks__
+
+# Build and Packaging
 /demo/dist
-/es
-/lib
-/node_modules
 /umd
-npm-debug.log*
-
-# Created by https://www.gitignore.io
-
-### OSX ###
-.DS_Store
-.AppleDouble
-.LSOverride
-
-# Icon must end with two \r
-Icon
-
-
-# Thumbnails
-._*
-
-# Files that might appear on external disk
-.Spotlight-V100
-.Trashes
-
-# Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
-
-
-### Python ###
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-
-# C extensions
-*.so
-
-# Distribution / packaging
-.Python
-env/
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-lib64/
-parts/
-sdist/
-var/
-*.egg-info/
-.installed.cfg
-*.egg
-
-# PyInstaller
-#  Usually these files are written by a python script from a template
-#  before PyInstaller builds the exe, so as to inject date/other infos into it.
-*.manifest
-*.spec
-
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.coverage
-.cache
-nosetests.xml
-coverage.xml
-
-# Translations
-*.mo
-*.pot
-
-# Sphinx documentation
-docs/_build/
-
-# PyBuilder
-target/
-
-
-### Django ###
-*.log
-*.pot
-*.pyc
-__pycache__/
-local_settings.py
+migrations/
