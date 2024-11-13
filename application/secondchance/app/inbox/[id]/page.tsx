@@ -77,7 +77,7 @@ const ConversationPage = ({ params }: { params: { id: string } }) => {
 
   return (
     <main className="mx-auto w-full px-6 pb-6">
-      {conversation && conversation.messages.length > 0 ? (
+      {conversation ? (
         <ConversationDetail
           token={token}
           userId={userId}
@@ -85,7 +85,12 @@ const ConversationPage = ({ params }: { params: { id: string } }) => {
           conversation={conversation.conversation}
         />
       ) : (
-        <p className="text-center text-gray-500">No messages in this conversation yet.</p>
+        <ConversationDetail
+          token={token}
+          userId={userId}
+          messages={[]}
+          conversation={{ id: params.id, users: [] }}
+        />
       )}
     </main>
   );

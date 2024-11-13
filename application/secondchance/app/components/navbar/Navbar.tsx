@@ -9,8 +9,6 @@ import { getUserId } from '@/app/lib/actions';
 const Navbar = async () => {
   const userId = await getUserId();
 
-  console.log('userId: ', userId);
-
   return (
     <nav className="fixed left-0 top-0 z-10 flex w-full items-center justify-between border-b border-white bg-white py-6 shadow-md">
       <div className="mx-auto w-full px-6">

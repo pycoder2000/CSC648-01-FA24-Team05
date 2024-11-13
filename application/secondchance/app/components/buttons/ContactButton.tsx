@@ -25,6 +25,8 @@ const ContactButton: React.FC<ContactButtonProps> = ({ userId, sellerId }) => {
     }
   };
 
+  const isOwnProfile = userId === sellerId;
+
   return (
     <div className="mt-4 flex w-full justify-center gap-4">
       <button
@@ -36,7 +38,12 @@ const ContactButton: React.FC<ContactButtonProps> = ({ userId, sellerId }) => {
 
       <button
         onClick={startConversation}
-        className="rounded-full border border-gray-400 px-8 py-2 font-medium text-gray-600 transition hover:bg-blue-600 hover:text-white"
+        className={`rounded-full border px-8 py-2 font-medium transition ${
+          isOwnProfile
+            ? 'cursor-not-allowed bg-gray-300 text-gray-500'
+            : 'border-gray-400 text-gray-600 hover:bg-blue-600 hover:text-white'
+        }`}
+        disabled={isOwnProfile}
       >
         Contact
       </button>

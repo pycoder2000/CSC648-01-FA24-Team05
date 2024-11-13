@@ -9,8 +9,6 @@ const ItemDetailPage = async ({ params }: { params: { id: string } }) => {
   const item = await apiService.get(`/api/items/${params.id}`);
   const userId = await getUserId();
 
-  console.log('userId', userId);
-
   return (
     <main className="mx-auto w-full max-w-7xl px-6 pb-6">
       <div className="relative mb-8 h-[60vh] w-full overflow-hidden rounded-lg border border-gray-300 shadow-lg">
