@@ -55,7 +55,7 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
           created_by: myUser as UserType,
           conversationId: conversation.id,
           read: false,
-          read_at: new Date().toISOString(), // Use read_at for timestamp
+          read_at: new Date().toISOString(),
         };
         setRealtimeMessages((prevMessages) => [...prevMessages, newMessage]);
       } else if (message.type === 'typing' && message.name === otherUser?.name) {
@@ -155,7 +155,7 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
         )}
       </div>
 
-      <div className="flex items-center space-x-4 bg-gray-50 px-4 py-2 shadow-lg">
+      <div className="sticky bottom-2 flex items-center space-x-4 bg-gray-50 px-4 py-2 shadow-lg">
         <input
           type="text"
           placeholder="Type your message..."

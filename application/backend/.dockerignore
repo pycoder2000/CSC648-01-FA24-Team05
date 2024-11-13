@@ -89,9 +89,4 @@ __benchmarks__
 # Build and Packaging
 /demo/dist
 /umd
-
-# Next.js Build Folder
-.next/
-
-# Django Migrations
 migrations/
