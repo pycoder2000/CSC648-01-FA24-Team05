@@ -173,17 +173,23 @@ docker exec -it backend-web-1 python manage.py createsuperuser
 cd application/secondchance
 ```
 
-2. Run this command
+2. Create a `.env` file in the `secondchance` folder with this as contents
+```
+NEXT_PUBLIC_API_HOST=http://localhost:8000
+NEXT_PUBLIC_WS_HOST=ws://localhost:8000
+```
+
+3. Run this command
 ```
 npm install
 ```
 
-3. Create the build
+1. Create the build
 ```
 npm run build
 ```
 
-4. Start the server
+1. Start the server
 ```
 npm start
 ```
