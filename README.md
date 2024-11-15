@@ -8,10 +8,11 @@
 * 3. [Technologies Used](#TechnologiesUsed)
 * 4. [Updated Page Names](#UpdatedPageNames)
 * 5. [Team 05 Members](#Team05Members)
-* 6. [Setup Frontend](#SetupFrontend)
-	* 6.1. [Optional Instructions](#OptionalInstructions)
+* 6. [Setup](#Setup)
 * 7. [Setup Backend](#SetupBackend)
-* 8. [Resources](#Resources)
+* 8. [Setup Frontend](#SetupFrontend)
+* 9. [Git Commands](#GitCommands)
+* 10. [Resources](#Resources)
 
 <!-- vscode-markdown-toc-config
 	numbering=true
@@ -187,7 +188,7 @@ npm run build
 npm start
 ```
 
-## 9. <a name='GitCommands'></a>Git Commands
+##  9. <a name='GitCommands'></a>Git Commands
 
 1. Remove Remote deleted branches from Local
 ```
