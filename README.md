@@ -111,12 +111,6 @@ To deactivate the environment
 deactivate
 ```
 
-4. Install requirements
-
-```bash
-pip install -r requirements.txt
-```
-
 ##  7. <a name='SetupBackend'></a>Setup Backend
 
 1. Install [Docker](https://docs.docker.com/engine/install/)
