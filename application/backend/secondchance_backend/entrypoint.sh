@@ -11,8 +11,8 @@ then
     echo "The database is up and running :-D"
 fi
 
-./manage.py makemigrations || exit 1
-./manage.py migrate || exit 1
-./manage.py collectstatic --noinput || exit 1
+./manage.py makemigrations
+./manage.py migrate
+./manage.py collectstatic --noinput
 
 exec "$@"
