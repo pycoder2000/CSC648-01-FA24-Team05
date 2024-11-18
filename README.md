@@ -1,26 +1,22 @@
 # SecondChance: The Eco-Friendly Rental Platform!
 
-<!-- **SecondChance App: [52.53.125.5](http://52.53.125.5/)** -->
-
 <!-- vscode-markdown-toc -->
-* 1. [Introduction](#Introduction)
-* 2. [Key Features](#KeyFeatures)
-* 3. [Technologies Used](#TechnologiesUsed)
-* 4. [Updated Page Names](#UpdatedPageNames)
-* 5. [Team 05 Members](#Team05Members)
-* 6. [Setup](#Setup)
-* 7. [Setup Backend](#SetupBackend)
-* 8. [Setup Frontend](#SetupFrontend)
-* 9. [Git Commands](#GitCommands)
-* 10. [Resources](#Resources)
+1. [Introduction](#Introduction)
+2. [Key Features](#KeyFeatures)
+3. [Technologies Used](#TechnologiesUsed)
+4. [Updated Page Names](#UpdatedPageNames)
+5. [Team 05 Members](#Team05Members)
+6. [Setup](#Setup)
+7. [Setup Backend](#SetupBackend)
+8. [Setup Frontend](#SetupFrontend)
+9. [Git Commands](#GitCommands)
+10. [Resources](#Resources)
 
 <!-- vscode-markdown-toc-config
 	numbering=true
 	autoSave=true
 	/vscode-markdown-toc-config -->
 <!-- /vscode-markdown-toc -->
-
-
 
 ##  1. <a name='Introduction'></a>Introduction
 
