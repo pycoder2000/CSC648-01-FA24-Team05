@@ -1,0 +1,24 @@
+/* custom.css */
+
+div.sphinxsidebar {
+  width: 330px; /* Adjust this value to increase the sidebar width */
+}
+
+div.bodywrapper {
+  margin: 0 0 0 330px; /* Adjust this value to match the sidebar width */
+}
+
+@media (max-width: 767px) {
+  div.sphinxsidebar {
+    width: 100%;
+  }
+
+  div.bodywrapper {
+    margin: 0;
+  }
+}
+
+/* Use the sidebarwidth class to set the width of the sidebar */
+.sidebarwidth {
+  width: 330px; /* Adjust this value to increase the sidebar width */
+}

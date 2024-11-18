@@ -1,12 +1,31 @@
 'use client';
+
 import { useEffect, useState } from 'react';
 import { CircularProgressbarWithChildren, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
 interface GaugeProps {
+  /**
+   * The score to be displayed on the gauge.
+   * Accepts values between 0 and 100.
+   */
   score: number;
 }
 
+/**
+ * Gauge Component
+ *
+ * A circular progress bar (gauge) component to visually represent a score.
+ * The score animates from 0 to the provided value upon rendering or updating.
+ *
+ * Props:
+ * - score: The target score to display in the gauge.
+ *
+ * Features:
+ * - Smooth animation from 0 to the target score.
+ * - Customizable styles, including colors and stroke width.
+ * - Displays the score numerically inside the gauge, along with a "Score" label.
+ */
 const Gauge = ({ score }: GaugeProps) => {
   const [displayScore, setDisplayScore] = useState(0);
 
@@ -21,6 +40,7 @@ const Gauge = ({ score }: GaugeProps) => {
         return prev + increment;
       });
     }, 20);
+
     return () => clearInterval(interval);
   }, [score]);
 

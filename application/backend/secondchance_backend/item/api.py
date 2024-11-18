@@ -1,5 +1,4 @@
 from django.http import JsonResponse
-
 from rest_framework.decorators import (
     api_view,
     authentication_classes,
@@ -17,6 +16,20 @@ from useraccount.models import User
 @authentication_classes([])
 @permission_classes([])
 def items_list(request):
+    """
+    Retrieve a list of items.
+
+    This function does not require authentication or permission.
+    It retrieves the user ID from the request token and fetches the corresponding user object.
+    If a condition is provided and not "undefined", it filters the items based on that condition.
+    It then checks if the user has favorited any items and adds those item IDs to a list of favorites.
+    Finally, it serializes the list of items using the ItemListSerializer.
+
+    :param request: The HTTP request object.
+    :type request: HttpRequest
+    :return: JSON response containing the serialized list of items and favorites.
+    :rtype: JsonResponse
+    """
     try:
         token = request.META["HTTP_AUTHORIZATION"].split("Bearer ")[1]
         token = AccessToken(token)
@@ -72,10 +85,18 @@ def items_list(request):
 @authentication_classes([])
 @permission_classes([])
 def items_detail(request, pk):
+    """
+    Retrieve details of a specific item using its primary key.
+
+    :param request: The HTTP request object.
+    :type request: HttpRequest
+    :param pk: The primary key of the item to retrieve.
+    :type pk: int
+    :return: JSON response containing the serialized data of the item.
+    :rtype: JsonResponse
+    """
     item = Item.objects.get(pk=pk)
-
     serializer = ItemDetailSerializer(item, many=False)
-
     return JsonResponse(serializer.data)
 
 
@@ -83,24 +104,41 @@ def items_detail(request, pk):
 @authentication_classes([])
 @permission_classes([])
 def item_rentals(request, pk):
+    """
+    Retrieve the rentals associated with a specific item.
+
+    :param request: The HTTP request object.
+    :type request: HttpRequest
+    :param pk: The primary key of the item.
+    :type pk: int
+    :return: JSON response containing the serialized rental data for the item.
+    :rtype: JsonResponse
+    """
     item = Item.objects.get(pk=pk)
     rentals = item.rentals.all()
-
     serializer = RentalListSerializer(rentals, many=True)
-
     return JsonResponse(serializer.data, safe=False)
 
 
 @api_view(["POST", "FILES"])
 def create_item(request):
+    """
+    Create an item using the form data and files provided.
+
+    If the form is valid, it saves the item with the current user as the seller and increments the number of items rented out by the user.
+    Returns a JSON response indicating success or errors.
+
+    :param request: The HTTP request object.
+    :type request: HttpRequest
+    :return: JSON response indicating success or errors.
+    :rtype: JsonResponse
+    """
     form = ItemForm(request.POST, request.FILES)
     if form.is_valid():
         item = form.save(commit=False)
         item.seller = request.user
         item.save()
-
         request.user.increment_items_rented_out()
-
         return JsonResponse({"success": True})
     else:
         return JsonResponse({"errors": form.errors.as_json()}, status=400)
@@ -108,6 +146,16 @@ def create_item(request):
 
 @api_view(["POST"])
 def rent_item(request, pk):
+    """
+    Handle renting an item.
+
+    :param request: The HTTP request object.
+    :type request: HttpRequest
+    :param pk: The primary key of the item to be rented.
+    :type pk: int
+    :return: JSON response indicating success or failure.
+    :rtype: JsonResponse
+    """
     try:
         start_date = request.POST.get("start_date", "")
         end_date = request.POST.get("end_date", "")
@@ -134,13 +182,21 @@ def rent_item(request, pk):
 
 @api_view(["POST"])
 def toggle_favorite(request, pk):
+    """
+    Toggle the favorite status of an item for the current user.
+
+    :param request: The HTTP request object.
+    :type request: HttpRequest
+    :param pk: The primary key of the item.
+    :type pk: int
+    :return: JSON response indicating whether the item is now a favorite or not.
+    :rtype: JsonResponse
+    """
     item = Item.objects.get(pk=pk)
 
     if request.user in item.favorited.all():
         item.favorited.remove(request.user)
-
         return JsonResponse({"is_favorite": False})
     else:
         item.favorited.add(request.user)
-
         return JsonResponse({"is_favorite": True})

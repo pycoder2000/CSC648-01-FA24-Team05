@@ -11,13 +11,13 @@ const Navbar = async () => {
 
   return (
     <nav className="fixed left-0 top-0 z-10 flex w-full items-center justify-between border-b border-white bg-white py-6 shadow-md">
-      <div className="mx-auto w-full px-6">
+      <div className="mx-auto w-full pl-6">
         <div className="flex items-center justify-between">
           <Link href="/">
-            <Image src="/assets/logo.png" alt="SecondChance Logo" width={124} height={38} />
+            <Image src="/assets/logo.png" alt="SecondChance Logo" width={160} height={38} />
           </Link>
 
-          <div className="flex space-x-6">
+          <div className="flex">
             <SearchFilters />
           </div>
 

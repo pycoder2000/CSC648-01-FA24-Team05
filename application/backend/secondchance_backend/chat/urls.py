@@ -1,5 +1,11 @@
-from django.urls import path
+"""
+Chat API URLs
+=============
 
+This module contains the URL routing configuration for the chat API.
+"""
+
+from django.urls import path
 from . import api
 
 urlpatterns = [

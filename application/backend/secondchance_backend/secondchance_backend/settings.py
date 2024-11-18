@@ -9,6 +9,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
+DOCS_ACCESS = "public"
+
 # DEBUG = bool(os.environ.get("DEBUG", default=0))
 DEBUG = True
 
@@ -97,6 +99,7 @@ INSTALLED_APPS = [
     "useraccount",
     "item",
     "chat",
+    "docs",
 ]
 
 MIDDLEWARE = [
@@ -175,6 +178,7 @@ STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "static"
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
+DOCS_ROOT = os.path.join(BASE_DIR, "docs/build/html")
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
