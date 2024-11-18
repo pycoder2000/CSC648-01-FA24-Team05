@@ -1,3 +1,10 @@
+"""
+User Account API URLs
+=====================
+
+This module contains the URL routing configuration for the user account API, including registration, login, logout, token refresh, and user details.
+"""
+
 from django.urls import path
 from dj_rest_auth.jwt_auth import get_refresh_view
 from dj_rest_auth.views import LoginView, LogoutView

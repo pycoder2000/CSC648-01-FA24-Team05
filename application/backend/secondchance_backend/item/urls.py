@@ -1,5 +1,11 @@
-from django.urls import path
+"""
+Item API URLs
+=============
 
+This module contains the URL routing configuration for the item API.
+"""
+
+from django.urls import path
 from . import api
 
 urlpatterns = [

@@ -5,6 +5,19 @@ interface CategoriesProps {
   setCategory: (category: string) => void;
 }
 
+/**
+ * A React functional component for displaying a list of categories.
+ * Users can click on a category to select it, visually indicated by styling changes.
+ *
+ * Props:
+ * - dataCategory: The currently selected category ID.
+ * - setCategory: A function to update the selected category when a user clicks on a category.
+ *
+ * Features:
+ * - Displays a grid of categories, each with an icon and label.
+ * - Highlights the currently selected category with distinct styles.
+ * - Applies hover effects to enhance user interactivity.
+ */
 const Categories: React.FC<CategoriesProps> = ({ dataCategory, setCategory }) => {
   const categories = [
     {
@@ -50,7 +63,8 @@ const Categories: React.FC<CategoriesProps> = ({ dataCategory, setCategory }) =>
             height={35}
             className="transition-transform duration-300 hover:scale-110"
           />
-          <span className="text-sm font-medium text-gray-700">{cat.label}</span>
+          <span className="text-sm font-medium text-gray-700">{cat.label}</span>{' '}
+          {/* Category label */}
         </div>
       ))}
     </div>
