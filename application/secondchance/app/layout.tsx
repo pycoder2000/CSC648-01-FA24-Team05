@@ -4,6 +4,7 @@ import SearchModal from '@/app/components/modals/SearchModal';
 import SignupModal from '@/app/components/modals/SignupModal';
 import SuccessModal from '@/app/components/modals/SuccessModal';
 import Navbar from '@/app/components/navbar/Navbar';
+import Footer from '@/app/components/footer/Footer';
 import '@/app/globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
@@ -35,6 +36,8 @@ export default function RootLayout({
         <Navbar />
 
         <div className="pt-32">{children}</div>
+
+        <Footer />
 
         <LoginModal />
         <SearchModal />

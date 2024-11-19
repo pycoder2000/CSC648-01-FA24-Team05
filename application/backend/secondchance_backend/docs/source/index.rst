@@ -44,7 +44,9 @@ To get started with the backend, see the :doc:`Installation <installation>` sect
    :class: rounded-image
    :width: 100%
 
-----------------------------
+Get involved with the **SecondChance** community on `GitHub`_ and contribute to making sustainability accessible to everyone!
+
+.. _GitHub: https://github.com/pycoder2000/SecondChance
 
 .. toctree::
    :maxdepth: 3
@@ -73,59 +75,62 @@ To get started with the backend, see the :doc:`Installation <installation>` sect
 .. toctree::
    :maxdepth: 3
    :caption: Views
+   :hidden:
 
    views
 
 .. toctree::
    :maxdepth: 3
    :caption: URLs
+   :hidden:
 
    urls
 
 .. toctree::
    :maxdepth: 3
    :caption: Admin
+   :hidden:
 
    admin
 
 .. toctree::
    :maxdepth: 3
    :caption: API
+   :hidden:
 
    api
 
 .. toctree::
    :maxdepth: 3
    :caption: Apps
+   :hidden:
 
    apps
 
 .. toctree::
    :maxdepth: 3
    :caption: Consumers
+   :hidden:
 
    consumers
 
 .. toctree::
    :maxdepth: 3
    :caption: Routing
+   :hidden:
 
    routing
 
 .. toctree::
    :maxdepth: 3
    :caption: Serializers
+   :hidden:
 
    serializers
 
 .. toctree::
    :maxdepth: 3
    :caption: Token Auth
+   :hidden:
 
    token_auth
-
-----------------------------
-
-Get involved with the **SecondChance** community on `GitHub`_ and contribute to making sustainability accessible to everyone!
-
-.. _GitHub: https://github.com/pycoder2000/SecondChance
