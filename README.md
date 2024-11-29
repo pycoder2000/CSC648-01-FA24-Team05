@@ -147,7 +147,7 @@ Follow the Git commands provided earlier in the instructions to manage your bran
 ###  11.1. <a name='RunTests'></a>Run Tests
 To run the tests with coverage:
 ```bash
-docker exec -it backend-web-1 pytest --cov=item --cov=useraccount --cov-report=term-missing
+docker exec -it backend-web-1 pytest
 ```
 
 ###  11.2. <a name='BuildDocumentation'></a>Build Documentation
