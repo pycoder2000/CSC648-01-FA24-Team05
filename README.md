@@ -1,16 +1,27 @@
-# SecondChance: The Eco-Friendly Rental Platform!
+<h1 align="center">
+  <a href="https://github.com/CSC-648-SFSU/CSC648-01-FA24-Team05" target="_blank">
+    <img src="application/secondchance/public/assets/logo.png" alt="SecondChance Logo" height="120">
+  </a>
+  <br>
+  <br>
+  SecondChance: The Eco-Friendly Rental Platform
+</h3>
+
 
 <!-- vscode-markdown-toc -->
-1. [Introduction](#Introduction)
-2. [Key Features](#KeyFeatures)
-3. [Technologies Used](#TechnologiesUsed)
-4. [Updated Page Names](#UpdatedPageNames)
-5. [Team 05 Members](#Team05Members)
-6. [Setup](#Setup)
-7. [Setup Backend](#SetupBackend)
-8. [Setup Frontend](#SetupFrontend)
-9. [Git Commands](#GitCommands)
-10. [Resources](#Resources)
+* 1. [Introduction](#Introduction)
+* 2. [Key Features](#KeyFeatures)
+* 3. [Technologies Used](#TechnologiesUsed)
+* 4. [Updated Page Names](#UpdatedPageNames)
+* 5. [Team 05 Members](#Team05Members)
+* 6. [Setup](#Setup)
+* 7. [Setup Backend](#SetupBackend)
+* 8. [Setup Frontend](#SetupFrontend)
+* 9. [Git Commands](#GitCommands)
+* 10. [Resources](#Resources)
+* 11. [Testing and Building Docs](#TestingandBuildingDocs)
+	* 11.1. [Run Tests](#RunTests)
+	* 11.2. [Build Documentation](#BuildDocumentation)
 
 <!-- vscode-markdown-toc-config
 	numbering=true
@@ -20,9 +31,15 @@
 
 ##  1. <a name='Introduction'></a>Introduction
 
-In today's fast-paced, consumer-driven world, waste and overproduction are growing concerns. Our project for CSC 648 focuses on combating these ecological challenges by creating SecondChance, a platform for renting second-hand items. This website offers users a chance to rent and lease a variety of pre-owned products, promoting sustainability and reducing waste.
+In today's fast-paced, consumer-driven world, waste and overproduction are growing concerns. Our project for CSC 648 focuses on combating these ecological challenges by creating **SecondChance**, a platform for renting second-hand items. This website offers users a chance to rent and lease a variety of pre-owned products, promoting sustainability and reducing waste.
 
-The key technological stack will include Django, Django Rest Framework, and Next.js, with a focus on a modern, responsive design using Tailwind CSS. We'll also try to integrate real-time chat functionality powered by sockets to enhance user interactions.
+Key technologies include Django, Django Rest Framework, and Next.js, along with Tailwind CSS for responsive design. Real-time chat functionality powered by sockets enhances user interactions.
+
+### Quick Demo
+
+<p align="center">
+  <img src="application/secondchance/public/assets/secondchance.gif" alt="SecondChance Demo" style="max-width: 100%; height: auto;">
+</p>
 
 ##  2. <a name='KeyFeatures'></a>Key Features
 
@@ -55,6 +72,7 @@ The key technological stack will include Django, Django Rest Framework, and Next
 | **Real-Time Communication** |          WebSockets           |
 
 ##  4. <a name='UpdatedPageNames'></a>Updated Page Names
+
 - **Homepage:** Welcome and feature overview of available second-hand items for rent.
 - **User Dashboard:** Personalized page where users can manage their rentals, preferences, and communication.
 - **Item Listing:** A page to add new second-hand items for rent, showcasing details, conditions, and rental rates.
@@ -82,7 +100,7 @@ The key technological stack will include Django, Django Rest Framework, and Next
 
 1. Clone the project repository
 ```bash
-git@github.com:CSC-648-SFSU/CSC648-01-FA24-Team05.git
+git clone git@github.com:CSC-648-SFSU/CSC648-01-FA24-Team05.git
 ```
 
 2. Move to the project root folder.
@@ -91,113 +109,55 @@ cd application/backend/secondchance_backend
 ```
 
 3. Create and activate a virtual environment.
-> (for Mac)
+- (For Mac)
 ```bash
 virtualenv venv
 source venv/bin/activate
 ```
-> (for Windows)
+- (For Windows)
 ```bash
 virtualenv venv
 .\venv\activate
 ```
 
-To deactivate the environment
+4. To deactivate the environment
 ```bash
 deactivate
 ```
 
 ##  7. <a name='SetupBackend'></a>Setup Backend
 
-1. Install [Docker](https://docs.docker.com/engine/install/)
-
-2. Checkout to `master` branch and run `git pull`
-
-3. Change the directory to the `backend` folder
-```
-cd application/backend
-```
-
-4. Create a `.env.dev` file in the `backend` folder. ( :warning: Please message me for the password)
-```
-DEBUG=1
-SECRET_KEY=secondchance_secret_key
-SQL_ENGINE=django.db.backends.postgresql
-SQL_DATABASE=secondchance
-SQL_USER=postgresuser
-SQL_PASSWORD=
-SQL_HOST=db
-SQL_PORT=5432
-DATABASE=postgres
-POSTGRES_USER=postgresuser
-POSTGRES_PASSWORD=
-POSTGRES_DB=secondchance
-```
-
-5. Run the docker container
-```
-docker-compose up --build
-```
-
-6. Once the backend container is up and running, open another terminal and run the following commands:
-```
-docker exec -it backend-web-1 python manage.py makemigrations useraccount
-docker exec -it backend-web-1 python manage.py makemigrations item
-docker exec -it backend-web-1 python manage.py makemigrations chat
-
-docker exec -it backend-web-1 python manage.py migrate
-```
-
-7. Create a superuser with the following command. (Keep your password as `secondchance` so that you don't forget it)
-```
-docker exec -it backend-web-1 python manage.py createsuperuser
-```
-
-8. Now you can open an browser and go to `http://localhost:8000/admin` to checkout your backend Deployment
+Follow the steps mentioned under the **Setup Backend** section in the instructions provided earlier.
 
 ##  8. <a name='SetupFrontend'></a>Setup Frontend
 
-1. Open another terminal and open the `secondchance` folder
-
-```
-cd application/secondchance
-```
-
-2. Create a `.env` file in the `secondchance` folder with this as contents
-```
-NEXT_PUBLIC_API_HOST=http://localhost:8000
-NEXT_PUBLIC_WS_HOST=ws://localhost:8000
-```
-
-3. Run this command
-```
-npm install
-```
-
-1. Create the build
-```
-npm run build
-```
-
-1. Start the server
-```
-npm start
-```
+Follow the steps mentioned under the **Setup Frontend** section in the instructions provided earlier.
 
 ##  9. <a name='GitCommands'></a>Git Commands
 
-1. Remove Remote deleted branches from Local
-```
-git fetch --prune
-git remote prune origin
-```
-
-2. :warning: Run this command in your branch before creating a PR
-```
-git pull origin master
-```
+Follow the Git commands provided earlier in the instructions to manage your branches and updates.
 
 ##  10. <a name='Resources'></a>Resources
 
 - [How to setup Github SSH](https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/GitHub-SSH-Key-Setup-Config-Ubuntu-Linux)
-- [How to setup a Django Project](https://medium.com/@hacodder/setting-up-a-django-project-a-step-by-step-guide-a60dad87e82a)( :warning: Only uptil Step 2)
+- [How to setup a Django Project](https://medium.com/@hacodder/setting-up-a-django-project-a-step-by-step-guide-a60dad87e82a) (:warning: Only uptil Step 2)
+
+##  11. <a name='TestingandBuildingDocs'></a>Testing and Building Docs
+
+###  11.1. <a name='RunTests'></a>Run Tests
+To run the tests with coverage:
+```bash
+docker exec -it backend-web-1 pytest --cov=item --cov=useraccount --cov-report=term-missing
+```
+
+###  11.2. <a name='BuildDocumentation'></a>Build Documentation
+1. Navigate to the docs folder:
+```bash
+cd application/backend/secondchance_backend/docs
+```
+
+2. Clean previous builds and build the documentation:
+```bash
+make clean
+make html
+```
