@@ -95,9 +95,12 @@ def items_detail(request, pk):
     :return: JSON response containing the serialized data of the item.
     :rtype: JsonResponse
     """
-    item = Item.objects.get(pk=pk)
-    serializer = ItemDetailSerializer(item, many=False)
-    return JsonResponse(serializer.data)
+    try:
+        item = Item.objects.get(pk=pk)
+        serializer = ItemDetailSerializer(item, many=False)
+        return JsonResponse(serializer.data)
+    except Item.DoesNotExist:
+        return JsonResponse({"error": "Item not found"}, status=404)
 
 
 @api_view(["GET"])

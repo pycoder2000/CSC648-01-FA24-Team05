@@ -10,6 +10,7 @@ from item.models import Item, Rental
 from useraccount.serializers import UserDetailSerializer
 from item.serializers import RentalListSerializer
 from item.forms import ItemForm
+from rest_framework import status
 
 
 @api_view(["GET"])
@@ -26,9 +27,15 @@ def seller_detail(request, pk):
     :return: JSON response containing the serialized data of the seller.
     :rtype: JsonResponse
     """
-    user = User.objects.get(pk=pk)
-    serializer = UserDetailSerializer(user, many=False)
-    return JsonResponse(serializer.data, safe=False)
+    try:
+        user = User.objects.get(pk=pk)
+        serializer = UserDetailSerializer(user, many=False)
+        return JsonResponse(serializer.data, safe=False)
+    except User.DoesNotExist:
+        return JsonResponse(
+            {"error": "Seller not found."},
+            status=status.HTTP_404_NOT_FOUND,
+        )
 
 
 @api_view(["GET"])
@@ -60,6 +67,12 @@ def get_user_detail(request, pk):
     :return: JSON response containing the serialized data of the user.
     :rtype: JsonResponse
     """
-    user = User.objects.get(pk=pk)
-    serializer = UserDetailSerializer(user, many=False)
-    return JsonResponse(serializer.data, safe=False)
+    try:
+        user = User.objects.get(pk=pk)
+        serializer = UserDetailSerializer(user, many=False)
+        return JsonResponse(serializer.data, safe=False)
+    except User.DoesNotExist:
+        return JsonResponse(
+            {"error": "User not found."},
+            status=status.HTTP_404_NOT_FOUND,
+        )

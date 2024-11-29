@@ -1,3 +1,4 @@
+alabaster==1.0.0
 asgiref==3.8.1
 attrs==24.2.0
 autobahn==24.4.2
@@ -12,6 +13,7 @@ charset-normalizer==3.4.0
 chatbotAI==0.3.1.3
 click==8.1.7
 constantly==23.10.4
+coverage==7.6.8
 cryptography==43.0.3
 daphne==4.1.2
 dj-rest-auth==6.0.0
@@ -27,6 +29,7 @@ hyperlink==21.0.0
 idna==3.10
 imagesize==1.4.1
 incremental==24.7.2
+iniconfig==2.0.0
 Jinja2==3.1.4
 MarkupSafe==3.0.2
 mypy-extensions==1.0.0
@@ -35,6 +38,7 @@ packaging==24.1
 pathspec==0.12.1
 pillow==11.0.0
 platformdirs==4.3.6
+pluggy==1.5.0
 psycopg2-binary==2.9.10
 pyasn1==0.6.1
 pyasn1_modules==0.4.1
@@ -42,6 +46,9 @@ pycparser==2.22
 Pygments==2.18.0
 PyJWT==2.9.0
 pyOpenSSL==24.2.1
+pytest==8.3.3
+pytest-cov==6.0.0
+pytest-django==4.9.0
 python-dotenv==1.0.1
 requests==2.32.3
 requests-oauthlib==2.0.0
