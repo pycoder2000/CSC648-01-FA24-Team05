@@ -49,7 +49,6 @@ def items_list(request):
     pick_up_date = request.GET.get("checkIn", "")
     return_date = request.GET.get("checkOut", "")
 
-    # Date-based filtering
     if pick_up_date and return_date:
         rented_items = Rental.objects.filter(
             start_date__lte=return_date,
