@@ -28,6 +28,7 @@
     "react-select": "^5.8.1",
     "react-use-websocket": "^4.10.0",
     "sharp": "^0.33.5",
+    "swiper": "^11.1.15",
     "world-countries": "^5.0.0",
     "zustand": "^5.0.0"
   },
