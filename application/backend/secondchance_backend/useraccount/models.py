@@ -190,6 +190,17 @@ class User(AbstractBaseUser, PermissionsMixin):
         :return: None
         :rtype: None
         """
+        # Concept for changes to the sustainability score:
+        # consider the type of item that is being sold and assign each item type a weight
+        # ex. clothing will have a higher weight than electronics because it can be
+        # wasteful to have 1 set of clothes for just 1 occassion
+        # It should provide a discount
+        # It should not be used to deminish anyone's contribution
+        #       the way it is displayed already shows is as an overall positive attribute
+        # When computing the score we could also consider how many of the items are
+        # currently being rented
+        #       con: score will constantly fluxuate
+        
         if self.date_joined:
             days_on_platform = (timezone.now() - self.date_joined).days
         else:
