@@ -41,7 +41,9 @@ class Item(models.Model):
         :return: The full image URL.
         :rtype: str
         """
-        return f"{settings.WEBSITE_URL}{self.image.url}"
+        if self.image:
+            return f"{settings.WEBSITE_URL}{self.image.url}"
+        return None
 
 
 class Rental(models.Model):

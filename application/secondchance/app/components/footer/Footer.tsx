@@ -6,28 +6,12 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-white py-10">
-      <div className="container mx-auto">
-        <div className="flex flex-col items-start justify-between space-y-6 text-gray-600 md:flex-row md:space-y-0">
-          <div className="flex items-center space-x-8">
-            <a href="http://localhost:8000/docs/" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 hover:text-gray-400">
-              <a className="text-sm hover:text-gray-500">Docs</a>
-            </a>
-            <Link href="/about-team">
-              <a className="text-sm hover:text-gray-500">About Team</a>
-            </Link>
-            <Link href="/faq">
-              <a className="text-sm hover:text-gray-500">F.A.Q</a>
-            </Link>
-            <Link href="/privacy-policy">
-              <a className="text-sm hover:text-gray-500">Privacy Policy</a>
-            </Link>
-            <Link href="/terms-and-conditions">
-              <a className="text-sm hover:text-gray-500">Terms &amp; Conditions</a>
-            </Link>
-          </div>
+    <footer className="w-full border-gray-200 bg-white py-6">
+      <div className="px-4 sm:px-6 lg:px-8">
+        <div className="mb-6 border-t border-gray-200"></div>
 
-          <div className="flex space-x-6">
+        <div className="flex flex-col items-center justify-between space-y-6 text-gray-600 md:flex-row md:space-y-0">
+          <div className="flex items-center space-x-6">
             <a
               href="https://twitter.com/yourusername"
               target="_blank"
@@ -61,11 +45,30 @@ const Footer = () => {
               <FontAwesomeIcon icon={faLinkedin} className="h-5 w-5" />
             </a>
           </div>
-        </div>
 
-        <div className="my-6 border-t border-gray-200"></div>
+          <div className="flex items-center space-x-8">
+            <a
+              href="http://localhost:8000/docs/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm hover:text-gray-500"
+            >
+              Docs
+            </a>
+            <Link href="/about-team" className="text-sm hover:text-gray-500">
+              About Team
+            </Link>
+            <Link href="/faq" className="text-sm hover:text-gray-500">
+              F.A.Q
+            </Link>
+            <Link href="/privacy-policy" className="text-sm hover:text-gray-500">
+              Privacy Policy
+            </Link>
+            <Link href="/terms-and-conditions" className="text-sm hover:text-gray-500">
+              Terms &amp; Conditions
+            </Link>
+          </div>
 
-        <div className="flex justify-center">
           <p className="text-sm text-gray-600">
             © {currentYear} Secondchance, Inc. All rights reserved.
           </p>

@@ -95,3 +95,6 @@ __benchmarks__
 
 # Django Migrations
 migrations/
+
+# Test images
+test_image*

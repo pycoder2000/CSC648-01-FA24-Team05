@@ -49,7 +49,6 @@ def items_list(request):
     pick_up_date = request.GET.get("checkIn", "")
     return_date = request.GET.get("checkOut", "")
 
-    # Date-based filtering
     if pick_up_date and return_date:
         rented_items = Rental.objects.filter(
             start_date__lte=return_date,
@@ -95,9 +94,12 @@ def items_detail(request, pk):
     :return: JSON response containing the serialized data of the item.
     :rtype: JsonResponse
     """
-    item = Item.objects.get(pk=pk)
-    serializer = ItemDetailSerializer(item, many=False)
-    return JsonResponse(serializer.data)
+    try:
+        item = Item.objects.get(pk=pk)
+        serializer = ItemDetailSerializer(item, many=False)
+        return JsonResponse(serializer.data)
+    except Item.DoesNotExist:
+        return JsonResponse({"error": "Item not found"}, status=404)
 
 
 @api_view(["GET"])
