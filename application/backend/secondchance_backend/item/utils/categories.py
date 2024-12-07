@@ -42,3 +42,28 @@ def get_user_listed_categories(user):
         .values_list('category', flat=True)
         # .distinct()
     )
+    
+def count_items_rented_from_user(user):
+    """
+    Get the number of items that are currently being rented from the given user
+    Find the rentals that have an item that belongs to the user instance passed in
+    
+    args:
+    user instance
+    
+    return: number of items being rented from the user
+    rtype: int
+    """
+    from datetime import date
+    from item.models import Rental, Item
+    
+    print("===CALLED: count_items_rented_from_user()")
+    
+    today = date.today()
+    
+    # count the number of listings belonging to the user that are being rented out
+    return Rental.objects.filter(
+        item__seller = user, # listings put up by user
+        start_date__lte = today, # listed items rented today or sooner
+        end_date__gte = today # listed items rented today or after
+    ).count()
