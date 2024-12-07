@@ -1,5 +1,5 @@
-from item.models import Rental
-from item.models import Item
+# from item.models import Rental
+# from item.models import Item
 
 def get_user_rented_categories(user):
     """
@@ -13,11 +13,12 @@ def get_user_rented_categories(user):
     return: list of categories
     rtype: list?
     """
+    from item.models import Rental
     # convert QuerySet to list before returning
     return list(
         Rental.objects.filter(rentals__created_by=user)
         .values_list('category', flat=True) # returns desired field 
-        .distinct() # eliminate duplicate categories
+        # .distinct() # eliminate duplicate categories
     )
     
     
@@ -34,8 +35,9 @@ def get_user_listed_categories(user):
     return: list of categories
     rtype: list?
     """
+    from item.models import Item
     return list(
         Item.objects.filter(seller=user)
         .values_list('category', flat=True)
-        .distinct()
+        # .distinct()
     )
