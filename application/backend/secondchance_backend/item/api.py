@@ -164,7 +164,7 @@ def rent_item(request, pk):
         start_date = request.POST.get("start_date", "")
         end_date = request.POST.get("end_date", "")
         number_of_days = int(request.POST.get("number_of_days", 0))
-        total_price = int(request.POST.get("total_price", 0))
+        total_price = float(request.POST.get("total_price", 0))
         
         try:
             start_date = datetime.strptime(start_date, "%Y-%m-%d").date()
