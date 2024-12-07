@@ -220,8 +220,11 @@ class User(AbstractBaseUser, PermissionsMixin):
         # currently being rented
         #       con: score will constantly fluxuate
         
-        
         # 30% of total score = days since join date
+        # 25% items rented by user
+        # 30% items listed by user
+        # 15% popularity (items listed by the user currently being rented by other users) 
+        
         max_normalized_score = 100
         
         if self.date_joined:
@@ -238,7 +241,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         print("--sustainability time score-- ", time_score)
         # get the items rented by the user
 
-        if self.items_rented or self.items_rented_out != 0:
+        if self.items_rented or self.items_rented != 0:
             from item.utils.categories import get_user_rented_categories
             
             # listed_items = Item.objects.filter(seller=self.id)
@@ -247,27 +250,32 @@ class User(AbstractBaseUser, PermissionsMixin):
             #     print("item title: %s", item.title)
             
             rented_categories = get_user_rented_categories(self)        
-            print(rented_categories)
-            
-            rented_items_weighted = 0 # temp
+            # print(rented_categories)
+            # print(rented_categories)
+            rented_items_weighted = 0 
             for category in rented_categories:
-                print(category)
-                print(CATEGORY_WEIGHTS[category.lower()])
+                # print(category)
+                # print(CATEGORY_WEIGHTS[category.lower()])
+                rented_items_weighted += CATEGORY_WEIGHTS[category.lower()]
                 
         else:
             rented_items_weighted = 0
             
-        print("--sustainability rented score-- PLACEHOLDER:", 0)
-            
-        max_rented_score = 30
-            
-        rented_items_score = 0 # compute here
+        max_rented_score = 40
+        
+        rented_items_score = min(max((rented_items_weighted / max_rented_score) * 100, 0), max_normalized_score) # compute here
+        print("--sustainability rented score-- ", rented_items_score)
         
         # print(self.items_rented)
         
         # rented out = listed by user
         if self.items_rented_out:
             from item.utils.categories import get_user_listed_categories
+            from item.utils.categories import count_items_rented_from_user
+            print("===LISTINGS RENTED FROM USER===")
+            
+            raw_popularity_score = count_items_rented_from_user(self) 
+            
             listed_categories = get_user_listed_categories(self)
             
             # print(listed_categories)
@@ -276,26 +284,49 @@ class User(AbstractBaseUser, PermissionsMixin):
                 listed_items_weighted += CATEGORY_WEIGHTS[category.lower()]
             
         else:
+            raw_popularity_score = 0
             listed_items_weighted = 0
             
         max_listed_score = 50
-            
+        max_raw_popularity_score = 80
+        
         listed_items_score = min(max((listed_items_weighted / max_listed_score) * 100, 0), max_normalized_score) # compute here
+        
+        popularity_score = min(max(raw_popularity_score / max_raw_popularity_score * 100, 0), max_normalized_score)
+        
         print("--sustainability listed score-- ", listed_items_score)
         # print("--TEST LISTED ITEM SCORE 100--")
         # print(min(max((60 / max_listed_score) * 100, 0), max_normalized_score))
         # print("--TEST LISTED ITEM SCORE 3--")
         # print(min(max((3 / max_listed_score) * 100, 0), max_normalized_score))
         
-
-        score = (
-            (self.items_rented_out * 2.5)
-            + (self.items_rented * 1.5)
-            + (days_on_platform * 0.1)
+        print("time score: ")
+        print(time_score)
+        print("rented items score") 
+        print(rented_items_score)
+        print("listed items score")
+        print(listed_items_score)
+        print("popularity score")
+        print(popularity_score)
+        
+        total_sustainability_score = (
+            time_score * 0.3
+            + rented_items_score * 0.25
+            + listed_items_score * 0.3
+            + popularity_score * 0.15
         )
-
         max_score = 100
-        normalized_score = min(max(round(score), 0), max_score)
+        normalized_score = min(max(round(total_sustainability_score), 0), max_score)
+
+        
+        # score = (
+        #     (self.items_rented_out * 2.5)
+        #     + (self.items_rented * 1.5)
+        #     + (days_on_platform * 0.1)
+        # )
+
+        # max_score = 100
+        # normalized_score = min(max(round(score), 0), max_score)
         
         
         
