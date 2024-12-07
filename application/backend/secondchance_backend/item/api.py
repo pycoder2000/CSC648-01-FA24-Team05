@@ -169,8 +169,8 @@ def rent_item(request, pk):
         try:
             start_date = datetime.strptime(start_date, "%Y-%m-%d").date()
             end_date = datetime.strptime(end_date, "%Y-%m-%d").date()
-        except ValueError as err:
-            print("Date parsing error:", err)
+        except ValueError as e:
+            print("Date parsing error:", e)
             return JsonResponse({"success": False, "error": "Error parsing dates."}, status=404)
         
         
@@ -191,11 +191,11 @@ def rent_item(request, pk):
         
         
         request.user.increment_items_rented()
-        print(request.user.items_rented)
-        print("request.user.items_rented before calling refresh_from_db()")
-        request.user.refresh_from_db()
-        print("request.user.items_rented AFTER calling refresh_from_db()")
-        print(request.user.items_rented)
+        # print(request.user.items_rented)
+        # print("request.user.items_rented before calling refresh_from_db()")
+        # request.user.refresh_from_db()
+        # print("request.user.items_rented AFTER calling refresh_from_db()")
+        # print(request.user.items_rented)
         
 
         return JsonResponse({"success": True})

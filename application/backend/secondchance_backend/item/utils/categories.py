@@ -13,11 +13,12 @@ def get_user_rented_categories(user):
     return: list of categories
     rtype: list?
     """
+    print("==CALLED: get_user_rented_categories()==")
     from item.models import Rental
     # convert QuerySet to list before returning
     return list(
-        Rental.objects.filter(rentals__created_by=user)
-        .values_list('category', flat=True) # returns desired field 
+        Rental.objects.filter(created_by=user)
+        .values_list('item__category', flat=True) # returns desired field 
         # .distinct() # eliminate duplicate categories
     )
     
