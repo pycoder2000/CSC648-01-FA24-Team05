@@ -44,9 +44,10 @@ const RentalSidebar: React.FC<RentalSidebarProps> = ({ item, userId }) => {
     if (userId) {
       if (dateRange.startDate && dateRange.endDate) {
         const formData = new FormData();
-        formData.append('location', item.location);
-        formData.append('condition', item.condition);
-        formData.append('category', item.category);
+        // removed fields not present in Rental Model
+        // formData.append('location', item.location); 
+        // formData.append('condition', item.condition);
+        // formData.append('category', item.category);
         formData.append('start_date', format(dateRange.startDate, 'yyyy-MM-dd'));
         formData.append('end_date', format(dateRange.endDate, 'yyyy-MM-dd'));
         formData.append('number_of_days', days.toString());
