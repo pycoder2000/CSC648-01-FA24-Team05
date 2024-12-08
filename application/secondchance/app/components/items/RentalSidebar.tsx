@@ -173,19 +173,19 @@ const RentalSidebar: React.FC<RentalSidebarProps> = ({ item, userId }) => {
 
       <div className="mb-4 flex items-center justify-between text-gray-700">
         <p className="text-md">Service Fee</p>
-        <p className="text-md">${fee}</p>
+        <p className="text-md">${fee.toFixed(2)}</p>
       </div>
 
       <div className="mb-4 flex items-center justify-between text-gray-700">
         <p className="text-md">Sustainability Score Discount</p>
-        <p className="text-md">${sustainabilityScore * 0.03}</p>
+        <p className="text-md">${(sustainabilityScore * 0.03).toFixed(2)}</p>
       </div>
 
       <hr className="my-4" />
 
       <div className="mt-4 flex items-center justify-between text-lg font-bold text-gray-900">
         <p>Total Amount</p>
-        <p>${totalPrice}</p>
+        <p>${totalPrice.toFixed(2)}</p>
       </div>
     </aside>
   );
