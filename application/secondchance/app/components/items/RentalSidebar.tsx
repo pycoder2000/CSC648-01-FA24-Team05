@@ -118,8 +118,6 @@ const RentalSidebar: React.FC<RentalSidebarProps> = ({ item, userId }) => {
   }, [userId]);
 
   useEffect(() => {
-    console.log("sustainability score:")
-    console.log(sustainabilityScore)
 
     if (dateRange.startDate && dateRange.endDate) {
       const dayCount = differenceInDays(dateRange.endDate, dateRange.startDate);
@@ -127,12 +125,13 @@ const RentalSidebar: React.FC<RentalSidebarProps> = ({ item, userId }) => {
       if (dayCount && item.price_per_day) {
         const _fee = ((dayCount * item.price_per_day) / 100) * 5;
 
-        let sustainabilityDiscount = sustainabilityScore * 0.3
-        console.log("SUSTAINABILITY DISCOUNT:")
-        console.log(sustainabilityDiscount)
+        const discountModifier = 0.03;
+        let sustainabilityDiscount = sustainabilityScore * discountModifier;
+
+        console.log("SUSTAINABILITY DISCOUNT:", sustainabilityDiscount);
 
         setFee(_fee);
-        setTotalPrice(dayCount * item.price_per_day + _fee);
+        setTotalPrice((dayCount * item.price_per_day + _fee) - sustainabilityDiscount);
         setDays(dayCount);
       } else {
         const _fee = (item.price_per_day / 100) * 5;
@@ -179,7 +178,7 @@ const RentalSidebar: React.FC<RentalSidebarProps> = ({ item, userId }) => {
 
       <div className="mb-4 flex items-center justify-between text-gray-700">
         <p className="text-md">Sustainability Score Discount</p>
-        <p className="text-md">${fee}</p>
+        <p className="text-md">${sustainabilityScore * 0.03}</p>
       </div>
 
       <hr className="my-4" />
