@@ -1,6 +1,3 @@
-# from item.models import Rental
-# from item.models import Item
-
 def get_user_rented_categories(user):
     """
     Get the categories of items that a user has rented from
@@ -13,13 +10,11 @@ def get_user_rented_categories(user):
     return: list of categories
     rtype: list?
     """
-    print("==CALLED: get_user_rented_categories()==")
     from item.models import Rental
     # convert QuerySet to list before returning
     return list(
         Rental.objects.filter(created_by=user)
         .values_list('item__category', flat=True) # returns desired field 
-        # .distinct() # eliminate duplicate categories
     )
     
     
@@ -37,10 +32,10 @@ def get_user_listed_categories(user):
     rtype: list?
     """
     from item.models import Item
+    
     return list(
         Item.objects.filter(seller=user)
         .values_list('category', flat=True)
-        # .distinct()
     )
     
 def count_items_rented_from_user(user):
@@ -56,8 +51,6 @@ def count_items_rented_from_user(user):
     """
     from datetime import date
     from item.models import Rental, Item
-    
-    print("===CALLED: count_items_rented_from_user()")
     
     today = date.today()
     
