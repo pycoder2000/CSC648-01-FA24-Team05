@@ -3,7 +3,12 @@ from django.conf import settings
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager
 from django.db import models
 from django.utils import timezone
+from enum import Enum 
+# from item.utils.categories import get_user_listed_categories, get_user_rented_categories
 
+# this breaks the code 
+# from item.models import Item
+# from item.models import Rental
 
 class CustomUserManager(UserManager):
     """
@@ -177,6 +182,8 @@ class User(AbstractBaseUser, PermissionsMixin):
         self.items_rented += 1
         self.calculate_sustainability_score()
         self.save(update_fields=["items_rented", "sustainability_score"])
+        
+        
 
     def calculate_sustainability_score(self):
         """
@@ -190,19 +197,75 @@ class User(AbstractBaseUser, PermissionsMixin):
         :return: None
         :rtype: None
         """
+        # 30% of total score = days since join date
+        # 25% items rented by user
+        # 30% items listed by user
+        # 15% popularity (items listed by the user currently being rented by other users) 
+        
+        max_normalized_score = 100
+        
+        # compute how many days out of 2 years the user has been on the platform
+        # then normalize it
         if self.date_joined:
-            days_on_platform = (timezone.now() - self.date_joined).days
+            days_on_platform = (timezone.now() - self.date_joined).days 
         else:
             days_on_platform = 0
 
-        score = (
-            (self.items_rented_out * 2.5)
-            + (self.items_rented * 1.5)
-            + (days_on_platform * 0.1)
-        )
+        max_points_date_joined = 730 # 2 years in days since the user joined the platform
+        time_score = min((days_on_platform / max_points_date_joined) * 100, 100)
+        
+        # get the items rented by the user
 
+        if self.items_rented or self.items_rented != 0:
+            from item.utils.categories import get_user_rented_categories
+
+            rented_categories = get_user_rented_categories(self)        
+            rented_items_weighted = 0 
+            
+            # sum weights
+            for category in rented_categories:
+                rented_items_weighted += CATEGORY_WEIGHTS[category.lower()]
+                
+        else:
+            rented_items_weighted = 0
+            
+        max_rented_score = 40
+        rented_items_score = min(max((rented_items_weighted / max_rented_score) * 100, 0), max_normalized_score) # compute here
+        
+        # compute score for items listed by user and how many of them are being rented
+        if self.items_rented_out:
+            from item.utils.categories import get_user_listed_categories
+            from item.utils.categories import count_items_rented_from_user
+            
+            raw_popularity_score = count_items_rented_from_user(self) 
+            
+            listed_categories = get_user_listed_categories(self)
+            
+            listed_items_weighted = 0
+            for category in listed_categories:
+                listed_items_weighted += CATEGORY_WEIGHTS[category.lower()]
+            
+        else:
+            raw_popularity_score = 0
+            listed_items_weighted = 0
+            
+        max_listed_score = 50
+        max_raw_popularity_score = 80
+        
+        listed_items_score = min(max((listed_items_weighted / max_listed_score) * 100, 0), max_normalized_score) # compute here
+        
+        popularity_score = min(max(raw_popularity_score / max_raw_popularity_score * 100, 0), max_normalized_score)
+        
+        total_sustainability_score = (
+            time_score * 0.3
+            + rented_items_score * 0.25
+            + listed_items_score * 0.3
+            + popularity_score * 0.15
+        )
         max_score = 100
-        normalized_score = min(max(round(score), 1), max_score)
+        normalized_score = min(max(round(total_sustainability_score), 0), max_score)
+        
+        # update user's score in DB
         self.sustainability_score = normalized_score
 
     def save(self, *args, **kwargs):
@@ -215,3 +278,21 @@ class User(AbstractBaseUser, PermissionsMixin):
         """
         self.calculate_sustainability_score()
         super().save(*args, **kwargs)
+
+CATEGORY_WEIGHTS = {
+    "electronics": 2,
+    "furniture": 1.5,
+    "clothing": 3,
+    "books": 3,
+    "appliances": 2,
+    "sports": 2.5,
+    "toys": 2.5,
+    "tools": 2,
+    "vehicles": 2,
+    "party": 2,
+    "music": 1,
+    "photography": 1,
+    "gardening": 1.5,
+    "office": 1,
+    "other": 1,
+}

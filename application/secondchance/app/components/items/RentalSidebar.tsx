@@ -39,14 +39,16 @@ const RentalSidebar: React.FC<RentalSidebarProps> = ({ item, userId }) => {
   const [dateRange, setDateRange] = useState<Range>(initialDateRange);
   const [minDate, setMinDate] = useState<Date>(new Date());
   const [reservedDates, setReservedDates] = useState<Date[]>([]);
+  const [sustainabilityScore, setSustainabilityScore] = useState<number>(0);
 
   const processRental = async () => {
     if (userId) {
       if (dateRange.startDate && dateRange.endDate) {
         const formData = new FormData();
-        formData.append('location', item.location);
-        formData.append('condition', item.condition);
-        formData.append('category', item.category);
+        // removed fields not present in Rental Model
+        // formData.append('location', item.location); 
+        // formData.append('condition', item.condition);
+        // formData.append('category', item.category);
         formData.append('start_date', format(dateRange.startDate, 'yyyy-MM-dd'));
         formData.append('end_date', format(dateRange.endDate, 'yyyy-MM-dd'));
         formData.append('number_of_days', days.toString());
@@ -97,8 +99,25 @@ const RentalSidebar: React.FC<RentalSidebarProps> = ({ item, userId }) => {
     setReservedDates(dates);
   };
 
+  const fetchSustainabilityScore = async () => {
+    if (userId) {
+      try {
+        const userData = await apiService.get(`/api/auth/users/${userId}/`);
+        setSustainabilityScore(userData.sustainability_score || 0);
+      } catch (error) {
+        console.error('Error fetching sustainability score:', error);
+      }
+    }
+  };
+
+  // bug fix: made the second useEffect wait for the sustainabilityScore to change
+  // instead of executing before it
   useEffect(() => {
     getRentals();
+    fetchSustainabilityScore();
+  }, [userId]);
+
+  useEffect(() => {
 
     if (dateRange.startDate && dateRange.endDate) {
       const dayCount = differenceInDays(dateRange.endDate, dateRange.startDate);
@@ -106,8 +125,13 @@ const RentalSidebar: React.FC<RentalSidebarProps> = ({ item, userId }) => {
       if (dayCount && item.price_per_day) {
         const _fee = ((dayCount * item.price_per_day) / 100) * 5;
 
+        const discountModifier = 0.03;
+        let sustainabilityDiscount = sustainabilityScore * discountModifier;
+
+        console.log("SUSTAINABILITY DISCOUNT:", sustainabilityDiscount);
+
         setFee(_fee);
-        setTotalPrice(dayCount * item.price_per_day + _fee);
+        setTotalPrice((dayCount * item.price_per_day + _fee) - sustainabilityDiscount);
         setDays(dayCount);
       } else {
         const _fee = (item.price_per_day / 100) * 5;
@@ -117,7 +141,7 @@ const RentalSidebar: React.FC<RentalSidebarProps> = ({ item, userId }) => {
         setDays(1);
       }
     }
-  }, [dateRange]);
+  }, [dateRange, sustainabilityScore], ); 
 
   return (
     <aside className="col-span-2 mt-6 rounded-xl border border-gray-200 bg-white p-6 shadow-xl">
@@ -149,14 +173,19 @@ const RentalSidebar: React.FC<RentalSidebarProps> = ({ item, userId }) => {
 
       <div className="mb-4 flex items-center justify-between text-gray-700">
         <p className="text-md">Service Fee</p>
-        <p className="text-md">${fee}</p>
+        <p className="text-md">${fee.toFixed(2)}</p>
+      </div>
+
+      <div className="mb-4 flex items-center justify-between text-gray-700">
+        <p className="text-md">Sustainability Score Discount</p>
+        <p className="text-md">${(sustainabilityScore * 0.03).toFixed(2)}</p>
       </div>
 
       <hr className="my-4" />
 
       <div className="mt-4 flex items-center justify-between text-lg font-bold text-gray-900">
         <p>Total Amount</p>
-        <p>${totalPrice}</p>
+        <p>${totalPrice.toFixed(2)}</p>
       </div>
     </aside>
   );
