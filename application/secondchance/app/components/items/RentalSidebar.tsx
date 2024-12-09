@@ -37,8 +37,18 @@ const RentalSidebar: React.FC<RentalSidebarProps> = ({ item, userId }) => {
   const [days, setDays] = useState<number>(1);
   const [totalPrice, setTotalPrice] = useState<number>(0);
   const [dateRange, setDateRange] = useState<Range>(initialDateRange);
-  const [minDate, setMinDate] = useState<Date>(new Date());
   const [reservedDates, setReservedDates] = useState<Date[]>([]);
+  const [discount, setDiscount] = useState<number>(0);
+  const [sustainabilityScore, setSustainabilityScore] = useState<number>(0);
+
+  const getSustainabilityScore = async () => {
+    try {
+      const user = await apiService.get(`/api/auth/users/${userId}/`);
+      setSustainabilityScore(user.sustainability_score || 0);
+    } catch (error) {
+      console.error('Failed to fetch sustainability score:', error);
+    }
+  };
 
   const processRental = async () => {
     if (userId) {
@@ -99,20 +109,25 @@ const RentalSidebar: React.FC<RentalSidebarProps> = ({ item, userId }) => {
 
   useEffect(() => {
     getRentals();
+    getSustainabilityScore();
 
     if (dateRange.startDate && dateRange.endDate) {
       const dayCount = differenceInDays(dateRange.endDate, dateRange.startDate);
+      const basePrice = dayCount * item.price_per_day;
+      const _discount = sustainabilityScore * 0.01 * basePrice;
 
       if (dayCount && item.price_per_day) {
         const _fee = ((dayCount * item.price_per_day) / 100) * 5;
 
         setFee(_fee);
-        setTotalPrice(dayCount * item.price_per_day + _fee);
+        setDiscount(_discount);
+        setTotalPrice(dayCount * item.price_per_day + _fee - _discount);
         setDays(dayCount);
       } else {
         const _fee = (item.price_per_day / 100) * 5;
 
         setFee(_fee);
+        setDiscount(0);
         setTotalPrice(item.price_per_day + _fee);
         setDays(1);
       }
@@ -149,14 +164,19 @@ const RentalSidebar: React.FC<RentalSidebarProps> = ({ item, userId }) => {
 
       <div className="mb-4 flex items-center justify-between text-gray-700">
         <p className="text-md">Service Fee</p>
-        <p className="text-md">${fee}</p>
+        <p className="text-md">${fee.toFixed(2)}</p>
+      </div>
+
+      <div className="mb-4 flex items-center justify-between text-gray-700">
+        <p className="text-md text-secondchance">Discount</p>
+        <p className="text-md text-secondchance-dark">-${discount.toFixed(2)}</p>
       </div>
 
       <hr className="my-4" />
 
       <div className="mt-4 flex items-center justify-between text-lg font-bold text-gray-900">
         <p>Total Amount</p>
-        <p>${totalPrice}</p>
+        <p>${totalPrice.toFixed(2)}</p>
       </div>
     </aside>
   );

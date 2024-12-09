@@ -60,8 +60,8 @@ const UserNav: React.FC<UserNavProps> = ({ userId }) => {
   };
 
   return (
-    <div className="relative flex h-[64px] cursor-pointer items-center rounded-full border px-4 transition duration-300 hover:bg-gray-100 lg:h-[64px]">
-      <button ref={buttonRef} onClick={toggleMenu} className="flex items-center space-x-2">
+    <div className="relative flex h-[64px] cursor-pointer items-center rounded-full border px-4 transition duration-300">
+      <button ref={buttonRef} onClick={toggleMenu} className="relative flex items-center space-x-2">
         {userId && userImage ? (
           <div className="relative">
             <Image
@@ -102,15 +102,17 @@ const UserNav: React.FC<UserNavProps> = ({ userId }) => {
             {userId ? (
               <>
                 {userName && (
-                  <div
+                  <motion.div
                     onClick={() => {
                       setIsOpen(false);
                       router.push(`/sellers/${userId}`);
                     }}
-                    className="cursor-pointer rounded-lg border-b border-gray-200 p-4 text-gray-900 transition hover:bg-gray-100"
+                    className="relative flex cursor-pointer rounded-lg border-b border-gray-200 p-4 text-gray-900"
+                    whileHover={{ backgroundColor: '#f3f4f6' }}
+                    transition={{ duration: 0.3 }}
                   >
                     <p className="text-lg font-semibold">{userName}</p>
-                  </div>
+                  </motion.div>
                 )}
 
                 <MenuLink

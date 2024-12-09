@@ -1,10 +1,11 @@
+import Chatbot from '@/app/components/chatbot/Chatbot';
+import Footer from '@/app/components/footer/Footer';
 import AddItemModal from '@/app/components/modals/AddItemModal';
 import LoginModal from '@/app/components/modals/LoginModal';
 import SearchModal from '@/app/components/modals/SearchModal';
 import SignupModal from '@/app/components/modals/SignupModal';
 import SuccessModal from '@/app/components/modals/SuccessModal';
 import Navbar from '@/app/components/navbar/Navbar';
-import Footer from '@/app/components/footer/Footer';
 import '@/app/globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
@@ -37,6 +38,7 @@ export default function RootLayout({
 
         <div className="pt-32">{children}</div>
 
+        <Chatbot />
         <Footer />
 
         <LoginModal />

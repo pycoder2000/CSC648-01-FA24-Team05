@@ -2,9 +2,9 @@
 
 import { MessageType } from '@/app/inbox/[id]/page';
 import { ConversationType, UserType } from '@/app/inbox/page';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
-import useWebSocket, { ReadyState } from 'react-use-websocket';
-import CustomButton from '../buttons/CustomButton';
+import useWebSocket from 'react-use-websocket';
 
 interface ConversationDetailProps {
   token: string;
@@ -122,33 +122,43 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
   return (
     <div className="flex h-screen flex-col">
       <div ref={messagesDiv} className="flex-1 space-y-4 overflow-auto px-4 py-6">
-        {messages.map((message, index) => (
-          <div
-            key={index}
-            className={`w-[80%] rounded-xl px-6 py-4 shadow ${
-              message.created_by.name === myUser?.name ? 'ml-[20%] bg-blue-100' : 'bg-gray-100'
-            }`}
-          >
-            <p className="font-bold text-gray-600">{message.created_by.name}</p>
-            <p>{message.body}</p>
-            <p className="text-xs text-gray-400">{formatTimestamp(message.read_at || '')}</p>
-            {message.read && <p className="text-xs text-gray-400">✔️ Read</p>}
-          </div>
-        ))}
+        <AnimatePresence initial={false}>
+          {messages.map((message, index) => (
+            <motion.div
+              key={index}
+              className={`w-[80%] rounded-xl px-6 py-4 shadow ${
+                message.created_by.name === myUser?.name ? 'ml-[20%] bg-blue-100' : 'bg-gray-100'
+              }`}
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 50 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+            >
+              <p className="font-bold text-gray-600">{message.created_by.name}</p>
+              <p>{message.body}</p>
+              <p className="text-xs text-gray-400">{formatTimestamp(message.read_at || '')}</p>
+              {message.read && <p className="text-xs text-gray-400">✔️ Read</p>}
+            </motion.div>
+          ))}
 
-        {realtimeMessages.map((message, index) => (
-          <div
-            key={index}
-            className={`w-[80%] rounded-xl px-6 py-4 shadow ${
-              message.name === myUser?.name ? 'ml-[20%] bg-blue-100' : 'bg-gray-100'
-            }`}
-          >
-            <p className="font-bold text-gray-600">{message.name}</p>
-            <p>{message.body}</p>
-            <p className="text-xs text-gray-400">{formatTimestamp(message.read_at || '')}</p>
-            {message.read && <p className="text-xs text-gray-400">✔️ Read</p>}
-          </div>
-        ))}
+          {realtimeMessages.map((message, index) => (
+            <motion.div
+              key={index}
+              className={`w-[80%] rounded-xl px-6 py-4 shadow ${
+                message.name === myUser?.name ? 'ml-[20%] bg-blue-100' : 'bg-gray-100'
+              }`}
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 50 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+            >
+              <p className="font-bold text-gray-600">{message.name}</p>
+              <p>{message.body}</p>
+              <p className="text-xs text-gray-400">{formatTimestamp(message.read_at || '')}</p>
+              {message.read && <p className="text-xs text-gray-400">✔️ Read</p>}
+            </motion.div>
+          ))}
+        </AnimatePresence>
 
         {isTyping && (
           <div className="text-sm italic text-gray-500">{otherUser?.name} is typing...</div>

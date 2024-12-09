@@ -64,7 +64,6 @@ const Categories: React.FC<CategoriesProps> = ({ dataCategory, setCategory }) =>
             className="transition-transform duration-300 hover:scale-110"
           />
           <span className="text-sm font-medium text-gray-700">{cat.label}</span>{' '}
-          {/* Category label */}
         </div>
       ))}
     </div>
