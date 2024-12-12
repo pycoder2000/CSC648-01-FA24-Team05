@@ -1,15 +1,13 @@
 from django.http import JsonResponse
 from django.utils import timezone
 from rest_framework.decorators import api_view
-
-from .models import Conversation, ConversationMessage
+from chat.models import Conversation
+from useraccount.models import User
 from .serializers import (
     ConversationListSerializer,
     ConversationDetailSerializer,
     ConversationMessageSerializer,
 )
-
-from useraccount.models import User
 
 
 @api_view(["GET"])

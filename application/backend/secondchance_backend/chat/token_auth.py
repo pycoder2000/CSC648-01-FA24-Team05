@@ -54,7 +54,13 @@ class TokenAuthMiddleware(BaseMiddleware):
         :return: The response after processing the request.
         :rtype: callable
         """
-        query = dict((x.split("=") for x in scope["query_string"].decode().split("&")))
+        query = {}
+        for x in scope["query_string"].decode().split("&"):
+            if "=" in x:
+                key, value = x.split("=", 1)
+                query[key] = value
+            else:
+                query[x] = ""
         token_key = query.get("token")
         scope["user"] = await get_user(token_key)
         return await super().__call__(scope, receive, send)

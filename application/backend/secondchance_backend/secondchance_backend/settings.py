@@ -100,6 +100,7 @@ INSTALLED_APPS = [
     "item",
     "chat",
     "docs",
+    "channels",
 ]
 
 MIDDLEWARE = [

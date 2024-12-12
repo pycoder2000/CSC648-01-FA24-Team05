@@ -1,10 +1,10 @@
 'use client';
 
 import useSearchModal, { SearchQuery } from '@/app/hooks/useSearchModal';
+import apiService from '@/app/services/apiService';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useState } from 'react';
-import apiService from '@/app/services/apiService';
-import ItemList from '@/app/components/items/ItemList';
 
 const Categories = () => {
   const searchModal = useSearchModal();
@@ -114,17 +114,33 @@ const Categories = () => {
     <div className="cursor-pointer overflow-x-auto pb-6 pt-3">
       <div className="flex w-full items-center space-x-8">
         {categories.map((cat) => (
-          <div
+          <motion.div
             key={cat.id}
             onClick={() => _setCategory(cat.id)}
             className={`flex flex-col items-center space-y-2 border-b-2 pb-4 ${
               category === cat.id ? 'border-black' : 'border-transparent'
-            } opacity-60 transition hover:border-gray-300 hover:opacity-100`}
+            } p-2 opacity-60 transition hover:border-gray-300 hover:opacity-100`}
+            whileHover={{
+              scale: 1.2,
+              rotate: 0,
+              boxShadow: '0px 4px 15px rgba(0, 0, 0, 0.2)',
+            }}
+            whileTap={{ scale: 0.7 }}
+            transition={{ type: 'spring', stiffness: 300 }}
           >
             <Image src={cat.icon} alt={`Category - ${cat.label}`} width={30} height={30} />
 
-            <span className="whitespace-nowrap text-xs">{cat.label}</span>
-          </div>
+            <motion.span
+              className="whitespace-nowrap text-xs"
+              whileHover={{
+                color: '#000',
+                scale: 1.1,
+              }}
+              transition={{ duration: 0.2 }}
+            >
+              {cat.label}
+            </motion.span>
+          </motion.div>
         ))}
       </div>
     </div>

@@ -1,7 +1,10 @@
+import openai
 import json
 from asgiref.sync import sync_to_async
 from channels.generic.websocket import AsyncWebsocketConsumer
-from .models import ConversationMessage
+from chat.models import ConversationMessage
+from item.models import Item, Rental
+from datetime import datetime, timedelta
 
 
 class ChatConsumer(AsyncWebsocketConsumer):
@@ -187,3 +190,159 @@ class ChatConsumer(AsyncWebsocketConsumer):
         )
         for message in messages:
             message.mark_as_read()
+
+
+class ChatbotConsumer(AsyncWebsocketConsumer):
+    async def connect(self):
+        """
+        Establish WebSocket connection for the chatbot.
+        """
+        await self.accept()
+
+    async def disconnect(self, close_code):
+        """
+        Disconnect WebSocket connection.
+        """
+        pass
+
+    async def receive(self, text_data):
+        """
+        Handle incoming WebSocket messages and respond using OpenAI API.
+        """
+        data = json.loads(text_data)
+        user_message = data.get("message", "").strip()
+
+        if user_message:
+            bot_response = await self.process_user_message(user_message)
+            await self.send(
+                text_data=json.dumps({"type": "message", "body": bot_response})
+            )
+
+    async def process_user_message(self, user_message):
+        """
+        Process the user's message and generate appropriate responses.
+        """
+        items = await sync_to_async(list)(Item.objects.all())
+        items_details = "\n".join(
+            [
+                f"ID: {item.id}\n"
+                f"Title: {item.title}\n"
+                f"Category: {item.category}\n"
+                f"Country: {item.country}\n"
+                f"Condition: {item.condition}\n"
+                f"Price per Day: ${item.price_per_day}\n"
+                f"Description: {item.description}\n"
+                for item in items
+            ]
+        )
+
+        context_message = f"""
+        You are a helpful assistant for the SecondChance EcoRental platform, where people can rent items sustainably.
+
+        Users may want to browse, filter, or book items. Please assist them by providing relevant options based on their requests.
+
+        Here are some things you can do:
+        - Provide available items based on filters such as category, country, and condition.
+        - If a user asks about an item, provide the relevant details like price, description, and availability.
+        - If a user wants to rent an item, confirm the details such as number of days and location, calculate the full price before tax, and ask them to confirm by typing "Rent Item".
+        Here are the available items:
+        {items_details}
+        """
+
+        try:
+            client = openai.OpenAI()
+            response = await sync_to_async(client.chat.completions.create)(
+                model="gpt-4o-mini",
+                messages=[
+                    {"role": "system", "content": context_message},
+                    {"role": "user", "content": user_message},
+                ],
+                temperature=0.7,
+            )
+            bot_reply = response.choices[0].message.content.strip()
+
+            if "rent this item" in user_message.lower():
+
+                item_id = self.extract_item_id(user_message)
+                if item_id:
+                    item = await sync_to_async(Item.objects.get)(id=item_id)
+                    return (
+                        f"You selected to rent:\n"
+                        f"Title: {item.title}\n"
+                        f"Price per Day: ${item.price_per_day}\n"
+                        f"Please provide the following details:\n"
+                        f"- Number of days you want to rent the item\n"
+                        f"- Location for delivery\n"
+                    )
+
+            if (
+                "number of days" in user_message.lower()
+                and "location" in user_message.lower()
+            ):
+
+                number_of_days, location = self.extract_rental_details(user_message)
+                item_id = self.current_item_id
+                item = await sync_to_async(Item.objects.get)(id=item_id)
+                total_price = item.price_per_day * number_of_days
+
+                return (
+                    f"Here are the details for your rental:\n"
+                    f"- Item: {item.title}\n"
+                    f"- Number of Days: {number_of_days}\n"
+                    f"- Location: {location}\n"
+                    f"- Total Price (before tax): ${total_price}\n"
+                    f"Type 'Rent Item' to confirm and proceed."
+                )
+
+            if "rent item" in user_message.lower():
+
+                item_id = self.current_item_id
+                user = self.scope["user"]
+                number_of_days = self.current_rental_days
+                total_price = self.current_total_price
+
+                rental_data = {
+                    "start_date": str(datetime.now().date()),
+                    "end_date": str(
+                        datetime.now().date() + timedelta(days=number_of_days)
+                    ),
+                    "number_of_days": number_of_days,
+                    "total_price": total_price,
+                }
+
+                await self.rent_item(item_id, rental_data, user)
+
+                return "Booking confirmed! Thank you for using SecondChance."
+
+            return bot_reply
+        except Exception as e:
+            return f"An error occurred: {str(e)}"
+
+    async def rent_item(self, item_id, rental_data, user):
+        """
+        Calls the rent_item function from the Item subapp to create a rental.
+        """
+        try:
+            from item.api import rent_item
+
+            request_data = {
+                "POST": rental_data,
+                "user": user,
+            }
+            await sync_to_async(rent_item)(request_data, item_id)
+        except Exception as e:
+            raise e
+
+    def extract_item_id(self, user_message):
+        """
+        Extract the item ID from the user's message.
+        """
+
+        pass
+
+    def extract_rental_details(self, user_message):
+        """
+        Extract rental details such as number of days and location from the user's message.
+        """
+
+        pass
